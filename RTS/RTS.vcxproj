@@ -89,6 +89,7 @@
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <DisableSpecificWarnings>4355;4251;4275;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <OpenMPSupport>false</OpenMPSupport>
     </ClCompile>
     <Link>
       <AdditionalDependencies>fmodex_vc.lib;CameraControlSystem_d.lib;OgreMain_d.lib;OIS_d.lib;TinyXML_Win32.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -185,6 +186,7 @@ echo "Done"
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <DisableSpecificWarnings>4355;4251;4275;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <OpenMPSupport>false</OpenMPSupport>
     </ClCompile>
     <Link>
       <AdditionalDependencies>fmodex_vc.lib;CameraControlSystem.lib;OgreMain.lib;OIS.lib;TinyXML_Win32.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -194,6 +196,9 @@ echo "Done"
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <TargetMachine>MachineX86</TargetMachine>
+      <IgnoreAllDefaultLibraries>
+      </IgnoreAllDefaultLibraries>
+      <IgnoreSpecificDefaultLibraries>vcomp.lib</IgnoreSpecificDefaultLibraries>
     </Link>
     <PostBuildEvent>
       <Command>if exist $(ProjectDir)\..\..\dependencies (
