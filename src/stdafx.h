@@ -1,0 +1,43 @@
+#ifdef USE_PCH_VISUAL
+
+#include <assert.h>
+#include <boost/bind.hpp>
+#include <boost/iterator/reverse_iterator.hpp>
+#include <boost/signal.hpp>
+#include <boost/math/special_functions.hpp>
+#include <boost/noncopyable.hpp>
+#include <boost/intrusive_ptr.hpp>
+#include <cassert>
+#include <CCSBasicCameraModes.h>
+#include <direct.h>
+#include <iostream>
+#include <limits>
+#include <math.h>
+#include <OIS/OIS.h>
+#include <Ogre/Ogre.h>
+#include <Ogre/OgreAxisAlignedBox.h>
+#include <OGRE/OgreCamera.h>
+#include <OGRE/OgreConfigFile.h>
+#include <OGRE/OgreEntity.h>
+#include <OGRE/OgreLogManager.h>
+#include <OGRE/OgreNode.h>
+#include <Ogre/OgreQuaternion.h>
+#include <OGRE/OgreRay.h>
+#include <OGRE/OgreRenderWindow.h>
+#include <OGRE/OgreRoot.h>
+#include <OGRE/OgreSceneManager.h>
+#include <Ogre/OgreSceneNode.h>
+#include <OGRE/OgreSceneQuery.h>
+#include <Ogre/OgreString.h>
+#include <OGRE/SdkTrays.h>
+#include <OGRE/SdkCameraMan.h>
+#include <Ogre/OgreString.h>
+#include <Ogre/OgreVector3.h>
+#include <OGRE/OgreViewport.h>
+#include <set>
+#include <string>
+#include <TinyXML/tinyxml.h>
+#include <vector>
+#include <fmod.hpp>
+
+#endif

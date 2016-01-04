@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- authors : Rémi Cozot, Fabrice Lamarche -->
+<!-- contacts : cozot@irisa.fr, fabrice.lamarche@irisa.fr -->
+<!-- date : 2011/11/29 -->
+<!-- revision : 2012/01/07 -->
+<configuration>
+	<!-- weapons description -->
+	<weapons>
+		<weapon name="MousticWeapon"						
+				strength="2"
+				armorDamage="0"
+				frequency="15"
+				extent="0"
+				type="straight"
+				range="30"
+				bulletMesh="JetEngine.scene"
+				scale="0.01"
+				speed="8"
+		/>
+		
+		<weapon name="CrocoWeapon"						
+				strength="5"
+				armorDamage="0"
+				frequency="7"
+				extent="0"
+				type="straight"
+				range="20"
+				bulletMesh="JetEngine.scene"
+				scale="0.01"
+				speed="5"
+		/>		
+		
+		<weapon name="HippoWeapon"						
+				strength="20"
+				armorDamage="0"
+				frequency="1"
+				extent="2"
+				type="ballistic"
+				range="20"
+				bulletMesh="JetEngine.scene"
+				scale="0.01"
+				speed="3"
+		/>		
+	</weapons>
+
+	<!-- Units descriptions -->
+	<units>
+		<!-- Blue units -->
+		<unit 	name="MousticB" 
+				mesh="MousticBleu01.scene" 
+				scale="0.01"
+				cost="250" 
+				perceptionRange="10" 
+				speed="6"
+				life="400"
+				armor="0"
+				weapon="MousticWeapon"
+		/>
+
+		<unit 	name="CrocoB" 
+				mesh="CrocoBleu01.scene" 
+				scale="0.01"
+				cost="500" 
+				perceptionRange="15" 
+				speed="4"
+				life="800"
+				armor="0"
+				weapon="CrocoWeapon"
+		/>
+		
+		<unit 	name="HippoB" 
+				mesh="HippoBleu01.scene" 
+				scale="0.01"
+				cost="1000" 
+				perceptionRange="10" 
+				speed="1"
+				life="1600"
+				armor="0"
+				weapon="HippoWeapon"
+		/>
+		
+		<!-- Red units -->
+		<unit 	name="MousticR" 
+				mesh="MousticRouge01.scene" 
+				scale="0.01"
+				cost="250" 
+				perceptionRange="10" 
+				speed="6"
+				life="400"
+				armor="0"
+				weapon="MousticWeapon"
+		/>
+
+		<unit 	name="CrocoR" 
+				mesh="CrocoRouge01.scene" 
+				scale="0.01"
+				cost="5000" 
+				perceptionRange="15" 
+				speed="4"
+				life="800"
+				armor="0"
+				weapon="CrocoWeapon"
+		/>
+		
+		<unit 	name="HippoR" 
+				mesh="HippoRouge01.scene" 
+				scale="0.01"
+				cost="1000" 
+				perceptionRange="10" 
+				speed="1"
+				life="1600"
+				armor="0"
+				weapon="HippoWeapon"
+		/>
+		
+	</units>
+
+	<!-- Maps description -->
+	<maps>
+		<map 	name="map01"	mesh="mapFinal.scene" scale="0.1" mapData="mapJPG.jpg">
+			<ground name="Grass" speedReduction="0" red="0" green="255" blue="0"/>
+			<ground name="Water" speedReduction="0.5" red="255" green="255" blue="0"/>
+			<ground name="Rock" speedReduction="1" red="255" green="0" blue="0"/>
+		</map>
+	</maps>
+</configuration>

@@ -1,0 +1,100 @@
+material arrowX_<DarkKhaki>
+{
+   technique
+   {
+      pass
+      {
+         diffuse 0.741176470588235 0.717647058823529 0.419607843137255 1.0
+      }
+   }
+}
+material arrowX_<LightGray>
+{
+   technique
+   {
+      pass
+      {
+         diffuse 0.662745098039216 0.662745098039216 0.662745098039216 1.0
+      }
+   }
+}
+material arrowX_<Beige>2
+{
+   technique
+   {
+      pass
+      {
+         diffuse 0.666666666666667 0.596078431372549 0.454901960784314 1.0
+      }
+   }
+}
+material arrowX_<Charcoal>
+{
+   technique
+   {
+      pass
+      {
+         diffuse 0.137254901960784 0.137254901960784 0.137254901960784 1.0
+      }
+   }
+}
+material arrowX_<DimGray>
+{
+   technique
+   {
+      pass
+      {
+         diffuse 0.411764705882353 0.411764705882353 0.411764705882353 1.0
+      }
+   }
+}
+material arrowX_<Burnt_Umber>1
+{
+   technique
+   {
+      pass
+      {
+         diffuse 0.0274509803921569 0.0117647058823529 0.00784313725490196 1.0
+      }
+   }
+}
+material arrowX_jean_blue
+{
+   technique
+   {
+      pass
+      {
+         diffuse 0.141176470588235 0.184313725490196 0.258823529411765 1.0
+      }
+   }
+}
+material arrowX_Matière1
+{
+   technique
+   {
+      pass
+      {
+         diffuse 0.882352941176471 0.882352941176471 0.784313725490196 1.0
+      }
+   }
+}
+material arrowX_White
+{
+   technique
+   {
+      pass
+      {
+         diffuse 1.0 1.0 1.0 1.0
+      }
+   }
+}
+material arrowX_SketchupDefault
+{
+   technique
+   {
+      pass
+      {
+         diffuse 1.0 1.0 1.0
+      }
+   }
+}

@@ -1,0 +1,113 @@
+material ship2_12_-_Default1
+{
+   technique
+   {
+      pass
+      {
+         scene_blend alpha_blend
+         diffuse 0.854901960784314 0.156862745098039 0.0196078431372549 1.0
+      }
+   }
+}
+material ship2_Material_#1
+{
+   technique
+   {
+      pass
+      {
+         scene_blend alpha_blend
+         diffuse 1 1 1 1.0
+         texture_unit
+         {
+            texture AWT4.JPG
+         }
+      }
+   }
+}
+material ship2_Material_#2
+{
+   technique
+   {
+      pass
+      {
+         scene_blend alpha_blend
+         diffuse 1 1 1 1.0
+         texture_unit
+         {
+            texture AWT1.JPG
+         }
+      }
+   }
+}
+material ship2_Material_#3
+{
+   technique
+   {
+      pass
+      {
+         scene_blend alpha_blend
+         diffuse 0.156862745098039 0.156862745098039 0.156862745098039 1.0
+      }
+   }
+}
+material ship2_Material_#4
+{
+   technique
+   {
+      pass
+      {
+         scene_blend alpha_blend
+         diffuse 0.113725490196078 0.113725490196078 0.113725490196078 0.729999989271164
+      }
+   }
+}
+material ship2_Material_#5
+{
+   technique
+   {
+      pass
+      {
+         scene_blend alpha_blend
+         diffuse 1 1 1 1.0
+         texture_unit
+         {
+            texture AW-TEXT2.JPG
+         }
+      }
+   }
+}
+material ship2_Material_#6
+{
+   technique
+   {
+      pass
+      {
+         scene_blend alpha_blend
+         diffuse 1 1 1 1.0
+         texture_unit
+         {
+            texture AW-TEXT3.JPG
+         }
+      }
+   }
+}
+material ship2_Matière1
+{
+   technique
+   {
+      pass
+      {
+         diffuse 1.0 1.0 1.0 1.0
+      }
+   }
+}
+material ship2_SketchupDefault
+{
+   technique
+   {
+      pass
+      {
+         diffuse 1.0 1.0 1.0
+      }
+   }
+}

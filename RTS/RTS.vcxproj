@@ -1,0 +1,420 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{967FF7D9-1C92-4CDC-99C9-D88446740F52}</ProjectGuid>
+    <RootNamespace>RTS</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.40219.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)$(Configuration)\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(TEMP)\$(Configuration)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Configuration)\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</LinkIncremental>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)$(Configuration)\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(TEMP)\$(Configuration)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Configuration)\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
+    <PostBuildEventUseInBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</PostBuildEventUseInBuild>
+    <PostBuildEventUseInBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</PostBuildEventUseInBuild>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <AdditionalOptions>/MP8 -Zm170 %(AdditionalOptions)</AdditionalOptions>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>$(ProjectDir)/../../dependencies/fmod/api/inc;$(ProjectDir)/../../dependencies/tbb/include;$(ProjectDir)/../../dependencies/OgreCameraControlSystem/include;$(ProjectDir)/../../dependencies/TinyXML/include;$(ProjectDir)/../../dependencies/Ogre/include;$(ProjectDir)/../../dependencies/boost/include/boost-1_48;$(ProjectDir)/../src;G:/esir3/jv/dependencies/fmod/api/inc;G:/esir3/jv/dependencies/tbb/include;G:/esir3/jv/dependencies/OgreCameraControlSystem/include;G:/esir3/jv/dependencies/TinyXML/include;G:/esir3/jv/dependencies/Ogre/include;G:/esir3/jv/dependencies/boost/include/boost-1_48;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>USE_PCH_VISUAL;CCS_OGRE_1_7;BOOST_ALL_DYN_LINK;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <DisableSpecificWarnings>4355;4251;4275;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>fmodex_vc.lib;CameraControlSystem_d.lib;OgreMain_d.lib;OIS_d.lib;TinyXML_Win32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)/../../dependencies/fmod/api/lib;$(ProjectDir)/../../dependencies/tbb/lib/ia32/vc10;$(ProjectDir)/../../dependencies/OgreCameraControlSystem/lib;$(ProjectDir)/../../dependencies/TinyXML/lib/$(Configuration);$(ProjectDir)/../../dependencies/Ogre/lib/$(Configuration);$(ProjectDir)/../../dependencies/boost/lib;G:/esir3/jv/dependencies/fmod/api/lib;G:/esir3/jv/dependencies/tbb/lib/ia32/vc10;G:/esir3/jv/dependencies/OgreCameraControlSystem/lib;G:/esir3/jv/dependencies/TinyXML/lib/$(Configuration);G:/esir3/jv/dependencies/Ogre/lib/$(Configuration);G:/esir3/jv/dependencies/boost/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Command>if exist $(ProjectDir)\..\..\dependencies (
+echo "Copying Ogre 3D libraries to target directory..."
+xcopy /D "$(ProjectDir)\..\..\dependencies\Ogre\bin\$(Configuration)\*.dll" "$(TargetDir)"
+echo "Copying boost libraries to target directory..."
+xcopy /D "$(ProjectDir)\..\..\dependencies\boost\lib\*.dll" "$(TargetDir)"
+echo "Copying camera control system libraries..."
+xcopy /D "$(ProjectDir)\..\..\dependencies\OgreCameraControlSystem\bin\$(Configuration)\*.dll" "$(TargetDir)"
+echo "Copying fmod libraries..."
+xcopy /D "$(ProjectDir)\..\..\dependencies\fmod\api\*.dll" "$(TargetDir)"
+echo "Copying intel TBB librairies..."
+xcopy /D "$(ProjectDir)\..\..\dependencies\tbb\bin\ia32\vc10\*.dll" "$(TargetDir)"
+echo "Done"
+)
+
+if exist G:\esir3\jv\dependencies (
+echo "Copying Ogre 3D libraries to target directory..."
+xcopy /D "G:\esir3\jv\dependencies\Ogre\bin\$(Configuration)\*.dll" "$(TargetDir)"
+echo "Copying boost libraries to target directory..."
+xcopy /D "G:\esir3\jv\dependencies\boost\lib\*.dll" "$(TargetDir)"
+echo "Copying camera control system libraries..."
+xcopy /D "G:\esir3\jv\dependencies\OgreCameraControlSystem\bin\$(Configuration)\*.dll" "$(TargetDir)"
+echo "Copying fmod libraries..."
+xcopy /D "G:\esir3\jv\dependencies\fmod\api\*.dll" "$(TargetDir)"
+echo "Copying intel TBB librairies..."
+xcopy /D "G:\esir3\jv\dependencies\tbb\bin\ia32\vc10\*.dll" "$(TargetDir)"
+echo "Done"
+)</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalOptions>/MP8 -Zm170 %(AdditionalOptions)</AdditionalOptions>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>$(ProjectDir)/../../dependencies/fmod/api/inc;$(ProjectDir)/../../dependencies/tbb/include;$(ProjectDir)/../../dependencies/OgreCameraControlSystem/include;$(ProjectDir)/../../dependencies/TinyXML;$(ProjectDir)/../../dependencies/Ogre/include;$(ProjectDir)/../../dependencies/boost/include/boost-1_48;$(ProjectDir)/../src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>USE_PCH_VISUAL;CCS_OGRE_1_7;WIN64;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4355;4251;4275;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>fmodex64_vc.lib;CameraControlSystem_d.lib;OgreMain_d.lib;OIS_d.lib;TinyXML_x64.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)/../../dependencies/fmod/api/lib;$(ProjectDir)/../../dependencies/tbb/lib/intel64/vc10;$(ProjectDir)/../../dependencies/OgreCameraControlSystem/lib;$(ProjectDir)/../../dependencies/TinyXML/lib/$(Configuration);$(ProjectDir)/../../dependencies/Ogre/lib/$(Configuration);$(ProjectDir)/../../dependencies/boost/lib</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <PostBuildEvent>
+      <Command>echo "Copying Ogre 3D libraries to target directory..."
+xcopy /D "$(ProjectDir)\..\..\dependencies\Ogre\bin\$(Configuration)\*.dll" "$(TargetDir)"
+echo "Copying boost libraries to target directory..."
+xcopy /D "$(ProjectDir)\..\..\dependencies\boost\lib\*.dll" "$(TargetDir)"
+echo "Copying camera control system libraries..."
+xcopy /D "$(ProjectDir)\..\..\dependencies\OgreCameraControlSystem\bin\$(Configuration)\*.dll" "$(TargetDir)"
+echo "Copying fmod libraries..."
+xcopy /D "$(ProjectDir)\..\..\dependencies\fmod\api\*.dll" "$(TargetDir)"
+echo "Copying intel TBB librairies..."
+xcopy /D "$(ProjectDir)\..\..\dependencies\tbb\bin\ia32\vc10\*.dll" "$(TargetDir)"
+echo "Done"
+</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalOptions>/MP8 -Zm170 %(AdditionalOptions)</AdditionalOptions>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <AdditionalIncludeDirectories>$(ProjectDir)/../../dependencies/fmod/api/inc;$(ProjectDir)/../../dependencies/tbb/include;$(ProjectDir)/../../dependencies/OgreCameraControlSystem/include;$(ProjectDir)/../../dependencies/TinyXML/include;$(ProjectDir)/../../dependencies/Ogre/include;$(ProjectDir)/../../dependencies/boost/include/boost-1_48;$(ProjectDir)/../src;G:/esir3/jv/dependencies/fmod/api/inc;G:/esir3/jv/dependencies/tbb/include;G:/esir3/jv/dependencies/OgreCameraControlSystem/include;G:/esir3/jv/dependencies/TinyXML/include;G:/esir3/jv/dependencies/Ogre/include;G:/esir3/jv/dependencies/boost/include/boost-1_48;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>USE_PCH_VISUAL;CCS_OGRE_1_7;BOOST_ALL_DYN_LINK;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <DisableLanguageExtensions>false</DisableLanguageExtensions>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>StdAfx.h</PrecompiledHeaderFile>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4355;4251;4275;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>fmodex_vc.lib;CameraControlSystem.lib;OgreMain.lib;OIS.lib;TinyXML_Win32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)/../../dependencies/fmod/api/lib;$(ProjectDir)/../../dependencies/tbb/lib/ia32/vc10;$(ProjectDir)/../../dependencies/OgreCameraControlSystem/lib;$(ProjectDir)/../../dependencies/TinyXML/lib/$(Configuration);$(ProjectDir)/../../dependencies/Ogre/lib/$(Configuration);$(ProjectDir)/../../dependencies/boost/lib;G:/esir3/jv/dependencies/fmod/api/lib;G:/esir3/jv/dependencies/tbb/lib/ia32/vc10;G:/esir3/jv/dependencies/OgreCameraControlSystem/lib;G:/esir3/jv/dependencies/TinyXML/lib/$(Configuration);G:/esir3/jv/dependencies/Ogre/lib/$(Configuration);G:/esir3/jv/dependencies/boost/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Command>if exist $(ProjectDir)\..\..\dependencies (
+echo "Copying Ogre 3D libraries to target directory..."
+xcopy /D "$(ProjectDir)\..\..\dependencies\Ogre\bin\$(Configuration)\*.dll" "$(TargetDir)"
+echo "Copying boost libraries to target directory..."
+xcopy /D "$(ProjectDir)\..\..\dependencies\boost\lib\*.dll" "$(TargetDir)"
+echo "Copying camera control system libraries..."
+xcopy /D "$(ProjectDir)\..\..\dependencies\OgreCameraControlSystem\bin\$(Configuration)\*.dll" "$(TargetDir)"
+echo "Copying fmod libraries..."
+xcopy /D "$(ProjectDir)\..\..\dependencies\fmod\api\*.dll" "$(TargetDir)"
+echo "Copying intel TBB librairies..."
+xcopy /D "$(ProjectDir)\..\..\dependencies\tbb\bin\ia32\vc10\*.dll" "$(TargetDir)"
+echo "Done"
+)
+
+if exist G:\esir3\jv\dependencies (
+echo "Copying Ogre 3D libraries to target directory..."
+xcopy /D "G:\esir3\jv\dependencies\Ogre\bin\$(Configuration)\*.dll" "$(TargetDir)"
+echo "Copying boost libraries to target directory..."
+xcopy /D "G:\esir3\jv\dependencies\boost\lib\*.dll" "$(TargetDir)"
+echo "Copying camera control system libraries..."
+xcopy /D "G:\esir3\jv\dependencies\OgreCameraControlSystem\bin\$(Configuration)\*.dll" "$(TargetDir)"
+echo "Copying fmod libraries..."
+xcopy /D "G:\esir3\jv\dependencies\fmod\api\*.dll" "$(TargetDir)"
+echo "Copying intel TBB librairies..."
+xcopy /D "G:\esir3\jv\dependencies\tbb\bin\ia32\vc10\*.dll" "$(TargetDir)"
+echo "Done"
+)</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalOptions>/MP8 -Zm170 %(AdditionalOptions)</AdditionalOptions>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <AdditionalIncludeDirectories>$(ProjectDir)/../../dependencies/fmod/api/inc;$(ProjectDir)/../../dependencies/tbb/include;$(ProjectDir)/../../dependencies/OgreCameraControlSystem/include;$(ProjectDir)/../../dependencies/TinyXML/;$(ProjectDir)/../../dependencies/Ogre/include;$(ProjectDir)/../../dependencies/boost/include/boost-1_48;$(ProjectDir)/../src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>USE_PCH_VISUAL;CCS_OGRE_1_7;WIN64;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <DisableLanguageExtensions>false</DisableLanguageExtensions>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>StdAfx.h</PrecompiledHeaderFile>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4355;4251;4275;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>fmodex64_vc.lib;CameraControlSystem.lib;OgreMain.lib;OIS.lib;TinyXML_x64.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)/../../dependencies/fmod/api/lib;$(ProjectDir)/../../dependencies/tbb/lib/intel64/vc10;$(ProjectDir)/../../dependencies/OgreCameraControlSystem/lib;$(ProjectDir)/../../dependencies/TinyXML/lib/$(Configuration);$(ProjectDir)/../../dependencies/Ogre/lib/$(Configuration);$(ProjectDir)/../../dependencies/boost/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+    </Link>
+    <PostBuildEvent>
+      <Command>echo "Copying Ogre 3D libraries to target directory..."
+c:\windows\system32\xcopy /D "$(ProjectDir)\..\..\dependencies\Ogre\bin\$(Configuration)\*.dll" "$(TargetDir)"
+echo "Copying boost libraries to target directory..."
+c:\windows\system32\xcopy /D "$(ProjectDir)\..\..\dependencies\boost\lib\*.dll" "$(TargetDir)"
+echo "Copying camera control system libraries..."
+c:\windows\system32\xcopy /D "$(ProjectDir)\..\..\dependencies\OgreCameraControlSystem\bin\$(Configuration)\*.dll" "$(TargetDir)"
+echo "Copying fmod libraries..."
+c:\windows\system32\xcopy /D "$(ProjectDir)\..\..\dependencies\fmod\api\*.dll" "$(TargetDir)"
+echo "Copying intel TBB librairies..."
+c:\windows\system32\xcopy /D "$(ProjectDir)\..\..\dependencies\tbb\bin\intel64\vc10\*.dll" "$(TargetDir)"
+echo "Done"
+</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\src\Ext\boost\reference_count.h" />
+    <ClInclude Include="..\src\Ext\Ogre\ComputeBoundingBox.h" />
+    <ClInclude Include="..\src\Ext\Ogre\NodeManipulation.h" />
+    <ClInclude Include="..\src\Ext\std\string_utils.h" />
+    <ClInclude Include="..\src\Ext\TinyXML\Helpers.h" />
+    <ClInclude Include="..\src\GameElements\BallisticBullet.h" />
+    <ClInclude Include="..\src\GameElements\BulletBase.h" />
+    <ClInclude Include="..\src\GameElements\ConfigurationLoader.h" />
+    <ClInclude Include="..\src\GameElements\Map.h" />
+    <ClInclude Include="..\src\GameElements\NullAgent.h" />
+    <ClInclude Include="..\src\GameElements\Perception.h" />
+    <ClInclude Include="..\src\GameElements\PlayParticleSystem.h" />
+    <ClInclude Include="..\src\GameElements\RandomAgent.h" />
+    <ClInclude Include="..\src\GameElements\StraightBullet.h" />
+    <ClInclude Include="..\src\GameElements\UnitsArchetypes.h" />
+    <ClInclude Include="..\src\GameElements\Weapon.h" />
+    <ClInclude Include="..\src\GameElements\WeaponsArchetypes.h" />
+    <ClInclude Include="..\src\OgreFramework\GlobalConfiguration.h" />
+    <ClInclude Include="..\src\Ogre\CollectEntities.h" />
+    <ClInclude Include="..\src\System\ActiveObject.h" />
+    <ClInclude Include="..\src\System\CallbackMessageListener.h" />
+    <ClInclude Include="..\src\System\ConstructionDestructionEmitter.h" />
+    <ClInclude Include="..\src\System\ConstructionDestructionListener.h" />
+    <ClInclude Include="..\src\System\ConstructionMessage.h" />
+    <ClInclude Include="..\src\System\Controller.h" />
+    <ClInclude Include="..\src\System\DestructionMessage.h" />
+    <ClInclude Include="..\src\System\MessageEmitter.h" />
+    <ClInclude Include="..\src\System\MessageListener.h" />
+    <ClInclude Include="..\src\System\namespaceDocumentation.h" />
+    <ClInclude Include="..\src\GameElements\Agent.h" />
+    <ClInclude Include="..\src\GameElements\Bullet.h" />
+    <ClInclude Include="..\src\GameElements\GameObject.h" />
+    <ClInclude Include="..\src\Math\BoundingBox.h" />
+    <ClInclude Include="..\src\Math\BoundingBox2D.h" />
+    <ClInclude Include="..\src\Math\Circle2D.h" />
+    <ClInclude Include="..\src\Math\Constant.h" />
+    <ClInclude Include="..\src\Math\distance2D.h" />
+    <ClInclude Include="..\src\Math\finite.h" />
+    <ClInclude Include="..\src\Math\Interval.h" />
+    <ClInclude Include="..\src\Math\Line.h" />
+    <ClInclude Include="..\src\Math\Line2D.h" />
+    <ClInclude Include="..\src\Math\Matrix3x3.h" />
+    <ClInclude Include="..\src\Math\Segment.h" />
+    <ClInclude Include="..\src\Math\Segment2D.h" />
+    <ClInclude Include="..\src\Math\Sphere.h" />
+    <ClInclude Include="..\src\Math\Triangle2D.h" />
+    <ClInclude Include="..\src\Math\Vector.h" />
+    <ClInclude Include="..\src\Math\Vector2.h" />
+    <ClInclude Include="..\src\Math\Vector3.h" />
+    <ClInclude Include="..\src\Config\Real.h" />
+    <ClInclude Include="..\src\Triggers\BasicCollisionDetector.h" />
+    <ClInclude Include="..\src\Triggers\CollisionDetectorBase.h" />
+    <ClInclude Include="..\src\Triggers\CollisionObject.h" />
+    <ClInclude Include="..\src\Triggers\namespaceDocumentation.h" />
+    <ClInclude Include="..\src\Triggers\Shape.h" />
+    <ClInclude Include="..\src\Triggers\SweepAndPrune.h" />
+    <ClInclude Include="..\src\DesignPattern\Singleton.h" />
+    <ClInclude Include="..\src\DesignPattern\StaticMember.h" />
+    <ClInclude Include="..\src\OgreFramework\BaseApplication.h" />
+    <ClInclude Include="..\src\OgreFramework\EntityAdapter.h" />
+    <ClInclude Include="..\src\OgreFramework\GeometryLoader.h" />
+    <ClInclude Include="..\src\OgreFramework\KeyboardState.h" />
+    <ClInclude Include="..\src\OgreFramework\MainApplication.h" />
+    <ClInclude Include="..\src\OgreFramework\PickableObject.h" />
+    <ClInclude Include="..\src\OgreFramework\Picking.h" />
+    <ClInclude Include="..\src\OgreFramework\PickingBoundingBox.h" />
+    <ClInclude Include="..\src\OgreFramework\PickingSelectionBuffer.h" />
+    <ClInclude Include="..\src\OgreFramework\RTSCameraManager.h" />
+    <ClInclude Include="..\src\DataStructure\Grid.h" />
+    <ClInclude Include="..\src\Ogre\DotSceneLoader.h" />
+    <ClInclude Include="..\src\Ogre\MaterialSwitcher.h" />
+    <ClInclude Include="..\src\Ogre\SelectionBuffer.h" />
+    <ClInclude Include="..\src\Ogre\SelectionRenderListener.h" />
+    <ClInclude Include="..\src\Ext\std\static_vector.h" />
+    <ClInclude Include="..\src\stdafx.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\Ext\Ogre\src\ComputeBoundingBox.cpp" />
+    <ClCompile Include="..\src\Ext\Ogre\src\NodeManipulation.cpp" />
+    <ClCompile Include="..\src\Ext\std\src\string_utils.cpp" />
+    <ClCompile Include="..\src\GameElements\src\BallisticBullet.cpp" />
+    <ClCompile Include="..\src\GameElements\src\BulletBase.cpp" />
+    <ClCompile Include="..\src\GameElements\src\ConfigurationLoader.cpp" />
+    <ClCompile Include="..\src\GameElements\src\Map.cpp" />
+    <ClCompile Include="..\src\GameElements\src\NullAgent.cpp" />
+    <ClCompile Include="..\src\GameElements\src\Perception.cpp" />
+    <ClCompile Include="..\src\GameElements\src\PlayParticleSystem.cpp" />
+    <ClCompile Include="..\src\GameElements\src\RandomAgent.cpp" />
+    <ClCompile Include="..\src\GameElements\src\StraightBullet.cpp" />
+    <ClCompile Include="..\src\GameElements\src\UnitsArchetypes.cpp" />
+    <ClCompile Include="..\src\GameElements\src\Weapon.cpp" />
+    <ClCompile Include="..\src\GameElements\src\WeaponsArchetypes.cpp" />
+    <ClCompile Include="..\src\OgreFramework\src\GlobalConfiguration.cpp" />
+    <ClCompile Include="..\src\Ogre\src\collectEntities.cpp" />
+    <ClCompile Include="..\src\System\src\ActiveObject.cpp" />
+    <ClCompile Include="..\src\System\src\ConstructionDestructionEmitter.cpp" />
+    <ClCompile Include="..\src\System\src\Controller.cpp" />
+    <ClCompile Include="..\src\System\src\MessageEmitter.cpp" />
+    <ClCompile Include="..\src\System\src\MessageListener.cpp" />
+    <ClCompile Include="..\src\OgreFramework\src\PickableObject.cpp" />
+    <ClCompile Include="..\src\GameElements\src\Agent.cpp" />
+    <ClCompile Include="..\src\GameElements\src\Bullet.cpp" />
+    <ClCompile Include="..\src\GameElements\src\GameObject.cpp" />
+    <ClCompile Include="..\src\Triggers\src\BasicCollisionDetector.cpp" />
+    <ClCompile Include="..\src\Triggers\src\CollisionDetectorBase.cpp" />
+    <ClCompile Include="..\src\Triggers\src\CollisionObject.cpp" />
+    <ClCompile Include="..\src\Triggers\src\Shape.cpp" />
+    <ClCompile Include="..\src\Triggers\src\SweepAndPrune.cpp" />
+    <ClCompile Include="..\src\OgreFramework\src\BaseApplication.cpp" />
+    <ClCompile Include="..\src\OgreFramework\src\EntityAdapter.cpp" />
+    <ClCompile Include="..\src\OgreFramework\src\GeometryLoader.cpp" />
+    <ClCompile Include="..\src\OgreFramework\src\KeyboardState.cpp" />
+    <ClCompile Include="..\src\OgreFramework\src\MainApplication.cpp" />
+    <ClCompile Include="..\src\OgreFramework\src\Picking.cpp" />
+    <ClCompile Include="..\src\OgreFramework\src\PickingBoundingBox.cpp" />
+    <ClCompile Include="..\src\OgreFramework\src\PickingSelectionBuffer.cpp" />
+    <ClCompile Include="..\src\OgreFramework\src\RTSCameraManager.cpp" />
+    <ClCompile Include="..\src\DataStructure\src\Grid.cpp" />
+    <ClCompile Include="..\src\Ogre\src\DotSceneLoader.cpp">
+      <DisableSpecificWarnings Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">4390;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <DisableSpecificWarnings Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">4390;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <DisableSpecificWarnings Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">4390;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <DisableSpecificWarnings Condition="'$(Configuration)|$(Platform)'=='Release|x64'">4390;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+    </ClCompile>
+    <ClCompile Include="..\src\Ogre\src\MaterialSwitcher.cpp" />
+    <ClCompile Include="..\src\Ogre\src\SelectionBuffer.cpp" />
+    <ClCompile Include="..\src\Ogre\src\SelectionRenderListener.cpp" />
+    <ClCompile Include="..\src\main.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\src\mainOgre.cpp" />
+    <ClCompile Include="..\src\stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

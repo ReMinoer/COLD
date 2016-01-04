@@ -1,0 +1,436 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="System">
+      <UniqueIdentifier>{26e43f0d-a5ce-4874-8399-d57874b2b04a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System\src">
+      <UniqueIdentifier>{71d33a3a-3332-4b45-a6e6-a9f1da1bddbc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameElements">
+      <UniqueIdentifier>{85b6c67c-2634-4eff-8773-a2ca93603909}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameElements\src">
+      <UniqueIdentifier>{cffa29a0-371e-44ae-8772-ed98fbc9bad8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math">
+      <UniqueIdentifier>{a2ed94c5-8b00-4772-8e96-e575757261e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Config">
+      <UniqueIdentifier>{36927a1c-7150-49ef-b93e-a7e33c80751f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Triggers">
+      <UniqueIdentifier>{789faa18-44f9-48a0-ae0d-b24893e6d229}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Triggers\src">
+      <UniqueIdentifier>{5b028fcd-0d25-4dbb-8279-3fbd0e2ce17d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DesignPattern">
+      <UniqueIdentifier>{84b4212f-2426-4181-a236-d2d1a20a2c68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OgreFramework">
+      <UniqueIdentifier>{9bd4fb82-c74e-4404-8865-ae3ea1420bbc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OgreFramework\src">
+      <UniqueIdentifier>{cc30c769-5081-4d7d-b281-d4891ccf3af4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DataStruture">
+      <UniqueIdentifier>{4eb79414-31ec-4b99-8321-64c284c5d7f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DataStruture\src">
+      <UniqueIdentifier>{b1047ad0-d6a3-437f-96fa-5d9da8a25dc5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ogre">
+      <UniqueIdentifier>{75818652-3218-4b85-a272-622aba1bf49c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ogre\src">
+      <UniqueIdentifier>{ddfd764d-4c51-43a0-880f-a3a5d453ad9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ext">
+      <UniqueIdentifier>{dfe8f1db-1207-43c5-8504-240f4fea6138}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ext\std">
+      <UniqueIdentifier>{88b52d92-99ea-404a-a156-f14286c8ac16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ext\TinyXML">
+      <UniqueIdentifier>{3f49d549-1eb5-4465-aaf6-751ad135e5da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ext\Ogre">
+      <UniqueIdentifier>{e74783eb-1b6e-486c-a628-9933a549a0b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ext\Ogre\src">
+      <UniqueIdentifier>{837ad239-a2cb-4b6b-8fe0-0b13a9329a42}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ext\std\src">
+      <UniqueIdentifier>{71ac4597-7b09-4baa-aee6-1a781ab6e57d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ext\boost">
+      <UniqueIdentifier>{779c0ec0-a962-450f-bf6b-1151af191457}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\src\System\ActiveObject.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\System\CallbackMessageListener.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\System\ConstructionDestructionEmitter.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\System\ConstructionDestructionListener.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\System\ConstructionMessage.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\System\Controller.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\System\DestructionMessage.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\System\MessageEmitter.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\System\MessageListener.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\System\namespaceDocumentation.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameElements\Agent.h">
+      <Filter>GameElements</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameElements\Bullet.h">
+      <Filter>GameElements</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameElements\GameObject.h">
+      <Filter>GameElements</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Math\BoundingBox.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Math\BoundingBox2D.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Math\Circle2D.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Math\Constant.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Math\distance2D.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Math\finite.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Math\Interval.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Math\Line.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Math\Line2D.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Math\Matrix3x3.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Math\Segment.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Math\Segment2D.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Math\Sphere.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Math\Triangle2D.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Math\Vector.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Math\Vector2.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Math\Vector3.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Config\Real.h">
+      <Filter>Config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Triggers\BasicCollisionDetector.h">
+      <Filter>Triggers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Triggers\CollisionDetectorBase.h">
+      <Filter>Triggers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Triggers\CollisionObject.h">
+      <Filter>Triggers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Triggers\namespaceDocumentation.h">
+      <Filter>Triggers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Triggers\Shape.h">
+      <Filter>Triggers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Triggers\SweepAndPrune.h">
+      <Filter>Triggers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\DesignPattern\Singleton.h">
+      <Filter>DesignPattern</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\DesignPattern\StaticMember.h">
+      <Filter>DesignPattern</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\OgreFramework\BaseApplication.h">
+      <Filter>OgreFramework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\OgreFramework\EntityAdapter.h">
+      <Filter>OgreFramework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\OgreFramework\GeometryLoader.h">
+      <Filter>OgreFramework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\OgreFramework\KeyboardState.h">
+      <Filter>OgreFramework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\OgreFramework\MainApplication.h">
+      <Filter>OgreFramework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\OgreFramework\PickableObject.h">
+      <Filter>OgreFramework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\OgreFramework\Picking.h">
+      <Filter>OgreFramework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\OgreFramework\PickingBoundingBox.h">
+      <Filter>OgreFramework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\OgreFramework\PickingSelectionBuffer.h">
+      <Filter>OgreFramework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\OgreFramework\RTSCameraManager.h">
+      <Filter>OgreFramework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\DataStructure\Grid.h">
+      <Filter>DataStruture</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Ogre\DotSceneLoader.h">
+      <Filter>Ogre</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Ogre\MaterialSwitcher.h">
+      <Filter>Ogre</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Ogre\SelectionBuffer.h">
+      <Filter>Ogre</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Ogre\SelectionRenderListener.h">
+      <Filter>Ogre</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Ext\std\static_vector.h">
+      <Filter>Ext\std</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\stdafx.h" />
+    <ClInclude Include="..\src\GameElements\UnitsArchetypes.h">
+      <Filter>GameElements</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameElements\WeaponsArchetypes.h">
+      <Filter>GameElements</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameElements\Map.h">
+      <Filter>GameElements</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameElements\ConfigurationLoader.h">
+      <Filter>GameElements</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Ext\TinyXML\Helpers.h">
+      <Filter>Ext\TinyXML</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Ext\Ogre\ComputeBoundingBox.h">
+      <Filter>Ext\Ogre</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Ext\std\string_utils.h">
+      <Filter>Ext\std</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\OgreFramework\GlobalConfiguration.h">
+      <Filter>OgreFramework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Ext\Ogre\NodeManipulation.h">
+      <Filter>Ext\Ogre</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameElements\PlayParticleSystem.h">
+      <Filter>GameElements</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameElements\NullAgent.h">
+      <Filter>GameElements</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Ext\boost\reference_count.h">
+      <Filter>Ext\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameElements\Perception.h">
+      <Filter>GameElements</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameElements\BulletBase.h">
+      <Filter>GameElements</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameElements\StraightBullet.h">
+      <Filter>GameElements</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameElements\BallisticBullet.h">
+      <Filter>GameElements</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameElements\Weapon.h">
+      <Filter>GameElements</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameElements\RandomAgent.h">
+      <Filter>GameElements</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Ogre\CollectEntities.h">
+      <Filter>Ogre</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\System\src\ActiveObject.cpp">
+      <Filter>System\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\System\src\ConstructionDestructionEmitter.cpp">
+      <Filter>System\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\System\src\Controller.cpp">
+      <Filter>System\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\System\src\MessageEmitter.cpp">
+      <Filter>System\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\System\src\MessageListener.cpp">
+      <Filter>System\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameElements\src\Agent.cpp">
+      <Filter>GameElements\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameElements\src\Bullet.cpp">
+      <Filter>GameElements\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameElements\src\GameObject.cpp">
+      <Filter>GameElements\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Triggers\src\BasicCollisionDetector.cpp">
+      <Filter>Triggers\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Triggers\src\CollisionDetectorBase.cpp">
+      <Filter>Triggers\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Triggers\src\CollisionObject.cpp">
+      <Filter>Triggers\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Triggers\src\Shape.cpp">
+      <Filter>Triggers\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Triggers\src\SweepAndPrune.cpp">
+      <Filter>Triggers\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\OgreFramework\src\BaseApplication.cpp">
+      <Filter>OgreFramework\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\OgreFramework\src\EntityAdapter.cpp">
+      <Filter>OgreFramework\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\OgreFramework\src\GeometryLoader.cpp">
+      <Filter>OgreFramework\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\OgreFramework\src\KeyboardState.cpp">
+      <Filter>OgreFramework\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\OgreFramework\src\MainApplication.cpp">
+      <Filter>OgreFramework\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\OgreFramework\src\Picking.cpp">
+      <Filter>OgreFramework\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\OgreFramework\src\PickingBoundingBox.cpp">
+      <Filter>OgreFramework\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\OgreFramework\src\PickingSelectionBuffer.cpp">
+      <Filter>OgreFramework\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\OgreFramework\src\RTSCameraManager.cpp">
+      <Filter>OgreFramework\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\DataStructure\src\Grid.cpp">
+      <Filter>DataStruture\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Ogre\src\DotSceneLoader.cpp">
+      <Filter>Ogre\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Ogre\src\MaterialSwitcher.cpp">
+      <Filter>Ogre\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Ogre\src\SelectionBuffer.cpp">
+      <Filter>Ogre\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Ogre\src\SelectionRenderListener.cpp">
+      <Filter>Ogre\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\main.cpp" />
+    <ClCompile Include="..\src\mainOgre.cpp" />
+    <ClCompile Include="..\src\stdafx.cpp" />
+    <ClCompile Include="..\src\GameElements\src\UnitsArchetypes.cpp">
+      <Filter>GameElements\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameElements\src\WeaponsArchetypes.cpp">
+      <Filter>GameElements\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameElements\src\Map.cpp">
+      <Filter>GameElements\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameElements\src\ConfigurationLoader.cpp">
+      <Filter>GameElements\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Ext\Ogre\src\ComputeBoundingBox.cpp">
+      <Filter>Ext\Ogre\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Ext\std\src\string_utils.cpp">
+      <Filter>Ext\std\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\OgreFramework\src\GlobalConfiguration.cpp">
+      <Filter>OgreFramework\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Ext\Ogre\src\NodeManipulation.cpp">
+      <Filter>Ext\Ogre\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameElements\src\PlayParticleSystem.cpp">
+      <Filter>GameElements\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameElements\src\NullAgent.cpp">
+      <Filter>GameElements\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameElements\src\Perception.cpp">
+      <Filter>GameElements\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameElements\src\BulletBase.cpp">
+      <Filter>GameElements\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameElements\src\StraightBullet.cpp">
+      <Filter>GameElements\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameElements\src\BallisticBullet.cpp">
+      <Filter>GameElements\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameElements\src\Weapon.cpp">
+      <Filter>GameElements\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameElements\src\RandomAgent.cpp">
+      <Filter>GameElements\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\OgreFramework\src\PickableObject.cpp">
+      <Filter>OgreFramework\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Ogre\src\collectEntities.cpp">
+      <Filter>Ogre\src</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

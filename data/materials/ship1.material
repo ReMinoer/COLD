@@ -1,0 +1,441 @@
+material ship1_<LightGray>
+{
+   technique
+   {
+      pass
+      {
+         diffuse 0.662745098039216 0.662745098039216 0.662745098039216 1.0
+      }
+   }
+}
+material ship1_<Charcoal>
+{
+   technique
+   {
+      pass
+      {
+         diffuse 0.137254901960784 0.137254901960784 0.137254901960784 1.0
+      }
+   }
+}
+material ship1_jean_blue
+{
+   technique
+   {
+      pass
+      {
+         diffuse 0.141176470588235 0.184313725490196 0.258823529411765 1.0
+      }
+   }
+}
+material ship1_black
+{
+   technique
+   {
+      pass
+      {
+         diffuse 0.0 0.0 0.0 1.0
+      }
+   }
+}
+material ship1_<Beige>1
+{
+   technique
+   {
+      pass
+      {
+         diffuse 0.827450980392157 0.741176470588235 0.564705882352941 1.0
+      }
+   }
+}
+material ship1_Couleur_B24
+{
+   technique
+   {
+      pass
+      {
+         diffuse 0.2 0.137254901960784 0.117647058823529 1.0
+      }
+   }
+}
+material ship1_0135_GrisFoncé
+{
+   technique
+   {
+      pass
+      {
+         diffuse 0.317647058823529 0.317647058823529 0.317647058823529 1.0
+      }
+   }
+}
+material ship1_96,96,96
+{
+   technique
+   {
+      pass
+      {
+         diffuse 0.376470588235294 0.376470588235294 0.376470588235294 1.0
+      }
+   }
+}
+material ship1_Green
+{
+   technique
+   {
+      pass
+      {
+         diffuse 0.0 0.501960784313725 0.0 1.0
+      }
+   }
+}
+material ship1_<Black>
+{
+   technique
+   {
+      pass
+      {
+         diffuse 0.0 0.0 0.0 1.0
+      }
+   }
+}
+material ship1_<Redwood>
+{
+   technique
+   {
+      pass
+      {
+         diffuse 0.654901960784314 0.396078431372549 0.32156862745098 1.0
+      }
+   }
+}
+material ship1_Métal_ondulé_brillant
+{
+   technique
+   {
+      pass
+      {
+         diffuse 1 1 1 1.0
+         texture_unit
+         {
+            texture Metal_Corrogated_Shiny.jpg
+         }
+      }
+   }
+}
+material ship1_0010_Neige
+{
+   technique
+   {
+      pass
+      {
+         diffuse 1.0 0.980392156862745 0.980392156862745 1.0
+      }
+   }
+}
+material ship1_Verre_translucide_effet_miroir
+{
+   technique
+   {
+      pass
+      {
+         scene_blend alpha_blend
+         diffuse 1 1 1 0.93
+         texture_unit
+         {
+            texture Translucent_Glass_Sky_Reflection_.jpg
+         }
+      }
+   }
+}
+material ship1_ROJO
+{
+   technique
+   {
+      pass
+      {
+         diffuse 1 1 1 1.0
+         texture_unit
+         {
+            texture Metal_Panel.jpg
+         }
+      }
+   }
+}
+material ship1_Matière1
+{
+   technique
+   {
+      pass
+      {
+         diffuse 1 1 1 1.0
+         texture_unit
+         {
+            texture Metal_Panel.jpg
+         }
+      }
+   }
+}
+material ship1_Matière2
+{
+   technique
+   {
+      pass
+      {
+         diffuse 0.352941176470588 0.47843137254902 0.768627450980392 1.0
+      }
+   }
+}
+material ship1_Matière3
+{
+   technique
+   {
+      pass
+      {
+         diffuse 1 1 1 1.0
+         texture_unit
+         {
+            texture Metal_Rough.jpg
+         }
+      }
+   }
+}
+material ship1_Matière4
+{
+   technique
+   {
+      pass
+      {
+         diffuse 1 1 1 1.0
+         texture_unit
+         {
+            texture Metal_Panel.jpg
+         }
+      }
+   }
+}
+material ship1_Matière5
+{
+   technique
+   {
+      pass
+      {
+         diffuse 1 1 1 1.0
+         texture_unit
+         {
+            texture Metal_Panel.jpg
+         }
+      }
+   }
+}
+material ship1_Matière6
+{
+   technique
+   {
+      pass
+      {
+         diffuse 1 1 1 1.0
+         texture_unit
+         {
+            texture Metal_Rough.jpg
+         }
+      }
+   }
+}
+material ship1_Eau_bassin_claire
+{
+   technique
+   {
+      pass
+      {
+         scene_blend alpha_blend
+         diffuse 1 1 1 0.73
+         texture_unit
+         {
+            texture Water_Pool.jpg
+         }
+      }
+   }
+}
+material ship1_Backfaces
+{
+   technique
+   {
+      pass
+      {
+         diffuse 1.0 0.188235294117647 0.784313725490196 1.0
+      }
+   }
+}
+material ship1_Couleur_A16
+{
+   technique
+   {
+      pass
+      {
+         diffuse 0.4 0.0 0.0 1.0
+      }
+   }
+}
+material ship1_Couleur_008
+{
+   technique
+   {
+      pass
+      {
+         diffuse 0.117647058823529 0.117647058823529 0.117647058823529 1.0
+      }
+   }
+}
+material ship1_Couleur_009
+{
+   technique
+   {
+      pass
+      {
+         diffuse 0.0 0.0 0.0 1.0
+      }
+   }
+}
+material ship1_Translucent_Glass_Purple
+{
+   technique
+   {
+      pass
+      {
+         diffuse 0.219607843137255 0.168627450980392 0.329411764705882 1.0
+      }
+   }
+}
+material ship1_[Color_007]1
+{
+   technique
+   {
+      pass
+      {
+         diffuse 0.227450980392157 0.227450980392157 0.227450980392157 1.0
+      }
+   }
+}
+material ship1_[Translucent_Glass_Sky_Reflection]3
+{
+   technique
+   {
+      pass
+      {
+         scene_blend alpha_blend
+         diffuse 1 1 1 0.8
+         texture_unit
+         {
+            texture Translucent_Glass_Sky_Reflection_.jpg
+         }
+      }
+   }
+}
+material ship1_[Translucent_Glass_Sky_Reflection]4
+{
+   technique
+   {
+      pass
+      {
+         diffuse 1 1 1 1.0
+         texture_unit
+         {
+            texture Translucent_Glass_Sky_Reflection_.jpg
+         }
+      }
+   }
+}
+material ship1_Couleur_B01
+{
+   technique
+   {
+      pass
+      {
+         diffuse 1.0 0.247058823529412 0.0 1.0
+      }
+   }
+}
+material ship1_Verre_translucide_gris
+{
+   technique
+   {
+      pass
+      {
+         scene_blend alpha_blend
+         diffuse 0.501960784313725 0.501960784313725 0.501960784313725 0.15
+      }
+   }
+}
+material ship1_Vortex
+{
+   technique
+   {
+      pass
+      {
+         diffuse 1 1 1 1.0
+         texture_unit
+         {
+            texture Vortex.jpg
+         }
+      }
+   }
+}
+material ship1_Matière23
+{
+   technique
+   {
+      pass
+      {
+         diffuse 1 1 1 1.0
+         texture_unit
+         {
+            texture hull.jpg
+         }
+      }
+   }
+}
+material ship1_[Translucent_Glass_Sky_Reflection]1
+{
+   technique
+   {
+      pass
+      {
+         scene_blend alpha_blend
+         diffuse 1 1 1 0.4
+         texture_unit
+         {
+            texture Translucent_Glass_Sky_Reflection_.jpg
+         }
+      }
+   }
+}
+material ship1_Couleur_J01
+{
+   technique
+   {
+      pass
+      {
+         diffuse 0.498039215686275 0.0 1.0 1.0
+      }
+   }
+}
+material ship1_Couleur_006
+{
+   technique
+   {
+      pass
+      {
+         diffuse 0.337254901960784 0.337254901960784 0.337254901960784 1.0
+      }
+   }
+}
+material ship1_SketchupDefault
+{
+   technique
+   {
+      pass
+      {
+         diffuse 1.0 1.0 1.0
+      }
+   }
+}
