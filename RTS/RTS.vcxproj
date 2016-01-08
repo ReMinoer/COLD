@@ -283,6 +283,7 @@ echo "Done"
     <ClInclude Include="..\src\Ext\Ogre\NodeManipulation.h" />
     <ClInclude Include="..\src\Ext\std\string_utils.h" />
     <ClInclude Include="..\src\Ext\TinyXML\Helpers.h" />
+    <ClInclude Include="..\src\GameElements\AiAgent.h" />
     <ClInclude Include="..\src\GameElements\BallisticBullet.h" />
     <ClInclude Include="..\src\GameElements\BulletBase.h" />
     <ClInclude Include="..\src\GameElements\ConfigurationLoader.h" />
@@ -358,6 +359,7 @@ echo "Done"
     <ClCompile Include="..\src\Ext\Ogre\src\ComputeBoundingBox.cpp" />
     <ClCompile Include="..\src\Ext\Ogre\src\NodeManipulation.cpp" />
     <ClCompile Include="..\src\Ext\std\src\string_utils.cpp" />
+    <ClCompile Include="..\src\GameElements\src\AiAgent.cpp" />
     <ClCompile Include="..\src\GameElements\src\BallisticBullet.cpp" />
     <ClCompile Include="..\src\GameElements\src\BulletBase.cpp" />
     <ClCompile Include="..\src\GameElements\src\ConfigurationLoader.cpp" />
