@@ -298,6 +298,9 @@
     <ClInclude Include="..\src\GameElements\GridPathfinder.h">
       <Filter>GameElements</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\GameElements\RTSPicking.h">
+      <Filter>GameElements</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\System\src\ActiveObject.cpp">
@@ -442,6 +445,11 @@
       <Filter>GameElements\src</Filter>
     </ClCompile>
     <ClCompile Include="..\src\GameElements\src\GridPathfinder.cpp">
+      <Filter>GameElements\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameElements\src\RTSPicking.cpp">
+      <Filter>GameElements\src</Filter>
+    </ClCompile>
       <Filter>GameElements\src</Filter>
     </ClCompile>
   </ItemGroup>

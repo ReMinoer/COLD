@@ -5,7 +5,7 @@
 
 namespace GameElements
 {
-	AiAgent::AiAgent( const UnitsArchetypes::Archetype * archetype, const WeaponsArchetypes::Archetype * weaponArchetype ) : Agent(archetype, weaponArchetype)
+	AiAgent::AiAgent( const UnitsArchetypes::Archetype * archetype, const WeaponsArchetypes::Archetype * weaponArchetype, Team team) : Agent(archetype, weaponArchetype), m_team(team)
 	{}
 
 	void AiAgent::update(const Config::Real & dt)
