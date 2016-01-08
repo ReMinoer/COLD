@@ -10,6 +10,8 @@ namespace GameElements
 
 	void AiAgent::update(const Config::Real & dt)
 	{
+		Agent::update(dt);
+
 		Math::Vector2<Config::Real> diff = _destination - getPosition().projectZ();
 		if (diff != Math::Vector2<Config::Real>())
 		{

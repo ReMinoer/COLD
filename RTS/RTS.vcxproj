@@ -287,6 +287,7 @@ echo "Done"
     <ClInclude Include="..\src\GameElements\BallisticBullet.h" />
     <ClInclude Include="..\src\GameElements\BulletBase.h" />
     <ClInclude Include="..\src\GameElements\ConfigurationLoader.h" />
+    <ClInclude Include="..\src\GameElements\GridPathfinder.h" />
     <ClInclude Include="..\src\GameElements\Map.h" />
     <ClInclude Include="..\src\GameElements\NullAgent.h" />
     <ClInclude Include="..\src\GameElements\Perception.h" />
@@ -363,6 +364,7 @@ echo "Done"
     <ClCompile Include="..\src\GameElements\src\BallisticBullet.cpp" />
     <ClCompile Include="..\src\GameElements\src\BulletBase.cpp" />
     <ClCompile Include="..\src\GameElements\src\ConfigurationLoader.cpp" />
+    <ClCompile Include="..\src\GameElements\src\GridPathfinder.cpp" />
     <ClCompile Include="..\src\GameElements\src\Map.cpp" />
     <ClCompile Include="..\src\GameElements\src\NullAgent.cpp" />
     <ClCompile Include="..\src\GameElements\src\Perception.cpp" />
