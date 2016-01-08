@@ -5,6 +5,8 @@
 
 namespace GameElements 
 {
+	enum Team {none, red, blue};
+
 	class AiAgent : public Agent
 	{
 	public:
@@ -12,8 +14,9 @@ namespace GameElements
 	protected:
 		Math::Vector2<Config::Real> _velocity;
 		Math::Vector2<Config::Real> _destination;
+		Team m_team;
 	public:
-		AiAgent(const UnitsArchetypes::Archetype * archetype, const WeaponsArchetypes::Archetype * weaponArchetype);
+		AiAgent(const UnitsArchetypes::Archetype * archetype, const WeaponsArchetypes::Archetype * weaponArchetype, Team team=none);
 
 		virtual void update(const Config::Real & dt);
 		virtual void onCollision (const CollisionMessage & message);

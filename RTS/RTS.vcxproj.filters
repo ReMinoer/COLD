@@ -295,6 +295,9 @@
     <ClInclude Include="..\src\GameElements\AiAgent.h">
       <Filter>GameElements</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\GameElements\RTSPicking.h">
+      <Filter>GameElements</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\System\src\ActiveObject.cpp">
@@ -436,6 +439,9 @@
       <Filter>Ogre\src</Filter>
     </ClCompile>
     <ClCompile Include="..\src\GameElements\src\AiAgent.cpp">
+      <Filter>GameElements\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameElements\src\RTSPicking.cpp">
       <Filter>GameElements\src</Filter>
     </ClCompile>
   </ItemGroup>
