@@ -450,7 +450,5 @@
     <ClCompile Include="..\src\GameElements\src\RTSPicking.cpp">
       <Filter>GameElements\src</Filter>
     </ClCompile>
-      <Filter>GameElements\src</Filter>
-    </ClCompile>
   </ItemGroup>
 </Project>
