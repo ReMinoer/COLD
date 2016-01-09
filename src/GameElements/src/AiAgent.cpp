@@ -7,11 +7,9 @@ namespace GameElements
 {
 	AiAgent::AiAgent( const UnitsArchetypes::Archetype * archetype, const WeaponsArchetypes::Archetype * weaponArchetype, Team team) : Agent(archetype, weaponArchetype), m_team(team)
 	{}
-
+	
 	void AiAgent::update(const Config::Real & dt)
 	{
-		Agent::update(dt);
-
 		Math::Vector2<Config::Real> diff = _destination - getPosition().projectZ();
 		if (diff != Math::Vector2<Config::Real>())
 		{
