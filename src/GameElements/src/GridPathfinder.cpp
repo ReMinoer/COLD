@@ -9,7 +9,7 @@ using namespace Config;
 namespace GameElements 
 {
 	GridPathfinder::GridPathfinder(Map* map)
-		: _map(map), _success(false), _isEnd(false)
+		: _map(map), _success(false), _isEnd(false), _timeout(1)
 	{
 		_closedGrid = new bool*[_map->height()];
 		for (int i = 0; i < _map->height(); i++)
@@ -124,9 +124,9 @@ namespace GameElements
 			}
 	}
 
-	vector<Vector2<Real>> GridPathfinder::GetPath()
+	stack<Vector2<Real>> GridPathfinder::GetPath()
 	{
-		vector<Vector2<Real>> path;
+		stack<Vector2<Real>> path;
 
 		if (_closedlist.empty())
 			return path;
@@ -134,8 +134,8 @@ namespace GameElements
 		Vector2<Real> current;
 		if (_isEnd)
 		{
-			path.push_back(_finish);
-			path.push_back(_map->toWorldCoordinates(_map->toGridCoordinates(_finish)));
+			path.push(_finish);
+			path.push(_map->toWorldCoordinates(_map->toGridCoordinates(_finish)));
 			current = _finish;
 		}
 		else
@@ -145,7 +145,7 @@ namespace GameElements
 				return path;
 
 			current = _map->toWorldCoordinates(BestNodeClosedlist());
-			path.push_back(current);
+			path.push(current);
 		}
 	
 		PathfinderNode node = _closedlist[_map->toGridCoordinates(current)];
@@ -155,10 +155,9 @@ namespace GameElements
 			current = _map->toWorldCoordinates(node.parent);
 			node = _closedlist[node.parent];
 
-			path.push_back(current);
+			path.push(current);
 		}
 
-		std::reverse(path.begin(), path.end());
 		return path;
 	}
 

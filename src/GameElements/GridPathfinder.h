@@ -1,7 +1,7 @@
 #ifndef _GameElements_GridPathfinder_H
 #define _GameElements_GridPathfinder_H
 
-#include <vector>
+#include <stack>
 #include <map>
 #include "Math\Vector2.h"
 #include "GameElements\Map.h"
@@ -47,7 +47,7 @@ namespace GameElements
 		~GridPathfinder();
 		void Initialize(Vector2<Real> start, Vector2<Real> finish);
 		bool ComputePath();
-		vector<Vector2<Config::Real>> GetPath();
+		stack<Vector2<Config::Real>> GetPath();
 	private:
 		void ProcessSurroundingCases();
 		Vector2<int> BestNodeOpenlist();
