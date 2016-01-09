@@ -1,175 +1,201 @@
-
+#include <stdafx.h>
 #include "GameElements\GridPathfinder.h"
-/*
+#include "GameElements\Map.h"
 
-GridPathfinder::GridPathfinder(Map map)
-	: _map(map), _success(false), _isEnd(false), _isReady(true)
-{
-    _closedGrid = new bool[_map.height()][];
-    for (int i = 0; i < _map.height(); i++)
-        _closedGrid[i] = new bool[_map.width()];
-}
+using namespace std;
+using namespace Math;
+using namespace Config;
 
-void GridPathfinder::Initialize(Vector2<Config::Real> start, Vector2<Config::Real> finish)
+namespace GameElements 
 {
-    _success = false;
-    _isReady = true;
-    if (!(IsCaseExist(start) && IsCaseExist(finish) && IsCaseEmpty(start)))
-    {
-        _isReady = false;
-        return;
-    }
-    _isEnd = false;
+	GridPathfinder::GridPathfinder(Map* map)
+		: _map(map), _success(false), _isEnd(false)
+	{
+		_closedGrid = new bool*[_map->height()];
+		for (int i = 0; i < _map->height(); i++)
+			_closedGrid[i] = new bool[_map->width()];
+	}
+
+	GridPathfinder::~GridPathfinder()
+	{
+		for (int i = 0; i < _map->height(); i++)
+			delete[] _closedGrid[i];
+		delete[] _closedGrid;
+	}
+
+	void GridPathfinder::Initialize(Vector2<Real> start, Vector2<Real> finish)
+	{
+		assert(_map->isValid(start) && _map->isValid(finish) && _map->getCell(start).m_speedReduction <= 0);
+		
+		_success = false;
+		_isEnd = false;
 	
-    _openlist.clear();
-    _closedlist.clear();
-	
-    _closedGrid = new bool[_map.height()][];
-    for (int i = 0; i < _map.height(); i++)
-        _closedGrid[i] = new bool[_map.width()];
+		_openlist.clear();
+		_closedlist.clear();
+		
+		for (int i = 0; i < _map->height(); i++)
+			for (int j = 0; j < _map->width(); j++)
+				_closedGrid[i][j] = false;
 
-    _start = start;
-    _finish = finish;
-    _current = _start;
+		_start = start;
+		_finish = finish;
+		_current = _map->toGridCoordinates(_start);
+		
+		Vector2<float> move = _start - _map->toWorldCoordinates(_current);
+		Vector2<float> remaining = _finish - _start;
 
-    _closedlist.insert();
-    _closedGrid[_current.y][_current.x] = true;
+		PathfinderNode node;
+		node.parentCost = _closedlist[_current].parentCost + move.norm();
+		node.personalCost = remaining.norm();
 
-    ProcessSurroundingCases();
+		_closedlist[_current] = node;
+		_closedGrid[_current[1]][_current[0]] = true;
 
-    _timeoutElapsed = 0;
-	_processDuration = 0;
-}
+		ProcessSurroundingCases();
 
-bool GridPathfinder::ComputePath()
-{
-    if (!_isReady)
-        return false;
+		_timeoutElapsed = 0;
+		_processDuration = 0;
+	}
 
-    _timeoutElapsed = 0;
-	_processDuration = 0;
+	bool GridPathfinder::ComputePath()
+	{
+		_timeoutElapsed = 0;
+		_processDuration = 0;
 
-    while (!_openlist.empty() && _timeoutElapsed < _timeout)
-    {
-		clock_t start = clock();
-
-        _current = BestNodeOpenlist();
-
-		_closedlist[_current] = _openlist[_current];
-		_closedGrid[_current.x][_current.y] = true;
-		_openlist.Remove(p);
-
-        if (_current == _finish)
-            break;
-
-        ProcessSurroundingCases();
-
-		clock_t end = clock();
-		double elapsed = (double) (end-start) / CLOCKS_PER_SEC;
-
-		_timeoutElapsed += elapsed;
-		_processDuration += elapsed;
-    }
-
-    _success = _current == _finish;
-    _isEnd = Success || _openlist.empty();
-
-    return _isEnd;
-}
-
-vector<Vector2<Config::Real>> GridPathfinder::GetPath()
-{
-    vector<Vector2<Config::Real>> path;
-
-    if (_closedlist.empty())
-        return path;
-
-	Vector2 current = _closedGrid[_finish.y][_finish.x] ? _finish : BestNodeClosedlist();
-
-    if (current == Vector2(-1, -1))
-        return path;
-	
-    PathfinderNode node = _closedlist[current];
-    path.push_back(current);
-
-    while (current != _start)
-    {
-        current = node.Parent;
-
-        node = closedlist[current];
-		path.push_back(current);
-    }
-
-    std::reverse(route.begin(), route.end());
-    return path;
-}
-
-void GridPathfinder::ProcessSurroundingCases()
-{
-	for (int i = -1; i <= 1; i++)
-		for (int j = -1; j <= 1; j++)
+		while (!_openlist.empty() && _timeoutElapsed < _timeout)
 		{
-			if (i == 0 && j = 0)
-				continue;
+			clock_t start = clock();
 
-			Vector2<int> point(_current.x + j, _current.y + i);
+			_current = BestNodeOpenlist();
 
-			if (!_map->isValid(point) && _map->getCell(point).m_speedReduction <= 0)
-				continue;
+			_closedlist[_current] = _openlist[_current];
+			_closedGrid[_current[1]][_current[0]] = true;
+			_openlist.erase(_current);
 
-			Vector2<int> move = point - _current;
-			Vector2<int> remaining = _finish - point;
+			if (_current == _map->toGridCoordinates(_finish))
+				break;
 
-			float actionCost = (1 - _map->getCell(point).m_speedReduction) * 5;
+			ProcessSurroundingCases();
 
-			PathfinderNode node;
-			node.parent = _current;
-			node.cost = _closedlist[_current].cost + move.distance + remaining.distance + actionCost;
+			clock_t end = clock();
+			double elapsed = (double) (end-start) / CLOCKS_PER_SEC;
 
-			PathfinderNode existingNode = _openlist.find(point);
-			if (existingNode != map::end)
+			_timeoutElapsed += elapsed;
+			_processDuration += elapsed;
+		}
+
+		_success = _current == _finish;
+		_isEnd = _success || _openlist.empty();
+
+		return _isEnd;
+	}
+
+	void GridPathfinder::ProcessSurroundingCases()
+	{
+		for (int i = -1; i <= 1; i++)
+			for (int j = -1; j <= 1; j++)
 			{
-				if (node.getCost() < existingNode.getCost())
+				if (i == 0 && j == 0)
+					continue;
+
+				Vector2<int> point(_current[0] + j, _current[1] + i);
+
+				if (!_map->isValid(point) && _map->getCell(point).m_speedReduction <= 0)
+					continue;
+		
+				Vector2<float> move = point - _map->toWorldCoordinates(_current);
+				Vector2<float> remaining = _finish - point;
+
+				float actionCost = (1 - _map->getCell(point).m_speedReduction) * 5;
+
+				PathfinderNode node;
+				node.parent = _current;
+				node.parentCost = _closedlist[_current].parentCost + move.norm() + actionCost;
+				node.personalCost = remaining.norm();
+
+				map<Vector2<int>, PathfinderNode>::const_iterator existingNode = _openlist.find(point);
+				if (existingNode != _openlist.end())
+				{
+					if (node.getCost() < existingNode->second.getCost())
+						_openlist[point] = node;
+				}
+				else
 					_openlist[point] = node;
 			}
-			else
-				_openlist[point] = node;
+	}
+
+	vector<Vector2<Real>> GridPathfinder::GetPath()
+	{
+		vector<Vector2<Real>> path;
+
+		if (_closedlist.empty())
+			return path;
+
+		Vector2<Real> current;
+		if (_isEnd)
+		{
+			path.push_back(_finish);
+			path.push_back(_map->toWorldCoordinates(_map->toGridCoordinates(_finish)));
+			current = _finish;
 		}
+		else
+		{
+			Vector2<int> bestPoint = BestNodeClosedlist();
+			if (current == Vector2<Real>(-1, -1))
+				return path;
+
+			current = _map->toWorldCoordinates(BestNodeClosedlist());
+			path.push_back(current);
+		}
+	
+		PathfinderNode node = _closedlist[_map->toGridCoordinates(current)];
+
+		while (current != _start)
+		{
+			current = _map->toWorldCoordinates(node.parent);
+			node = _closedlist[node.parent];
+
+			path.push_back(current);
+		}
+
+		std::reverse(path.begin(), path.end());
+		return path;
+	}
+
+	Vector2<int> GridPathfinder::BestNodeOpenlist()
+	{
+		Vector2<int> pointMin = Vector2<int>(-1, -1);
+		float costMin = numeric_limits<float>::max();
+
+		for (std::map<Vector2<int>, PathfinderNode>::const_iterator it = _openlist.begin(); it != _openlist.end(); ++it)
+		{
+			float cost = it->second.getCost();
+			if (cost < costMin)
+			{
+				costMin = cost;
+				pointMin = it->first;
+			}
+		}
+
+		return pointMin;
+	}
+
+	Vector2<int> GridPathfinder::BestNodeClosedlist()
+	{
+		Vector2<int> pointMin = Vector2<int>(-1, -1);
+		float distanceMin = numeric_limits<float>::max();
+	
+		for (std::map<Vector2<int>, PathfinderNode>::const_iterator it = _closedlist.begin(); it != _closedlist.end(); ++it)
+		{
+			Vector2<int> point = it->first;
+			float distance = (_finish - _map->toWorldCoordinates(point)).norm();
+			if (distance < distanceMin)
+			{
+				distanceMin = distance;
+				pointMin = it->first;
+			}
+		}
+
+		return pointMin;
+	}
 }
-
-virtual Vector2<int> GridPathfinder::BestNodeOpenlist()
-{
-    var tmp = new Point(-1, -1);
-    float p = float.MaxValue;
-
-    foreach (KeyValuePair<Point, Node> n in Openlist)
-    {
-        float np = n.Value.Cost;
-        if (np < p)
-        {
-            tmp = n.Key;
-            p = np;
-        }
-    }
-
-    return tmp;
-}
-
-virtual Vector2<int> GridPathfinder::BestNodeClosedlist()
-{
-    var tmp = new Point(-1, -1);
-    float d = float.MaxValue;
-
-    foreach (KeyValuePair<Point, Node> n in Closedlist)
-    {
-        float nd = DistanceTo(n.Key, Finish);
-        if (nd < d)
-        {
-            d = nd;
-            tmp = n.Key;
-        }
-    }
-
-    return tmp;
-}
-*/

@@ -2,37 +2,57 @@
 #define _GameElements_GridPathfinder_H
 
 #include <vector>
-#include <set>
-#include "OGRE\OgreVector2.h"
-#include "DataStructure\Grid.h"
+#include <map>
+#include "Math\Vector2.h"
+#include "GameElements\Map.h"
 
-template<class T>
-class GridPathfinder
+using namespace std;
+using namespace Math;
+using namespace Config;
+
+namespace GameElements 
 {
+	class GridPathfinder
+	{
+	public:
 
-/*
-private:
-	Map *_map;
-	map<Vector2<int>, PathfinderNode> _openlist;
-	bool[][] _closedGrid;
-	map<Vector2<int>, PathfinderNode> _closedlist;
-	bool _success;
-	bool _isEnd;
-	bool _isReady;
-	Vector2<Config::Real> _start;
-	Vector2<Config::Real> _finish;
-	Vector2<int> _current;
-	double _timeout;
-	double _timeoutElapsed;
-	double _processDuration;
-public:
-	GridPathfinder(Map map);
-	void Initialize(Vector2<Config::Real> start, Vector2<Config::Real> finish);
-	bool ComputePath();
-	vector<Vector2<Config::Real>> GetPath();
-private:
-	void ProcessSurroundingCases();
-	*/
+		struct PathfinderNode
+		{
+			Vector2<int> parent;
+			float personalCost;
+			float parentCost;
+		
+			float getCost() const
+			{
+				return personalCost + parentCost;
+			}
+		};
+
+		typedef ::boost::intrusive_ptr<GridPathfinder> Pointer;
+	private:
+		Map* _map;
+		map<Vector2<int>, PathfinderNode> _openlist;
+		bool** _closedGrid;
+		map<Vector2<int>, PathfinderNode> _closedlist;
+		bool _success;
+		bool _isEnd;
+		Vector2<Real> _start;
+		Vector2<Real> _finish;
+		Vector2<int> _current;
+		double _timeout;
+		double _timeoutElapsed;
+		double _processDuration;
+	public:
+		GridPathfinder(Map* map);
+		~GridPathfinder();
+		void Initialize(Vector2<Real> start, Vector2<Real> finish);
+		bool ComputePath();
+		vector<Vector2<Config::Real>> GetPath();
+	private:
+		void ProcessSurroundingCases();
+		Vector2<int> BestNodeOpenlist();
+		Vector2<int> BestNodeClosedlist();
+	};
 }
 
 #endif
