@@ -20,6 +20,7 @@
 #include <GameElements/RandomAgent.h>
 
 #include <GameElements/AiAgent.h>
+#include<GameElements\RTSPicking.h>
 
 namespace OgreFramework
 {
@@ -101,6 +102,8 @@ namespace OgreFramework
 		// Setups the picking
 		//m_picking = new PickingBoundingBox(m_sceneManager, m_camera, OIS::MB_Left) ;
 		m_picking = new PickingSelectionBuffer(m_window, m_sceneManager, m_camera, OIS::MB_Left) ;
+		//m_picking = new GameElements::RTSPicking(m_window, m_sceneManager, m_camera, OIS::MB_Left, OIS::MB_Right) ;
+
 		// Setups the camera control system
 		m_cameraManager = new RTSCameraManager(m_sceneManager, m_camera, &m_keyboardState) ;
 
