@@ -5,6 +5,8 @@
 
 namespace GameElements
 {
+	DesignPattern::StaticMember<System::MessageEmitter<AiAgent::SelectedAiAgentMessage> > AiAgent::AiAgentEmitter ;
+
 	AiAgent::AiAgent( const UnitsArchetypes::Archetype * archetype, const WeaponsArchetypes::Archetype * weaponArchetype, Map* map, Team team)
 		: Agent(archetype, weaponArchetype), m_team(team), _pathfinder(GridPathfinder(map))
 	{}
@@ -58,5 +60,16 @@ namespace GameElements
 		*/
 
 		return true;
+	}
+
+	System::MessageEmitter<AiAgent::SelectedAiAgentMessage> * AiAgent::getAIMessageEmitter()
+	{
+		return AiAgentEmitter.getInstance();
+	}
+
+	void AiAgent::onSelect()
+	{
+		Agent::onSelect();
+		getAIMessageEmitter()->send(SelectedAiAgentMessage(*this)) ;
 	}
 }
