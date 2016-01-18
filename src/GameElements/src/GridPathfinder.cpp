@@ -23,9 +23,11 @@ namespace GameElements
 		delete[] _closedGrid;
 	}
 
-	void GridPathfinder::Initialize(Vector2<Real> start, Vector2<Real> finish)
+	bool GridPathfinder::Initialize(Vector2<Real> start, Vector2<Real> finish)
 	{
-		assert(_map->isValid(start) && _map->isValid(finish) && _map->getCell(start).m_speedReduction <= 0);
+		GameElements::Map::GroundCellDescription cell = _map->getCell(start);
+		if(!_map->isValid(start) || !_map->isValid(finish) || cell.m_speedReduction >= 1.0)
+			return false;
 		
 		_success = false;
 		_isEnd = false;
@@ -45,7 +47,7 @@ namespace GameElements
 		Vector2<float> remaining = _finish - _start;
 
 		PathfinderNode node;
-		node.parentCost = _closedlist[_current].parentCost + move.norm();
+		node.parentCost = move.norm();
 		node.personalCost = remaining.norm();
 
 		_closedlist[_current] = node;
@@ -55,6 +57,8 @@ namespace GameElements
 
 		_timeoutElapsed = 0;
 		_processDuration = 0;
+
+		return true;
 	}
 
 	bool GridPathfinder::ComputePath()
@@ -99,12 +103,13 @@ namespace GameElements
 					continue;
 
 				Vector2<int> point(_current[0] + j, _current[1] + i);
+				Vector2<float> worldPoint = _map->toWorldCoordinates(point);
 
-				if (!_map->isValid(point) && _map->getCell(point).m_speedReduction <= 0)
+				if (!_map->isValid(point) && _map->getCell(point).m_speedReduction >= 1.0)
 					continue;
 		
-				Vector2<float> move = point - _map->toWorldCoordinates(_current);
-				Vector2<float> remaining = _finish - point;
+				Vector2<float> move = worldPoint - _map->toWorldCoordinates(_current);
+				Vector2<float> remaining = _finish - worldPoint;
 
 				float actionCost = (1 - _map->getCell(point).m_speedReduction) * 5;
 
@@ -141,10 +146,10 @@ namespace GameElements
 		else
 		{
 			Vector2<int> bestPoint = BestNodeClosedlist();
-			if (current == Vector2<Real>(-1, -1))
+			if (bestPoint == Vector2<Real>(-1, -1))
 				return path;
 
-			current = _map->toWorldCoordinates(BestNodeClosedlist());
+			current = _map->toWorldCoordinates(bestPoint);
 			path.push(current);
 		}
 	

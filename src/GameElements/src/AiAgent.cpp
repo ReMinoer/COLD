@@ -11,10 +11,8 @@ namespace GameElements
 	
 	void AiAgent::update(const Config::Real & dt)
 	{
-		/*
-		if (_currentPath.empty())
-			return;
-			*/
+		//if (_currentPath.empty())
+		//	  return;
 		
 		Math::Vector2<Config::Real> diff = _nextDestination - getPosition().projectZ();
 		if (diff.norm() != 0)
@@ -27,10 +25,8 @@ namespace GameElements
 		if (newDiff * diff <= 0)
 		{
 			setPosition(_nextDestination.push(0.0));
-			/*
-			_currentPath.pop();
-			_nextDestination = _currentPath.top();
-			*/
+			//_currentPath.pop();
+			//_nextDestination = _currentPath.top();
 		}
 		else
 			setPosition(newPosition.push(0.0));
@@ -48,14 +44,19 @@ namespace GameElements
 		return _velocity * (1.0 - currentCell.m_speedReduction);
 	}
 
-	void AiAgent::setDestination(Math::Vector2<Config::Real> destination)
+	bool AiAgent::setDestination(Math::Vector2<Config::Real> destination)
 	{
 		_nextDestination = destination;
+
 		/*
-		_pathfinder.Initialize(getPosition().projectZ(), destination);
+		if (!_pathfinder.Initialize(getPosition().projectZ(), destination))
+			return false;
+
 		_pathfinder.ComputePath();
 		_currentPath = _pathfinder.GetPath();
 		_nextDestination = _currentPath.top();
 		*/
+
+		return true;
 	}
 }

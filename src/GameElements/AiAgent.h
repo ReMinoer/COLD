@@ -26,7 +26,7 @@ namespace GameElements
 		virtual void onCollision (const CollisionMessage & message);
 		virtual Math::Vector2<Config::Real> getVelocity() const;
 
-		void setDestination(Math::Vector2<Config::Real> destination);
+		bool setDestination(Math::Vector2<Config::Real> destination);
 	};
 }
 

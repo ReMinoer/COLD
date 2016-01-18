@@ -45,7 +45,7 @@ namespace GameElements
 	public:
 		GridPathfinder(Map* map);
 		~GridPathfinder();
-		void Initialize(Vector2<Real> start, Vector2<Real> finish);
+		bool Initialize(Vector2<Real> start, Vector2<Real> finish);
 		bool ComputePath();
 		stack<Vector2<Config::Real>> GetPath();
 	private:
