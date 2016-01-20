@@ -12,7 +12,7 @@
 
 namespace GameElements
 {
-	class RTSPicking: public OgreFramework::Picking, System::MessageListener<AiAgent::SelectedAiAgentMessage>
+	class RTSPicking: public OgreFramework::Picking, System::MessageListener<AiAgent::SelectedAiAgentMessage>, System::MessageListener<AiAgent::UnselectedAiAgentMessage>
 	{
 	protected :
 		AiAgent* agentSelected;
@@ -22,9 +22,10 @@ namespace GameElements
 		bool getCoord(const OIS::MouseEvent &arg, Math::Vector3<Config::Real> * destination);
 	public:
 
-		RTSPicking (Ogre::RenderWindow *renderWindow, Ogre::SceneManager * sceneManager, Ogre::Camera * camera, OIS::MouseButtonID buttonId, OIS::MouseButtonID buttonIdright, System::MessageEmitter<AiAgent::SelectedAiAgentMessage> * emitter);
+		RTSPicking (Ogre::RenderWindow *renderWindow, Ogre::SceneManager * sceneManager, Ogre::Camera * camera, OIS::MouseButtonID buttonId, OIS::MouseButtonID buttonIdright, System::MessageEmitter<AiAgent::SelectedAiAgentMessage> * emitter, System::MessageEmitter<AiAgent::UnselectedAiAgentMessage> * emitterUnSelect );
 		void update(const OIS::MouseEvent &arg, OIS::MouseButtonID id);
 		void onMessage(AiAgent::SelectedAiAgentMessage const& msg);
+		void onMessage(AiAgent::UnselectedAiAgentMessage const& msg);
 	};
 }
 

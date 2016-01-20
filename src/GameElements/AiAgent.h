@@ -21,6 +21,14 @@ namespace GameElements
 				: m_selected(object)
 			{}
 		};
+		struct UnselectedAiAgentMessage
+		{
+			AiAgent & m_unselected ;
+
+			UnselectedAiAgentMessage(AiAgent & object)
+				: m_unselected(object)
+			{}	
+		};
 
 		typedef ::boost::intrusive_ptr<AiAgent> Pointer;
 	protected:
@@ -31,6 +39,7 @@ namespace GameElements
 		Team m_team;
 	private:
 		static DesignPattern::StaticMember<System::MessageEmitter<SelectedAiAgentMessage> > AiAgentEmitter ;
+		static DesignPattern::StaticMember<System::MessageEmitter<UnselectedAiAgentMessage> > AiAgentEmitterUnSelect ;
 	public:
 		AiAgent(const UnitsArchetypes::Archetype * archetype, const WeaponsArchetypes::Archetype * weaponArchetype, Map* map, Team team=none);
 
@@ -40,7 +49,9 @@ namespace GameElements
 
 		bool setDestination(Math::Vector2<Config::Real> destination);
 		void onSelect();
+		void onUnselect();
 		static System::MessageEmitter<SelectedAiAgentMessage> * getAIMessageEmitter();
+		static System::MessageEmitter<UnselectedAiAgentMessage> * getAIMessageEmitterUnSelect();
 	};
 }
 

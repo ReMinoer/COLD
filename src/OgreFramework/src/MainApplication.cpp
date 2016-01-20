@@ -102,7 +102,7 @@ namespace OgreFramework
 		// Setups the picking
 		//m_picking = new PickingBoundingBox(m_sceneManager, m_camera, OIS::MB_Left) ;
 		//m_picking = new PickingSelectionBuffer(m_window, m_sceneManager, m_camera, OIS::MB_Left) ;
-		m_picking = new GameElements::RTSPicking(m_window, m_sceneManager, m_camera, OIS::MB_Left, OIS::MB_Right, GameElements::AiAgent::getAIMessageEmitter()) ;
+		m_picking = new GameElements::RTSPicking(m_window, m_sceneManager, m_camera, OIS::MB_Left, OIS::MB_Right, GameElements::AiAgent::getAIMessageEmitter(), GameElements::AiAgent::getAIMessageEmitterUnSelect()) ;
 
 		// Setups the camera control system
 		m_cameraManager = new RTSCameraManager(m_sceneManager, m_camera, &m_keyboardState) ;

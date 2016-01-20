@@ -4,10 +4,11 @@
 
 namespace GameElements
 {
-RTSPicking::RTSPicking( Ogre::RenderWindow *renderWindow, Ogre::SceneManager * sceneManager, Ogre::Camera * camera, OIS::MouseButtonID buttonId, OIS::MouseButtonID buttonIdright,System::MessageEmitter<AiAgent::SelectedAiAgentMessage> *emitter ) 
-		: Picking(sceneManager, camera, buttonId), m_rightButton(buttonIdright), MessageListener(emitter)
+RTSPicking::RTSPicking( Ogre::RenderWindow *renderWindow, Ogre::SceneManager * sceneManager, Ogre::Camera * camera, OIS::MouseButtonID buttonId, OIS::MouseButtonID buttonIdright,System::MessageEmitter<AiAgent::SelectedAiAgentMessage> *emitter, System::MessageEmitter<AiAgent::UnselectedAiAgentMessage> * emitterUnSelect  ) 
+		: Picking(sceneManager, camera, buttonId), m_rightButton(buttonIdright), MessageListener<AiAgent::SelectedAiAgentMessage>(emitter), MessageListener<AiAgent::UnselectedAiAgentMessage>(emitterUnSelect)
 	{
 		mSelectionBuffer = new Ogre::SelectionBuffer(sceneManager, camera, renderWindow);
+		agentSelected = NULL;
 	}
 
 	bool RTSPicking::getCoord(const OIS::MouseEvent &arg, Math::Vector3<Config::Real> * destination)
@@ -20,10 +21,10 @@ RTSPicking::RTSPicking( Ogre::RenderWindow *renderWindow, Ogre::SceneManager * s
 
 		for (Ogre::RaySceneQueryResult::iterator it = result.begin(); it != result.end(); it++)
 		{
-			mMovableFound = it->movable;
+			mMovableFound = it->movable && it->movable->getName() == "scene0Box001";
 			if (mMovableFound)
 			{
-				Ogre::Vector3 tmp =it->worldFragment->singleIntersection;
+				Ogre::Vector3 tmp = mouseRay.getPoint(it->distance);
 				*destination = Math::Vector3<Config::Real> (tmp.x, tmp.y, tmp.z);
 				return true;
 			}
@@ -51,22 +52,20 @@ RTSPicking::RTSPicking( Ogre::RenderWindow *renderWindow, Ogre::SceneManager * s
 		}
 		if (m_isActive && id==m_rightButton)
 		{
-			if(dynamic_cast<AiAgent*>(m_lastSelected) != NULL)
-			{
 				if( agentSelected != NULL)
-				{
-					//atk
-				}
-				else
-				{
+				{	
 					//move
 					Math::Vector3<Config::Real> destination;
 					if (getCoord(arg,&destination))
-					{
+					{	
 						agentSelected->setDestination(destination.projectZ());
 					}
 				}
-			}
+				else
+				{
+					
+				}
+			
 
 		}
 
@@ -75,5 +74,10 @@ RTSPicking::RTSPicking( Ogre::RenderWindow *renderWindow, Ogre::SceneManager * s
 	void RTSPicking::onMessage(AiAgent::SelectedAiAgentMessage const& msg)
 	{
 		agentSelected = &msg.m_selected;
+	}
+
+	void RTSPicking::onMessage(AiAgent::UnselectedAiAgentMessage const& msg)
+	{
+		agentSelected = NULL;
 	}
 }

@@ -6,6 +6,7 @@
 namespace GameElements
 {
 	DesignPattern::StaticMember<System::MessageEmitter<AiAgent::SelectedAiAgentMessage> > AiAgent::AiAgentEmitter ;
+	DesignPattern::StaticMember<System::MessageEmitter<AiAgent::UnselectedAiAgentMessage> > AiAgent::AiAgentEmitterUnSelect ;
 
 	AiAgent::AiAgent( const UnitsArchetypes::Archetype * archetype, const WeaponsArchetypes::Archetype * weaponArchetype, Map* map, Team team)
 		: Agent(archetype, weaponArchetype), m_team(team), _pathfinder(GridPathfinder(map))
@@ -67,9 +68,20 @@ namespace GameElements
 		return AiAgentEmitter.getInstance();
 	}
 
+	System::MessageEmitter<AiAgent::UnselectedAiAgentMessage> * AiAgent::getAIMessageEmitterUnSelect()
+	{
+		return AiAgentEmitterUnSelect.getInstance();
+	}
+
 	void AiAgent::onSelect()
 	{
 		Agent::onSelect();
 		getAIMessageEmitter()->send(SelectedAiAgentMessage(*this)) ;
+	}
+
+	void AiAgent::onUnselect()
+	{
+		Agent::onUnselect();
+		getAIMessageEmitterUnSelect()->send(UnselectedAiAgentMessage(*this)) ;
 	}
 }
