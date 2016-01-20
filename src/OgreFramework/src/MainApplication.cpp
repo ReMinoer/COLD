@@ -101,8 +101,8 @@ namespace OgreFramework
 		}
 		// Setups the picking
 		//m_picking = new PickingBoundingBox(m_sceneManager, m_camera, OIS::MB_Left) ;
-		m_picking = new PickingSelectionBuffer(m_window, m_sceneManager, m_camera, OIS::MB_Left) ;
-		//m_picking = new GameElements::RTSPicking(m_window, m_sceneManager, m_camera, OIS::MB_Left, OIS::MB_Right) ;
+		//m_picking = new PickingSelectionBuffer(m_window, m_sceneManager, m_camera, OIS::MB_Left) ;
+		m_picking = new GameElements::RTSPicking(m_window, m_sceneManager, m_camera, OIS::MB_Left, OIS::MB_Right, GameElements::AiAgent::getAIMessageEmitter()) ;
 
 		// Setups the camera control system
 		m_cameraManager = new RTSCameraManager(m_sceneManager, m_camera, &m_keyboardState) ;
@@ -117,7 +117,7 @@ namespace OgreFramework
 		types.push_back("MousticR") ;
 		types.push_back("CrocoR") ;
 		types.push_back("HippoR") ;
-		for(int cpt=0 ; cpt<50² ; ++cpt)
+		for(int cpt=0 ; cpt<50 ; ++cpt)
 		{
 			const GameElements::UnitsArchetypes::Archetype * unit = GlobalConfiguration::getConfigurationLoader()->getUnitsArchetypes().get(types[rand()%types.size()]) ;
 			const GameElements::WeaponsArchetypes::Archetype * weapon = GlobalConfiguration::getConfigurationLoader()->getWeaponsArchetypes().get(unit->m_weapon) ;
