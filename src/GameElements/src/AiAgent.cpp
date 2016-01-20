@@ -13,12 +13,27 @@ namespace GameElements
 	
 	void AiAgent::update(const Config::Real & dt)
 	{
-		//if (_currentPath.empty())
-		//	  return;
-		
+		/*
+		if (_currentPath.empty())
+			return;
+			*/
+
 		Math::Vector2<Config::Real> diff = _nextDestination - getPosition().projectZ();
-		if (diff.norm() != 0)
-			_velocity = diff.normalized() * m_archetype->m_speed;
+		if (diff.norm() == 0)
+		{
+			/*
+			if (!_currentPath.empty())
+				getNextDestination();
+				*/
+			return;
+		}
+
+		/*
+		if (!_pathfinder.isEnd())
+			computePath();
+			*/
+		
+		_velocity = diff.normalized() * m_archetype->m_speed;
 
 		const Map::GroundCellDescription & currentCell = OgreFramework::GlobalConfiguration::getCurrentMap()->getCell(getPosition().projectZ());
 		Math::Vector2<Config::Real> newPosition = getPosition().projectZ() + _velocity * dt * (1.0 - currentCell.m_speedReduction);
@@ -27,8 +42,10 @@ namespace GameElements
 		if (newDiff * diff <= 0)
 		{
 			setPosition(_nextDestination.push(0.0));
-			//_currentPath.pop();
-			//_nextDestination = _currentPath.top();
+			/*
+			if (!_currentPath.empty())
+				getNextDestination();
+				*/
 		}
 		else
 			setPosition(newPosition.push(0.0));
@@ -54,12 +71,28 @@ namespace GameElements
 		if (!_pathfinder.Initialize(getPosition().projectZ(), destination))
 			return false;
 
+		computePath();
+		*/
+		return true;
+	}
+
+	void AiAgent::computePath()
+	{
 		_pathfinder.ComputePath();
 		_currentPath = _pathfinder.GetPath();
 		_nextDestination = _currentPath.top();
-		*/
+		cout << "Destination : " << _nextDestination << endl;
+	}
+	
+	void AiAgent::getNextDestination()
+	{
+		_currentPath.pop();
 
-		return true;
+		if (!_currentPath.empty())
+		{
+			_nextDestination = _currentPath.top();
+			cout << "Destination : " << _nextDestination << endl;
+		}
 	}
 
 	System::MessageEmitter<AiAgent::SelectedAiAgentMessage> * AiAgent::getAIMessageEmitter()

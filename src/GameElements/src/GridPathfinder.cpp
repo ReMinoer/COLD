@@ -102,6 +102,9 @@ namespace GameElements
 				if (i == 0 && j == 0)
 					continue;
 
+				if (_closedGrid[_current[1] + i][_current[0] + j])
+					continue;
+
 				Vector2<int> point(_current[0] + j, _current[1] + i);
 				Vector2<float> worldPoint = _map->toWorldCoordinates(point);
 
@@ -111,7 +114,7 @@ namespace GameElements
 				Vector2<float> move = worldPoint - _map->toWorldCoordinates(_current);
 				Vector2<float> remaining = _finish - worldPoint;
 
-				float actionCost = (1 - _map->getCell(point).m_speedReduction) * 5;
+				float actionCost = _map->getCell(point).m_speedReduction * 5;
 
 				PathfinderNode node;
 				node.parent = _current;
@@ -201,5 +204,10 @@ namespace GameElements
 		}
 
 		return pointMin;
+	}
+	
+	bool GridPathfinder::isEnd()
+	{
+		return _isEnd;
 	}
 }

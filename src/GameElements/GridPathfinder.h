@@ -47,6 +47,7 @@ namespace GameElements
 		~GridPathfinder();
 		bool Initialize(Vector2<Real> start, Vector2<Real> finish);
 		bool ComputePath();
+		bool isEnd();
 		stack<Vector2<Config::Real>> GetPath();
 	private:
 		void ProcessSurroundingCases();

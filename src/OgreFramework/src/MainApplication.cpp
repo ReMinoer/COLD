@@ -111,21 +111,22 @@ namespace OgreFramework
 		// Creates two entities for testing purpose
 		// ----------------------------------------
 		::std::vector<::std::string> types ;
-		types.push_back("MousticB") ;
+		types.push_back("HippoR") ;
 		types.push_back("CrocoB") ;
 		types.push_back("HippoB") ;
 		types.push_back("MousticR") ;
 		types.push_back("CrocoR") ;
-		types.push_back("HippoR") ;
-		for(int cpt=0 ; cpt<50 ; ++cpt)
+		types.push_back("MousticB") ;
+		for(int cpt=0 ; cpt<1 ; ++cpt)
 		{
 			const GameElements::UnitsArchetypes::Archetype * unit = GlobalConfiguration::getConfigurationLoader()->getUnitsArchetypes().get(types[rand()%types.size()]) ;
 			const GameElements::WeaponsArchetypes::Archetype * weapon = GlobalConfiguration::getConfigurationLoader()->getWeaponsArchetypes().get(unit->m_weapon) ;
 			if(weapon==NULL) { ::std::cout<<"HippoB: bad weapon!" ; char c ; ::std::cin>>c ; }
 			GameElements::AiAgent::Pointer m_entityAdapter = new GameElements::AiAgent(unit, weapon, GlobalConfiguration::getCurrentMap()) ;
 			//GameElements::RandomAgent::Pointer m_entityAdapter = new GameElements::RandomAgent(unit, weapon) ;
-			m_entityAdapter->setPosition(GlobalConfiguration::getCurrentMap()->toWorldCoordinates(GlobalConfiguration::getCurrentMap()->findFreeLocation()).push(0.0)) ;
-			m_entityAdapter->setDestination(GlobalConfiguration::getCurrentMap()->toWorldCoordinates(GlobalConfiguration::getCurrentMap()->findFreeLocation())) ;
+			Vector2<Config::Real> position = GlobalConfiguration::getCurrentMap()->toWorldCoordinates(GlobalConfiguration::getCurrentMap()->findFreeLocation());
+			m_entityAdapter->setPosition(position.push(0.0)) ;
+			m_entityAdapter->setDestination(GlobalConfiguration::getCurrentMap()->toWorldCoordinates(GlobalConfiguration::getCurrentMap()->findFreeLocation()));
 		}
 
 		//m_entityAdapter = new GameElements::NullAgent(configurationLoader.getUnitsArchetypes().get("HippoB"), configurationLoader.getWeaponsArchetypes().get()) ;
