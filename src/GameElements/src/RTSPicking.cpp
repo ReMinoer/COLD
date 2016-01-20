@@ -35,7 +35,7 @@ RTSPicking::RTSPicking( Ogre::RenderWindow *renderWindow, Ogre::SceneManager * s
 	void RTSPicking::update( const OIS::MouseEvent &arg, OIS::MouseButtonID id )
 	{
 		Ogre::Entity *selectedEntity = mSelectionBuffer->OnSelectionClick(arg.state.X.abs, arg.state.Y.abs);
-			
+		lastbutton = id;
 		if(m_isActive && id==m_button)
 		{
 			
@@ -52,6 +52,8 @@ RTSPicking::RTSPicking( Ogre::RenderWindow *renderWindow, Ogre::SceneManager * s
 		}
 		if (m_isActive && id==m_rightButton)
 		{
+				
+				notifySelected(selectedEntity) ;
 				if( agentSelected != NULL)
 				{	
 					//move
@@ -73,11 +75,31 @@ RTSPicking::RTSPicking( Ogre::RenderWindow *renderWindow, Ogre::SceneManager * s
 	
 	void RTSPicking::onMessage(AiAgent::SelectedAiAgentMessage const& msg)
 	{
-		agentSelected = &msg.m_selected;
+		if (agentSelected == NULL || lastbutton == m_button) 
+		{
+			agentSelected = &msg.m_selected;
+		}
+		else if (lastbutton == m_rightButton)
+		{
+			attack(&msg.m_selected);
+		}
 	}
 
 	void RTSPicking::onMessage(AiAgent::UnselectedAiAgentMessage const& msg)
 	{
 		agentSelected = NULL;
+	}
+
+	void RTSPicking::attack(AiAgent * target)
+	{
+		if (agentSelected->getTeam() != target->getTeam())
+		{
+			std::cout << "BOOOMMMM" << std::endl;
+		}
+		else 
+		{	//suivre alié ?
+			std::cout << "BOH NAN C 1 COPAIN" << std::endl;
+		}
+		
 	}
 }

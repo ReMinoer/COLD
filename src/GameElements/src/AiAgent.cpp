@@ -84,4 +84,9 @@ namespace GameElements
 		Agent::onUnselect();
 		getAIMessageEmitterUnSelect()->send(UnselectedAiAgentMessage(*this)) ;
 	}
+
+	Team AiAgent::getTeam()
+	{
+		return m_team;
+	}
 }

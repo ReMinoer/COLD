@@ -117,6 +117,32 @@ namespace OgreFramework
 		types.push_back("MousticR") ;
 		types.push_back("CrocoR") ;
 		types.push_back("HippoR") ;
+		//regarder les team ! 
+		/*
+		for(int typeunit=0 ; typeunit<3; ++typeunit)
+		{
+			for (int nbunit = 0; nbunit<4; nbunit++)
+			{
+			const GameElements::UnitsArchetypes::Archetype * unit = GlobalConfiguration::getConfigurationLoader()->getUnitsArchetypes().get(types[typeunit]) ;
+			const GameElements::WeaponsArchetypes::Archetype * weapon = GlobalConfiguration::getConfigurationLoader()->getWeaponsArchetypes().get(unit->m_weapon) ;
+			if(weapon==NULL) { ::std::cout<<"HippoB: bad weapon!" ; char c ; ::std::cin>>c ; }
+			GameElements::AiAgent::Pointer m_entityAdapter = new GameElements::AiAgent(unit, weapon, GlobalConfiguration::getCurrentMap(), GameElements::Team::blue) ;
+			m_entityAdapter->setPosition(GlobalConfiguration::getCurrentMap()->toWorldCoordinates(GlobalConfiguration::getCurrentMap()->findFreeLocation()).push(0.0)) ;
+			m_entityAdapter->setDestination(GlobalConfiguration::getCurrentMap()->toWorldCoordinates(GlobalConfiguration::getCurrentMap()->findFreeLocation())) ;
+		
+			}
+			for (int nbunit = 0; nbunit<4; nbunit++)
+			{
+			const GameElements::UnitsArchetypes::Archetype * unit = GlobalConfiguration::getConfigurationLoader()->getUnitsArchetypes().get(types[typeunit+3]) ;
+			const GameElements::WeaponsArchetypes::Archetype * weapon = GlobalConfiguration::getConfigurationLoader()->getWeaponsArchetypes().get(unit->m_weapon) ;
+			if(weapon==NULL) { ::std::cout<<"HippoB: bad weapon!" ; char c ; ::std::cin>>c ; }
+			GameElements::AiAgent::Pointer m_entityAdapter = new GameElements::AiAgent(unit, weapon, GlobalConfiguration::getCurrentMap(), GameElements::Team::red) ;
+			m_entityAdapter->setPosition(GlobalConfiguration::getCurrentMap()->toWorldCoordinates(GlobalConfiguration::getCurrentMap()->findFreeLocation()).push(0.0)) ;
+			m_entityAdapter->setDestination(GlobalConfiguration::getCurrentMap()->toWorldCoordinates(GlobalConfiguration::getCurrentMap()->findFreeLocation())) ;
+		
+			}
+		}
+		*/
 		for(int cpt=0 ; cpt<50 ; ++cpt)
 		{
 			const GameElements::UnitsArchetypes::Archetype * unit = GlobalConfiguration::getConfigurationLoader()->getUnitsArchetypes().get(types[rand()%types.size()]) ;

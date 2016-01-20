@@ -52,6 +52,8 @@ namespace GameElements
 		void onUnselect();
 		static System::MessageEmitter<SelectedAiAgentMessage> * getAIMessageEmitter();
 		static System::MessageEmitter<UnselectedAiAgentMessage> * getAIMessageEmitterUnSelect();
+		Team getTeam();
+
 	};
 }
 
