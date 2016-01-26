@@ -59,7 +59,8 @@ namespace GameElements
 		static System::MessageEmitter<UnselectedAiAgentMessage> * getAIMessageEmitterUnSelect();
 		Team getTeam();
 		void drawCircle();
-
+		void attackInRange();
+		Ogre::ManualObject * getCircle();
 	};
 }
 

@@ -78,11 +78,13 @@ RTSPicking::RTSPicking( Ogre::RenderWindow *renderWindow, Ogre::SceneManager * s
 		if (agentSelected == NULL || lastbutton == m_button) 
 		{
 			agentSelected = &msg.m_selected;
+			agentSelected->getCircle()->setVisible(true);
 		}
 		else if (lastbutton == m_rightButton)
 		{
-			attack(&msg.m_selected);
+			attackTarget(&msg.m_selected);
 		}
+	
 	}
 
 	void RTSPicking::onMessage(AiAgent::UnselectedAiAgentMessage const& msg)
@@ -90,7 +92,7 @@ RTSPicking::RTSPicking( Ogre::RenderWindow *renderWindow, Ogre::SceneManager * s
 		agentSelected = NULL;
 	}
 
-	void RTSPicking::attack(AiAgent * target)
+	void RTSPicking::attackTarget(AiAgent * target)
 	{
 		if (agentSelected->getTeam() != target->getTeam())
 		{
@@ -98,8 +100,10 @@ RTSPicking::RTSPicking( Ogre::RenderWindow *renderWindow, Ogre::SceneManager * s
 		}
 		else 
 		{	//suivre alié ?
+			agentSelected->setDestination(target->getPosition().projectZ());
 			std::cout << "BOH NAN C 1 COPAIN" << std::endl;
 		}
 		
 	}
+
 }

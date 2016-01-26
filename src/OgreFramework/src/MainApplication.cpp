@@ -61,7 +61,6 @@ namespace OgreFramework
 
 		m_camera->setFarClipDistance(Ogre::Real(3000)) ;
 		m_camera->setNearClipDistance(Ogre::Real(0.01)) ;
-
 		// 2- Sets fog
 		// -----------
 		m_sceneManager->setFog(Ogre::FOG_LINEAR, Ogre::ColourValue(Ogre::Real(0.0), Ogre::Real(0.0), Ogre::Real(0.0)), Ogre::Real(0.03), Ogre::Real(2000.0), Ogre::Real(3000.0)) ;
@@ -106,7 +105,8 @@ namespace OgreFramework
 
 		// Setups the camera control system
 		m_cameraManager = new RTSCameraManager(m_sceneManager, m_camera, &m_keyboardState) ;
-
+		m_camera->setPosition(0,0,60);
+	
 		// ----------------------------------------
 		// Creates two entities for testing purpose
 		// ----------------------------------------
@@ -117,12 +117,11 @@ namespace OgreFramework
 		types.push_back("CrocoR") ;
 		types.push_back("HippoR") ;
 		types.push_back("MousticR") ;
-		//regarder les team ! 
 		
 		for(int typeunit=0 ; typeunit<3; ++typeunit)
 		{
 			//blue team
-			for (int nbunit = 0; nbunit<1; nbunit++)
+			for (int nbunit = 0; nbunit<3; nbunit++)
 			{
 			const GameElements::UnitsArchetypes::Archetype * unit = GlobalConfiguration::getConfigurationLoader()->getUnitsArchetypes().get(types[typeunit]) ;
 			const GameElements::WeaponsArchetypes::Archetype * weapon = GlobalConfiguration::getConfigurationLoader()->getWeaponsArchetypes().get(unit->m_weapon) ;
