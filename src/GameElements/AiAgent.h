@@ -37,11 +37,14 @@ namespace GameElements
 		Math::Vector2<Config::Real> _velocity;
 		Math::Vector2<Config::Real> _nextDestination;
 		Team m_team;
+		Ogre::SceneManager * m_sceneManager ;
+		Ogre::ManualObject * m_circle;
+		
 	private:
 		static DesignPattern::StaticMember<System::MessageEmitter<SelectedAiAgentMessage> > AiAgentEmitter ;
 		static DesignPattern::StaticMember<System::MessageEmitter<UnselectedAiAgentMessage> > AiAgentEmitterUnSelect ;
 	public:
-		AiAgent(const UnitsArchetypes::Archetype * archetype, const WeaponsArchetypes::Archetype * weaponArchetype, Map* map, Team team=none);
+		AiAgent(const UnitsArchetypes::Archetype * archetype, const WeaponsArchetypes::Archetype * weaponArchetype, Map* map, Ogre::SceneManager * sceneManager, Team team=none);
 
 		virtual void update(const Config::Real & dt);
 		virtual void onCollision (const CollisionMessage & message);
@@ -55,6 +58,7 @@ namespace GameElements
 		static System::MessageEmitter<SelectedAiAgentMessage> * getAIMessageEmitter();
 		static System::MessageEmitter<UnselectedAiAgentMessage> * getAIMessageEmitterUnSelect();
 		Team getTeam();
+		void drawCircle();
 
 	};
 }
