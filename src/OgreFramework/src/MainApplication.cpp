@@ -21,6 +21,7 @@
 
 #include <GameElements/AiAgent.h>
 #include<GameElements\RTSPicking.h>
+#include <GameElements/BuyMenu.h>
 
 namespace OgreFramework
 {
@@ -85,7 +86,12 @@ namespace OgreFramework
 		// Setups the GUI (it's a test / example)
 		// --------------------------------------
 		
-		{
+		int moneyMax = 10000;
+		int moneyActual = moneyMax;
+		GameElements::BuyMenu m_buyMenu = GameElements::BuyMenu(moneyMax);
+		
+
+		/*{
 			Ogre::StringVector tmp ;
 			tmp.push_back("item 1") ;
 			tmp.push_back("item 2") ;
@@ -98,6 +104,9 @@ namespace OgreFramework
 			tmp.push_back("item 2") ;
 			tmp.push_back("item 3") ;
 			OgreBites::SelectMenu * menu1 = m_trayManager->createThickSelectMenu(OgreBites::TL_TOPLEFT, "Menu 2", "Foo 2", 200, 10, tmp) ;
+		}*/
+		{
+			m_buyMenu.ShowSelectionMenu(m_trayManager, moneyActual);
 		}
 		// Setups the picking
 		//m_picking = new PickingBoundingBox(m_sceneManager, m_camera, OIS::MB_Left) ;
@@ -239,7 +248,31 @@ namespace OgreFramework
 
 	void MainApplication::itemSelected( OgreBites::SelectMenu* menu )
 	{
-		::std::cout<<"Selection in menu "<<menu->getCaption()<<", item: "<<menu->getSelectedItem()<<::std::endl ;
+		int SelectionIndex = menu->getSelectionIndex();
+		Ogre::DisplayString SelectedItem = "";
+		int UnityCost = 0;
+
+		switch(SelectionIndex)
+		{
+		case 0:
+			SelectedItem = "Moustic";
+			UnityCost = 250;
+			break;
+		case 1:
+			SelectedItem = "Croco";
+			UnityCost = 500;
+			break;
+		case 2:
+			SelectedItem = "Hippo";
+			UnityCost = 1000;
+			break;
+		default:
+			SelectedItem = "No selection";
+			UnityCost = 0;
+			break;
+		}
+
+		::std::cout<<"Selection in menu "<<menu->getCaption()<<", item: "<<SelectedItem<< ", cost: " <<UnityCost<<::std::endl ;
 	}
 
 	bool MainApplication::keyPressed( const OIS::KeyEvent &arg )
