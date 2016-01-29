@@ -12,6 +12,7 @@ using namespace Config;
 
 namespace GameElements 
 {
+	// BUG : Grid step != 1 don't work !
 	class GridPathfinder
 	{
 	public:
@@ -39,11 +40,12 @@ namespace GameElements
 		Vector2<Real> _start;
 		Vector2<Real> _finish;
 		Vector2<int> _current;
+		int _gridStep;
 		double _timeout;
 		double _timeoutElapsed;
 		double _processDuration;
 	public:
-		GridPathfinder(Map* map);
+		GridPathfinder(Map* map, int gridStep = 1);
 		~GridPathfinder();
 		bool Initialize(Vector2<Real> start, Vector2<Real> finish);
 		bool ComputePath();
@@ -53,6 +55,14 @@ namespace GameElements
 		void ProcessSurroundingCases();
 		Vector2<int> BestNodeOpenlist();
 		Vector2<int> BestNodeClosedlist();
+		int width() const;
+		int height() const;
+		Math::Vector2<int> toGridCoordinates(Math::Vector2<Real> const & worldCoordinates) const;
+		Math::Vector2<Real> toWorldCoordinates(Math::Vector2<int> const & gridCoordinates) const;
+		const Map::GroundCellDescription & getCell(Math::Vector2<int> const & gridCoordinates) const;
+		const Map::GroundCellDescription & getCell(Math::Vector2<Config::Real> const & worldCoordinates) const;
+		bool isValid(Math::Vector2<int> const & gridCoordinates) const;
+		bool isValid(Math::Vector2<Config::Real> const & worldCoordinates) const;
 	};
 }
 

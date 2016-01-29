@@ -15,7 +15,8 @@ namespace GameElements
 	class RTSPicking: public OgreFramework::Picking, System::MessageListener<AiAgent::SelectedAiAgentMessage>, System::MessageListener<AiAgent::UnselectedAiAgentMessage>
 	{
 	protected :
-		AiAgent* agentSelected;
+		AiAgent * agentSelected;
+		
 		OIS::MouseButtonID m_rightButton;
 		Ogre::SelectionBuffer * mSelectionBuffer;
 		OIS::MouseButtonID lastbutton;
@@ -27,7 +28,8 @@ namespace GameElements
 		void update(const OIS::MouseEvent &arg, OIS::MouseButtonID id);
 		void onMessage(AiAgent::SelectedAiAgentMessage const& msg);
 		void onMessage(AiAgent::UnselectedAiAgentMessage const& msg);
-		void attack(AiAgent * target);
+		void attackTarget(AiAgent * target);
+		
 	};
 }
 
