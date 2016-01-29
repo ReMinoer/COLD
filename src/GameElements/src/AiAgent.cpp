@@ -17,6 +17,8 @@ namespace GameElements
 	
 	void AiAgent::update(const Config::Real & dt)
 	{
+		attackInRange();
+
 		if (_currentPath.empty())
 			return;
 
@@ -47,7 +49,6 @@ namespace GameElements
 			setPosition(newPosition.push(0.0));
 
 		setOrientation(_velocity);
-		attackInRange();
 	}
 
 	void AiAgent::onCollision (const CollisionMessage & message)
