@@ -32,12 +32,12 @@ namespace GameElements
 			//diff = _nextDestination - getPosition().projectZ();
 		}
 		
-		_velocity = diff.normalized() * m_archetype->m_speed;
-
 		const Map::GroundCellDescription & currentCell = OgreFramework::GlobalConfiguration::getCurrentMap()->getCell(getPosition().projectZ());
-		Math::Vector2<Config::Real> newPosition = getPosition().projectZ() + _velocity * dt * (1.0 - currentCell.m_speedReduction);
+		_velocity = diff.normalized() * m_archetype->m_speed * (1.0 - currentCell.m_speedReduction);
 		
+		Math::Vector2<Config::Real> newPosition = getPosition().projectZ() + _velocity * dt;
 		Math::Vector2<Config::Real> newDiff = _nextDestination - newPosition;
+
 		if (newDiff * diff <= 0)
 		{
 			setPosition(_nextDestination.push(0.0));
@@ -57,8 +57,7 @@ namespace GameElements
 
 	Math::Vector2<Config::Real> AiAgent::getVelocity() const
 	{
-		const Map::GroundCellDescription & currentCell = OgreFramework::GlobalConfiguration::getCurrentMap()->getCell(getPosition().projectZ());
-		return _velocity * (1.0 - currentCell.m_speedReduction);
+		return _velocity;
 	}
 
 	bool AiAgent::setDestination(Math::Vector2<Config::Real> destination)

@@ -47,7 +47,7 @@ namespace GameElements
 			{
 				Vector2<int> point = origin + Vector2<int>(j, i);
 
-				if (!isValid(point))
+				if (!isValid(point) && getCell(point).m_speedReduction < 1.0)
 					continue;
 
 				Vector2<float> move = _start - toWorldCoordinates(point);
@@ -132,12 +132,12 @@ namespace GameElements
 				Vector2<float> move = worldPoint - toWorldCoordinates(_current);
 				Vector2<float> remaining = _finish - worldPoint;
 
-				float actionCost = getCell(point).m_speedReduction * 10;
+				float actionCost = getCell(point).m_speedReduction * 100;
 
 				PathfinderNode node;
 				node.parent = _current;
-				node.parentCost = _closedlist[_current].parentCost + move.norm() + actionCost;
-				node.personalCost = remaining.norm();
+				node.parentCost = _closedlist[_current].parentCost + move.norm();
+				node.personalCost = remaining.norm() + actionCost;
 
 				map<Vector2<int>, PathfinderNode>::const_iterator existingNode = _openlist.find(point);
 				if (existingNode != _openlist.end())
