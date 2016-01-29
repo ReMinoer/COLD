@@ -39,6 +39,7 @@ namespace GameElements
 		bool _isEnd;
 		Vector2<Real> _start;
 		Vector2<Real> _finish;
+		Vector2<int> _gridFinish;
 		Vector2<int> _current;
 		int _gridStep;
 		double _timeout;
