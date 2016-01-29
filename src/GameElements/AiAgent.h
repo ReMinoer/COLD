@@ -39,7 +39,8 @@ namespace GameElements
 		Team m_team;
 		Ogre::SceneManager * m_sceneManager ;
 		Ogre::ManualObject * m_circle;
-		
+		AiAgent * m_target;	
+
 	private:
 		static DesignPattern::StaticMember<System::MessageEmitter<SelectedAiAgentMessage> > AiAgentEmitter ;
 		static DesignPattern::StaticMember<System::MessageEmitter<UnselectedAiAgentMessage> > AiAgentEmitterUnSelect ;
@@ -61,6 +62,7 @@ namespace GameElements
 		void drawCircle();
 		void attackInRange();
 		Ogre::ManualObject * getCircle();
+		void setTarget(AiAgent * target);
 	};
 }
 

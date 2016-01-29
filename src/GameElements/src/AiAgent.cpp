@@ -11,6 +11,7 @@ namespace GameElements
 	AiAgent::AiAgent( const UnitsArchetypes::Archetype * archetype, const WeaponsArchetypes::Archetype * weaponArchetype, Map* map, Ogre::SceneManager * sceneManager, Team team)
 		: Agent(archetype, weaponArchetype), m_team(team), _pathfinder(GridPathfinder(map)), m_sceneManager(sceneManager)
 	{
+		m_target = NULL;
 		drawCircle();
 	}
 	
@@ -59,6 +60,7 @@ namespace GameElements
 
 	void AiAgent::onCollision (const CollisionMessage & message)
 	{
+		
 	}
 
 	Math::Vector2<Config::Real> AiAgent::getVelocity() const
@@ -154,37 +156,54 @@ namespace GameElements
 	{
 		if(canFire())
 		{
-			::std::vector<Triggers::CollisionObject::Pointer> objects = m_perception->perceivedAgents() ;
-			for(int cpt=0 ; cpt<objects.size() ; ++cpt)
+			AiAgent::Pointer ptr;
+			if (m_target == NULL)
 			{
-				if(boost::dynamic_pointer_cast<Agent>(objects[cpt])==NULL)
+				::std::vector<Triggers::CollisionObject::Pointer> objects = m_perception->perceivedAgents() ;
+				for(int cpt=0 ; cpt<objects.size() ; ++cpt)
 				{
-					::std::swap(objects[cpt], objects.back()) ;
-					objects.pop_back() ;
+					if(boost::dynamic_pointer_cast<AiAgent>(objects[cpt])==NULL)
+					{
+						::std::swap(objects[cpt], objects.back()) ;
+						objects.pop_back() ;
+					}
+				}
+				if(objects.size()!=0) // If there is something to shoot, then open fire !!!! 
+				{
+					int index = rand()%objects.size() ;
+					ptr = boost::dynamic_pointer_cast<AiAgent>(objects[index]) ;
+					m_perception->reset() ;
+					
 				}
 			}
-			if(objects.size()!=0) // If there is something to shoot, then open fire !!!! 
+			else
 			{
-				
-				int index = rand()%objects.size() ;
-				AiAgent::Pointer ptr = boost::dynamic_pointer_cast<AiAgent>(objects[index]) ;
-				if(ptr!=NULL && ptr != this && ptr->getTeam() != m_team)
+				ptr = m_target;
+			}
+			if(ptr!=NULL && ptr != this && ptr->getTeam() != m_team)
+			{
+				Math::Vector2<Config::Real> otherPosition = ptr->getPosition().projectZ() ;
+				Math::Vector2<Config::Real> otherVelocity = ptr->getVelocity() ;
+				Config::Real bulletSpeed = m_weapon.getArchetype()->m_speed ;
+				Config::Real distanceToTarget = (getPosition().projectZ()-otherPosition).norm() ;
+				Config::Real timeToTarget = distanceToTarget/bulletSpeed ;
+				if(distanceToTarget <= m_weapon.getArchetype()->m_range)
 				{
-					Math::Vector2<Config::Real> otherPosition = ptr->getPosition().projectZ() ;
-					Math::Vector2<Config::Real> otherVelocity = ptr->getVelocity() ;
-					Config::Real bulletSpeed = m_weapon.getArchetype()->m_speed ;
-					Config::Real distanceToTarget = (getPosition().projectZ()-otherPosition).norm() ;
-					Config::Real timeToTarget = distanceToTarget/bulletSpeed ;
 					fire(otherPosition+otherVelocity*timeToTarget) ;
 					//fire(ptr->getPosition().projectZ()) ;
 				}
 			}
 		}
-		m_perception->reset() ;
+		
 	}
 
 	Ogre::ManualObject * AiAgent::getCircle()
 	{
 		return m_circle;
+	}
+
+	void AiAgent::setTarget(AiAgent * target)
+	{
+		m_target = target;
 	}
 }

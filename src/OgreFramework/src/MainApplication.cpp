@@ -121,7 +121,7 @@ namespace OgreFramework
 		for(int typeunit=0 ; typeunit<3; ++typeunit)
 		{
 			//blue team
-			for (int nbunit = 0; nbunit<3; nbunit++)
+			for (int nbunit = 0; nbunit<1; nbunit++)
 			{
 			const GameElements::UnitsArchetypes::Archetype * unit = GlobalConfiguration::getConfigurationLoader()->getUnitsArchetypes().get(types[typeunit]) ;
 			const GameElements::WeaponsArchetypes::Archetype * weapon = GlobalConfiguration::getConfigurationLoader()->getWeaponsArchetypes().get(unit->m_weapon) ;

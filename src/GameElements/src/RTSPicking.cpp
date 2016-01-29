@@ -61,6 +61,7 @@ RTSPicking::RTSPicking( Ogre::RenderWindow *renderWindow, Ogre::SceneManager * s
 					if (getCoord(arg,&destination))
 					{	
 						agentSelected->setDestination(destination.projectZ());
+						agentSelected->setTarget(NULL);
 					}
 				}
 				else
@@ -96,6 +97,7 @@ RTSPicking::RTSPicking( Ogre::RenderWindow *renderWindow, Ogre::SceneManager * s
 	{
 		if (agentSelected->getTeam() != target->getTeam())
 		{
+			agentSelected->setTarget(target);
 			std::cout << "BOOOMMMM" << std::endl;
 		}
 		else 
