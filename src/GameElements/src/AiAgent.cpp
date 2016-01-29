@@ -19,11 +19,14 @@ namespace GameElements
 	{
 		attackInRange();
 
+		if (!_pathfinder.isEnd())
+		{
+			computePath();
+			return;
+		}
+
 		if (_currentPath.empty())
 			return;
-
-		//if (!_pathfinder.isEnd())
-			//computePath();
 
 		Math::Vector2<Config::Real> diff = _nextDestination - getPosition().projectZ();
 		while (diff.norm() == 0)
@@ -63,8 +66,6 @@ namespace GameElements
 
 	bool AiAgent::setDestination(Math::Vector2<Config::Real> destination)
 	{
-		//_nextDestination = destination;
-
 		if (!_pathfinder.Initialize(getPosition().projectZ(), destination))
 			return false;
 

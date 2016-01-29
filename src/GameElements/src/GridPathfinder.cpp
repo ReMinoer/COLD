@@ -9,7 +9,7 @@ using namespace Config;
 namespace GameElements 
 {
 	GridPathfinder::GridPathfinder(Map* map, int gridStep)
-		: _map(map), _success(false), _isEnd(false), _timeout(1000), _gridStep(gridStep)
+		: _map(map), _success(false), _isEnd(true), _timeout(10), _gridStep(gridStep)
 	{
 		_closedGrid = new bool*[height()];
 		for (int i = 0; i < height(); i++)
@@ -72,7 +72,7 @@ namespace GameElements
 		_timeoutElapsed = 0;
 		_processDuration = 0;
 
-		while (!_openlist.empty())// && _timeoutElapsed < _timeout)
+		while (!_openlist.empty() && _timeoutElapsed < _timeout)
 		{
 			clock_t start = clock();
 
@@ -82,13 +82,18 @@ namespace GameElements
 			_closedGrid[_current[1]][_current[0]] = true;
 			_openlist.erase(_current);
 			
+			/*
 			for (int i = 0; i < 2; i++)
 				for(int j = 0; j < 2; j++)
 				{
 					Vector2<int> point = _current + Vector2<int>(j, i);
-					if (_current == toGridCoordinates(_finish))
+					if (point == toGridCoordinates(_finish))
 						_success = true;
 				}
+				*/
+
+			if (_current == toGridCoordinates(_finish))
+				_success = true;
 
 			if (_success)
 				break;
@@ -176,7 +181,6 @@ namespace GameElements
 	
 		PathfinderNode node = _closedlist[toGridCoordinates(current)];
 
-		Vector2<int> girdStart = toGridCoordinates(_start);
 		while (node.parent != Vector2<int>(-1, -1))
 		{
 			current = toWorldCoordinates(node.parent);
