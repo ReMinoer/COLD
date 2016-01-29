@@ -14,25 +14,20 @@ namespace GameElements
 	
 	void AiAgent::update(const Config::Real & dt)
 	{
-		/*
 		if (_currentPath.empty())
 			return;
-			*/
+
+		//if (!_pathfinder.isEnd())
+			//computePath();
 
 		Math::Vector2<Config::Real> diff = _nextDestination - getPosition().projectZ();
-		if (diff.norm() == 0)
+		while (diff.norm() == 0)
 		{
-			/*
-			if (!_currentPath.empty())
-				getNextDestination();
-				*/
-			return;
+			getNextDestination();
+			//if (_currentPath.empty())
+				return;
+			//diff = _nextDestination - getPosition().projectZ();
 		}
-
-		/*
-		if (!_pathfinder.isEnd())
-			computePath();
-			*/
 		
 		_velocity = diff.normalized() * m_archetype->m_speed;
 
@@ -43,10 +38,7 @@ namespace GameElements
 		if (newDiff * diff <= 0)
 		{
 			setPosition(_nextDestination.push(0.0));
-			/*
-			if (!_currentPath.empty())
-				getNextDestination();
-				*/
+			getNextDestination();
 		}
 		else
 			setPosition(newPosition.push(0.0));
@@ -66,14 +58,13 @@ namespace GameElements
 
 	bool AiAgent::setDestination(Math::Vector2<Config::Real> destination)
 	{
-		_nextDestination = destination;
+		//_nextDestination = destination;
 
-		/*
 		if (!_pathfinder.Initialize(getPosition().projectZ(), destination))
 			return false;
 
 		computePath();
-		*/
+
 		return true;
 	}
 
@@ -82,18 +73,17 @@ namespace GameElements
 		_pathfinder.ComputePath();
 		_currentPath = _pathfinder.GetPath();
 		_nextDestination = _currentPath.top();
-		cout << "Destination : " << _nextDestination << endl;
 	}
 	
 	void AiAgent::getNextDestination()
 	{
+		if (_currentPath.empty())
+			return;
+
 		_currentPath.pop();
 
 		if (!_currentPath.empty())
-		{
 			_nextDestination = _currentPath.top();
-			cout << "Destination : " << _nextDestination << endl;
-		}
 	}
 
 	System::MessageEmitter<AiAgent::SelectedAiAgentMessage> * AiAgent::getAIMessageEmitter()

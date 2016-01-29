@@ -144,7 +144,7 @@ namespace OgreFramework
 			}
 		}
 		*/
-		for(int cpt=0 ; cpt<50 ; ++cpt)
+		for(int cpt=0 ; cpt<1 ; ++cpt)
 		{
 			const GameElements::UnitsArchetypes::Archetype * unit = GlobalConfiguration::getConfigurationLoader()->getUnitsArchetypes().get(types[rand()%types.size()]) ;
 			const GameElements::WeaponsArchetypes::Archetype * weapon = GlobalConfiguration::getConfigurationLoader()->getWeaponsArchetypes().get(unit->m_weapon) ;
@@ -153,7 +153,7 @@ namespace OgreFramework
 			//GameElements::RandomAgent::Pointer m_entityAdapter = new GameElements::RandomAgent(unit, weapon) ;
 			Vector2<Config::Real> position = GlobalConfiguration::getCurrentMap()->toWorldCoordinates(GlobalConfiguration::getCurrentMap()->findFreeLocation());
 			m_entityAdapter->setPosition(position.push(0.0)) ;
-			m_entityAdapter->setDestination(GlobalConfiguration::getCurrentMap()->toWorldCoordinates(GlobalConfiguration::getCurrentMap()->findFreeLocation()));
+			m_entityAdapter->setDestination(Vector2<Config::Real>(-position[0], -position[1]));
 		}
 
 		//m_entityAdapter = new GameElements::NullAgent(configurationLoader.getUnitsArchetypes().get("HippoB"), configurationLoader.getWeaponsArchetypes().get()) ;
