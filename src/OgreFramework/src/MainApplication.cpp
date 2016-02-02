@@ -21,13 +21,14 @@
 
 #include <GameElements/AiAgent.h>
 #include<GameElements\RTSPicking.h>
-#include <GameElements/BuyMenu.h>
 
 namespace OgreFramework
 {
 	MainApplication::MainApplication()
 		: m_keyboardState(*KeyboardState::getInstance())
 	{
+		int moneyMax = 10000;
+		m_buyMenu = GameElements::BuyMenu(moneyMax);
 	}
 
 	MainApplication::~MainApplication()
@@ -85,9 +86,6 @@ namespace OgreFramework
 		// Setups the GUI (it's a test / example)
 		// --------------------------------------
 		
-		int moneyMax = 10000;
-		int moneyActual = moneyMax;
-		GameElements::BuyMenu m_buyMenu = GameElements::BuyMenu(moneyMax);
 		
 
 		/*{
@@ -105,7 +103,7 @@ namespace OgreFramework
 			OgreBites::SelectMenu * menu1 = m_trayManager->createThickSelectMenu(OgreBites::TL_TOPLEFT, "Menu 2", "Foo 2", 200, 10, tmp) ;
 		}*/
 		{
-			m_buyMenu.ShowSelectionMenu(m_trayManager, moneyActual);
+			m_buyMenu.ShowSelectionMenu(m_trayManager);
 		}
 		// Setups the picking
 		//m_picking = new PickingBoundingBox(m_sceneManager, m_camera, OIS::MB_Left) ;
@@ -245,30 +243,22 @@ namespace OgreFramework
 	void MainApplication::itemSelected( OgreBites::SelectMenu* menu )
 	{
 		int SelectionIndex = menu->getSelectionIndex();
-		Ogre::DisplayString SelectedItem = "";
-		int UnityCost = 0;
 
-		switch(SelectionIndex)
-		{
-		case 0:
-			SelectedItem = "Moustic";
-			UnityCost = 250;
-			break;
-		case 1:
-			SelectedItem = "Croco";
-			UnityCost = 500;
-			break;
-		case 2:
-			SelectedItem = "Hippo";
-			UnityCost = 1000;
-			break;
-		default:
-			SelectedItem = "No selection";
-			UnityCost = 0;
-			break;
-		}
+		::std::vector<::std::string> types ;
+		types.push_back("MousticB") ;
+		types.push_back("CrocoB") ;
+		types.push_back("HippoB") ;
 
-		::std::cout<<"Selection in menu "<<menu->getCaption()<<", item: "<<SelectedItem<< ", cost: " <<UnityCost<<::std::endl ;
+		const GameElements::UnitsArchetypes::Archetype * unit = GlobalConfiguration::getConfigurationLoader()->getUnitsArchetypes().get(types[SelectionIndex]) ;
+		
+		::std::cout<<"Selection in menu "<<menu->getCaption()<<::std::endl ;
+	
+		m_buyMenu.BuyVehicle(unit);
+		
+		/*{
+			m_buyMenu();
+			m_buyMenu.ShowSelectionMenu(m_trayManager);
+		}*/
 	}
 
 	bool MainApplication::keyPressed( const OIS::KeyEvent &arg )
