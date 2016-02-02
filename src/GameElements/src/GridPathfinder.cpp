@@ -9,7 +9,7 @@ using namespace Config;
 namespace GameElements 
 {
 	GridPathfinder::GridPathfinder(Map* map, int gridStep)
-		: _map(map), _success(false), _isEnd(false), _timeout(1000), _gridStep(gridStep)
+		: _map(map), _success(false), _isEnd(true), _timeout(10), _gridStep(gridStep)
 	{
 		_closedGrid = new bool*[height()];
 		for (int i = 0; i < height(); i++)
@@ -40,6 +40,7 @@ namespace GameElements
 
 		_start = start;
 		_finish = finish;
+		_gridFinish = toGridCoordinates(_finish);
 		Vector2<int> origin = toGridCoordinates(_start);
 
 		for (int i = 0; i < 2; i++)
@@ -47,7 +48,7 @@ namespace GameElements
 			{
 				Vector2<int> point = origin + Vector2<int>(j, i);
 
-				if (!isValid(point))
+				if (!isValid(point) && getCell(point).m_speedReduction < 1.0)
 					continue;
 
 				Vector2<float> move = _start - toWorldCoordinates(point);
@@ -72,7 +73,7 @@ namespace GameElements
 		_timeoutElapsed = 0;
 		_processDuration = 0;
 
-		while (!_openlist.empty())// && _timeoutElapsed < _timeout)
+		while (!_success && !_openlist.empty() && _timeoutElapsed < _timeout)
 		{
 			clock_t start = clock();
 
@@ -81,19 +82,11 @@ namespace GameElements
 			_closedlist[_current] = _openlist[_current];
 			_closedGrid[_current[1]][_current[0]] = true;
 			_openlist.erase(_current);
-			
-			for (int i = 0; i < 2; i++)
-				for(int j = 0; j < 2; j++)
-				{
-					Vector2<int> point = _current + Vector2<int>(j, i);
-					if (_current == toGridCoordinates(_finish))
-						_success = true;
-				}
-
-			if (_success)
-				break;
-
-			ProcessSurroundingCases();
+				
+			if (_current == _gridFinish)
+				_success = true;
+			else
+				ProcessSurroundingCases();
 
 			clock_t end = clock();
 			double elapsed = (double) (end-start);
@@ -132,13 +125,13 @@ namespace GameElements
 				Vector2<float> move = worldPoint - toWorldCoordinates(_current);
 				Vector2<float> remaining = _finish - worldPoint;
 
-				float actionCost = getCell(point).m_speedReduction * 10;
+				float actionCost = getCell(point).m_speedReduction * 100;
 
 				PathfinderNode node;
 				node.parent = _current;
-				node.parentCost = _closedlist[_current].parentCost + move.norm() + actionCost;
-				node.personalCost = remaining.norm();
-
+				node.parentCost = _closedlist[_current].parentCost + move.norm();
+				node.personalCost = remaining.norm() + actionCost;
+				
 				map<Vector2<int>, PathfinderNode>::const_iterator existingNode = _openlist.find(point);
 				if (existingNode != _openlist.end())
 				{
@@ -158,11 +151,14 @@ namespace GameElements
 			return path;
 
 		Vector2<Real> current;
-		if (_isEnd)
+		PathfinderNode node;
+
+		if (_success)
 		{
 			path.push(_finish);
-			path.push(toWorldCoordinates(toGridCoordinates(_finish)));
+
 			current = _finish;
+			node = _closedlist[toGridCoordinates(_finish)];
 		}
 		else
 		{
@@ -171,12 +167,9 @@ namespace GameElements
 				return path;
 
 			current = toWorldCoordinates(bestPoint);
-			path.push(current);
+			node = _closedlist[bestPoint];
 		}
-	
-		PathfinderNode node = _closedlist[toGridCoordinates(current)];
 
-		Vector2<int> girdStart = toGridCoordinates(_start);
 		while (node.parent != Vector2<int>(-1, -1))
 		{
 			current = toWorldCoordinates(node.parent);
@@ -193,7 +186,7 @@ namespace GameElements
 		Vector2<int> pointMin = Vector2<int>(-1, -1);
 		float costMin = numeric_limits<float>::max();
 
-		for (std::map<Vector2<int>, PathfinderNode>::const_iterator it = _openlist.begin(); it != _openlist.end(); ++it)
+		for (map<Vector2<int>, PathfinderNode>::const_iterator it = _openlist.begin(); it != _openlist.end(); ++it)
 		{
 			float cost = it->second.getCost();
 			if (cost < costMin)
@@ -211,7 +204,7 @@ namespace GameElements
 		Vector2<int> pointMin = Vector2<int>(-1, -1);
 		float distanceMin = numeric_limits<float>::max();
 	
-		for (std::map<Vector2<int>, PathfinderNode>::const_iterator it = _closedlist.begin(); it != _closedlist.end(); ++it)
+		for (map<Vector2<int>, PathfinderNode>::const_iterator it = _closedlist.begin(); it != _closedlist.end(); ++it)
 		{
 			Vector2<int> point = it->first;
 			float distance = (_finish - toWorldCoordinates(point)).norm();
