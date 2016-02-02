@@ -1,0 +1,583 @@
+Testing: positionToNextSymbol
+  character found: [c]   Line:4  : PASSED
+  character found: [-]   Line:4  : PASSED
+  character found: [,]   Line:5  : PASSED
+  character found: [e]   Line:5  : PASSED
+finished testing: positionToNextSymbol
+
+Testing: getTypeDefText
+  default name of mov is: [mov]: PASSED
+finished testing: getTypeDefText
+
+Testing: isSymbol
+  before: [mov r0,c1]
+  symbol to find: [mov]
+  after: [r0,c1] : PASSED
+  symbol size: 3
+finished testing: isSymbol
+
+Testing: isFloatValue
+  test string [1 test]
+   value is: 1.000000 should be 1.000000: PASSED
+   char size is: 1 should be 1: PASSED
+  test string [2.3f test]
+   value is: 2.300000 should be 2.300000: PASSED
+   char size is: 3 should be 3: PASSED
+  test string [-0.5 test]
+   value is: -0.500000 should be -0.500000: PASSED
+   char size is: 4 should be 4: PASSED
+  test string [ 23.6 test]
+   value is: 23.600000 should be 23.600000: PASSED
+   char size is: 5 should be 5: PASSED
+  test string [  -0.021 test]
+   value is: -0.021000 should be -0.021000: PASSED
+   char size is: 8 should be 8: PASSED
+  test string [12 test]
+   value is: 12.000000 should be 12.000000: PASSED
+   char size is: 2 should be 2: PASSED
+  test string [3test]
+   value is: 3.000000 should be 3.000000: PASSED
+   char size is: 1 should be 1: PASSED
+finished testing: isFloatValue
+
+*** TESTING: Basic PS_1_4 Compile: Check Pass 1 and 2
+  source to compile:
+[
+ps.1.4
+
+]
+  Pass 1 Lines scaned: 1, Tokens produced: 1 out of 1: PASSED
+
+  Validating Pass 1:
+
+  Tokens:
+    Token[0] [ps.1.4] 0: [ps.1.4] 0: PASSED
+
+finished testing: Basic PS_1_4 Compile: Check Pass 2
+
+
+*** TESTING: Basic PS_1_1 Compile: Check Pass 1 and 2
+  source to compile:
+[
+ps.1.1
+
+]
+  Pass 1 Lines scaned: 1, Tokens produced: 1 out of 1: PASSED
+
+  Validating Pass 1:
+
+  Tokens:
+    Token[0] [ps.1.1] 1: [ps.1.1] 1: PASSED
+
+finished testing: Basic PS_1_1 Compile: Check Pass 2
+
+
+*** TESTING: PS_1_4 with defines Compile: Check Pass 1 and 2
+  source to compile:
+[
+ps.1.4
+def c0, 1.0, 2.0, 3.0, 4.0
+
+]
+  Pass 1 Lines scaned: 2, Tokens produced: 11 out of 11: PASSED
+
+  Validating Pass 1:
+
+  Tokens:
+    Token[0] [ps.1.4] 0: [ps.1.4] 0: PASSED
+    Token[1] [def] 24: [def] 24: PASSED
+    Token[2] [c0] 4: [c0] 4: PASSED
+    Token[3] [,] 52: [,] 52: PASSED
+    Token[4] [Float Value] 53: [Float Value] 53: PASSED
+    Token[5] [,] 52: [,] 52: PASSED
+    Token[6] [Float Value] 53: [Float Value] 53: PASSED
+    Token[7] [,] 52: [,] 52: PASSED
+    Token[8] [Float Value] 53: [Float Value] 53: PASSED
+    Token[9] [,] 52: [,] 52: PASSED
+    Token[10] [Float Value] 53: [Float Value] 53: PASSED
+
+finished testing: PS_1_4 with defines Compile: Check Pass 2
+
+
+*** TESTING: PS_1_4 with 2 defines Compile: Check Pass 1 and 2
+  source to compile:
+[
+ps.1.4
+//test kkl 
+def c0, 1.0, 2.0, 3.0, 4.0
+def c3, 1.0, 2.0, 3.0, 4.0
+
+]
+  Pass 1 Lines scaned: 4, Tokens produced: 21 out of 21: PASSED
+
+  Validating Pass 1:
+
+  Tokens:
+    Token[0] [ps.1.4] 0: [ps.1.4] 0: PASSED
+    Token[1] [def] 24: [def] 24: PASSED
+    Token[2] [c0] 4: [c0] 4: PASSED
+    Token[3] [,] 52: [,] 52: PASSED
+    Token[4] [Float Value] 53: [Float Value] 53: PASSED
+    Token[5] [,] 52: [,] 52: PASSED
+    Token[6] [Float Value] 53: [Float Value] 53: PASSED
+    Token[7] [,] 52: [,] 52: PASSED
+    Token[8] [Float Value] 53: [Float Value] 53: PASSED
+    Token[9] [,] 52: [,] 52: PASSED
+    Token[10] [Float Value] 53: [Float Value] 53: PASSED
+    Token[11] [def] 24: [def] 24: PASSED
+    Token[12] [c3] 7: [c3] 7: PASSED
+    Token[13] [,] 52: [,] 52: PASSED
+    Token[14] [Float Value] 53: [Float Value] 53: PASSED
+    Token[15] [,] 52: [,] 52: PASSED
+    Token[16] [Float Value] 53: [Float Value] 53: PASSED
+    Token[17] [,] 52: [,] 52: PASSED
+    Token[18] [Float Value] 53: [Float Value] 53: PASSED
+    Token[19] [,] 52: [,] 52: PASSED
+    Token[20] [Float Value] 53: [Float Value] 53: PASSED
+
+finished testing: PS_1_4 with 2 defines Compile: Check Pass 2
+
+
+*** TESTING: PS_1_4 with defines Compile: Check Pass 1 and 2
+  source to compile:
+[
+ps.1.4
+def c0, 1.0, 2.0, 3.0, 4.0
+
+]
+  Pass 1 Lines scaned: 2, Tokens produced: 11 out of 11: PASSED
+
+  Validating Pass 1:
+
+  Tokens:
+    Token[0] [ps.1.4] 0: [ps.1.4] 0: PASSED
+    Token[1] [def] 24: [def] 24: PASSED
+    Token[2] [c0] 4: [c0] 4: PASSED
+    Token[3] [,] 52: [,] 52: PASSED
+    Token[4] [Float Value] 53: [Float Value] 53: PASSED
+    Token[5] [,] 52: [,] 52: PASSED
+    Token[6] [Float Value] 53: [Float Value] 53: PASSED
+    Token[7] [,] 52: [,] 52: PASSED
+    Token[8] [Float Value] 53: [Float Value] 53: PASSED
+    Token[9] [,] 52: [,] 52: PASSED
+    Token[10] [Float Value] 53: [Float Value] 53: PASSED
+
+  Machine Instructions:
+  Pass 2 Machine Instructions generated: 3 out of 3: PASSED
+
+  Validating Pass 2:
+    instruction[0] = 0x6 : 0x6 : PASSED
+    instruction[1] = 0x8941 : 0x8941 : PASSED
+    instruction[2] = 0x0 : 0x0 : PASSED
+
+  Constants:
+    Constants[0] = 1.000000 : PASSED
+    Constants[1] = 2.000000 : PASSED
+    Constants[2] = 3.000000 : PASSED
+    Constants[3] = 4.000000 : PASSED
+
+finished testing: PS_1_4 with defines Compile: Check Pass 2
+
+
+*** TESTING: PS_1_4 ALU simple Compile: Check Pass 1 and 2
+  source to compile:
+[
+ps.1.4
+mov r0.xzw, c1 
+mul r3, r2, c3
+]
+  Pass 1 Lines scaned: 3, Tokens produced: 12 out of 12: PASSED
+
+  Validating Pass 1:
+
+  Tokens:
+    Token[0] [ps.1.4] 0: [ps.1.4] 0: PASSED
+    Token[1] [mov] 19: [mov] 19: PASSED
+    Token[2] [r0] 54: [r0] 54: PASSED
+    Token[3] [.xzw] 37: [.xzw] 37: PASSED
+    Token[4] [,] 52: [,] 52: PASSED
+    Token[5] [c1] 5: [c1] 5: PASSED
+    Token[6] [mul] 16: [mul] 16: PASSED
+    Token[7] [r3] 57: [r3] 57: PASSED
+    Token[8] [,] 52: [,] 52: PASSED
+    Token[9] [r2] 56: [r2] 56: PASSED
+    Token[10] [,] 52: [,] 52: PASSED
+    Token[11] [c3] 7: [c3] 7: PASSED
+
+finished testing: PS_1_4 ALU simple Compile: Check Pass 2
+
+
+*** TESTING: PS_1_4 ALU simple modifier Compile: Check Pass 1 and 2
+  source to compile:
+[
+ps.1.4
+def c0,1.0,2.0,3.0,4.0
+mov_x8 r1,v0
+mov r0,r1.g
+]
+  Pass 1 Lines scaned: 4, Tokens produced: 21 out of 21: PASSED
+
+  Validating Pass 1:
+
+  Tokens:
+    Token[0] [ps.1.4] 0: [ps.1.4] 0: PASSED
+    Token[1] [def] 24: [def] 24: PASSED
+    Token[2] [c0] 4: [c0] 4: PASSED
+    Token[3] [,] 52: [,] 52: PASSED
+    Token[4] [Float Value] 53: [Float Value] 53: PASSED
+    Token[5] [,] 52: [,] 52: PASSED
+    Token[6] [Float Value] 53: [Float Value] 53: PASSED
+    Token[7] [,] 52: [,] 52: PASSED
+    Token[8] [Float Value] 53: [Float Value] 53: PASSED
+    Token[9] [,] 52: [,] 52: PASSED
+    Token[10] [Float Value] 53: [Float Value] 53: PASSED
+    Token[11] [mov] 19: [mov] 19: PASSED
+    Token[12] [_x8] 67: [_x8] 67: PASSED
+    Token[13] [r1] 55: [r1] 55: PASSED
+    Token[14] [,] 52: [,] 52: PASSED
+    Token[15] [v0] 12: [v0] 12: PASSED
+    Token[16] [mov] 19: [mov] 19: PASSED
+    Token[17] [r0] 54: [r0] 54: PASSED
+    Token[18] [,] 52: [,] 52: PASSED
+    Token[19] [r1] 55: [r1] 55: PASSED
+    Token[20] [.y] 41: [.y] 41: PASSED
+
+  Machine Instructions:
+  Pass 2 Machine Instructions generated: 33 out of 33: PASSED
+
+  Validating Pass 2:
+    instruction[0] = 0x6 : 0x6 : PASSED
+    instruction[1] = 0x8941 : 0x8941 : PASSED
+    instruction[2] = 0x0 : 0x0 : PASSED
+    instruction[3] = 0x0 : 0x0 : PASSED
+    instruction[4] = 0x8961 : 0x8961 : PASSED
+    instruction[5] = 0x8922 : 0x8922 : PASSED
+    instruction[6] = 0x7 : 0x7 : PASSED
+    instruction[7] = 0x4 : 0x4 : PASSED
+    instruction[8] = 0x8577 : 0x8577 : PASSED
+    instruction[9] = 0x0 : 0x0 : PASSED
+    instruction[10] = 0x0 : 0x0 : PASSED
+    instruction[11] = 0x3 : 0x3 : PASSED
+    instruction[12] = 0x8961 : 0x8961 : PASSED
+    instruction[13] = 0x8922 : 0x8922 : PASSED
+    instruction[14] = 0x4 : 0x4 : PASSED
+    instruction[15] = 0x8577 : 0x8577 : PASSED
+    instruction[16] = 0x0 : 0x0 : PASSED
+    instruction[17] = 0x0 : 0x0 : PASSED
+    instruction[18] = 0x0 : 0x0 : PASSED
+    instruction[19] = 0x8961 : 0x8961 : PASSED
+    instruction[20] = 0x8921 : 0x8921 : PASSED
+    instruction[21] = 0x7 : 0x7 : PASSED
+    instruction[22] = 0x0 : 0x0 : PASSED
+    instruction[23] = 0x8922 : 0x8922 : PASSED
+    instruction[24] = 0x1904 : 0x1904 : PASSED
+    instruction[25] = 0x0 : 0x0 : PASSED
+    instruction[26] = 0x3 : 0x3 : PASSED
+    instruction[27] = 0x8961 : 0x8961 : PASSED
+    instruction[28] = 0x8921 : 0x8921 : PASSED
+    instruction[29] = 0x0 : 0x0 : PASSED
+    instruction[30] = 0x8922 : 0x8922 : PASSED
+    instruction[31] = 0x1904 : 0x1904 : PASSED
+    instruction[32] = 0x0 : 0x0 : PASSED
+
+  Constants:
+    Constants[0] = 1.000000 : PASSED
+    Constants[1] = 2.000000 : PASSED
+    Constants[2] = 3.000000 : PASSED
+    Constants[3] = 4.000000 : PASSED
+
+finished testing: PS_1_4 ALU simple modifier Compile: Check Pass 2
+
+
+*** TESTING: PS_1_1 Texture simple Compile: Check Pass 1 and 2
+  source to compile:
+[
+ps.1.1
+def c0,1.0,2.0,3.0,4.0
+tex t0
+// test
+tex t1
+dp3 t0.rgb, t0_bx2, t1_bx2
++ mov r0,1 - t0
+]
+  Pass 1 Lines scaned: 7, Tokens produced: 30 out of 30: PASSED
+
+  Validating Pass 1:
+
+  Tokens:
+    Token[0] [ps.1.1] 1: [ps.1.1] 1: PASSED
+    Token[1] [def] 24: [def] 24: PASSED
+    Token[2] [c0] 4: [c0] 4: PASSED
+    Token[3] [,] 52: [,] 52: PASSED
+    Token[4] [Float Value] 53: [Float Value] 53: PASSED
+    Token[5] [,] 52: [,] 52: PASSED
+    Token[6] [Float Value] 53: [Float Value] 53: PASSED
+    Token[7] [,] 52: [,] 52: PASSED
+    Token[8] [Float Value] 53: [Float Value] 53: PASSED
+    Token[9] [,] 52: [,] 52: PASSED
+    Token[10] [Float Value] 53: [Float Value] 53: PASSED
+    Token[11] [tex] 84: [tex] 84: PASSED
+    Token[12] [t0] 80: [t0] 80: PASSED
+    Token[13] [tex] 84: [tex] 84: PASSED
+    Token[14] [t1] 81: [t1] 81: PASSED
+    Token[15] [dp3] 22: [dp3] 22: PASSED
+    Token[16] [t0] 80: [t0] 80: PASSED
+    Token[17] [.xyz] 33: [.xyz] 33: PASSED
+    Token[18] [,] 52: [,] 52: PASSED
+    Token[19] [t0] 80: [t0] 80: PASSED
+    Token[20] [_bx2] 51: [_bx2] 51: PASSED
+    Token[21] [,] 52: [,] 52: PASSED
+    Token[22] [t1] 81: [t1] 81: PASSED
+    Token[23] [_bx2] 51: [_bx2] 51: PASSED
+    Token[24] [+] 98: [+] 98: PASSED
+    Token[25] [mov] 19: [mov] 19: PASSED
+    Token[26] [r0] 78: [r0] 78: PASSED
+    Token[27] [,] 52: [,] 52: PASSED
+    Token[28] [1 -] 49: [1 -] 49: PASSED
+    Token[29] [t0] 80: [t0] 80: PASSED
+
+  Machine Instructions:
+  Pass 2 Machine Instructions generated: 37 out of 37: PASSED
+
+  Validating Pass 2:
+    instruction[0] = 0x6 : 0x6 : PASSED
+    instruction[1] = 0x8941 : 0x8941 : PASSED
+    instruction[2] = 0x0 : 0x0 : PASSED
+    instruction[3] = 0x8 : 0x8 : PASSED
+    instruction[4] = 0x8921 : 0x8921 : PASSED
+    instruction[5] = 0x84c0 : 0x84c0 : PASSED
+    instruction[6] = 0x8976 : 0x8976 : PASSED
+    instruction[7] = 0x8 : 0x8 : PASSED
+    instruction[8] = 0x8922 : 0x8922 : PASSED
+    instruction[9] = 0x84c1 : 0x84c1 : PASSED
+    instruction[10] = 0x8976 : 0x8976 : PASSED
+    instruction[11] = 0x1 : 0x1 : PASSED
+    instruction[12] = 0x8966 : 0x8966 : PASSED
+    instruction[13] = 0x8921 : 0x8921 : PASSED
+    instruction[14] = 0x7 : 0x7 : PASSED
+    instruction[15] = 0x0 : 0x0 : PASSED
+    instruction[16] = 0x8921 : 0x8921 : PASSED
+    instruction[17] = 0x0 : 0x0 : PASSED
+    instruction[18] = 0x9 : 0x9 : PASSED
+    instruction[19] = 0x8922 : 0x8922 : PASSED
+    instruction[20] = 0x0 : 0x0 : PASSED
+    instruction[21] = 0x9 : 0x9 : PASSED
+    instruction[22] = 0x0 : 0x0 : PASSED
+    instruction[23] = 0x8961 : 0x8961 : PASSED
+    instruction[24] = 0x8921 : 0x8921 : PASSED
+    instruction[25] = 0x7 : 0x7 : PASSED
+    instruction[26] = 0x0 : 0x0 : PASSED
+    instruction[27] = 0x8921 : 0x8921 : PASSED
+    instruction[28] = 0x0 : 0x0 : PASSED
+    instruction[29] = 0x2 : 0x2 : PASSED
+    instruction[30] = 0x3 : 0x3 : PASSED
+    instruction[31] = 0x8961 : 0x8961 : PASSED
+    instruction[32] = 0x8921 : 0x8921 : PASSED
+    instruction[33] = 0x0 : 0x0 : PASSED
+    instruction[34] = 0x8921 : 0x8921 : PASSED
+    instruction[35] = 0x0 : 0x0 : PASSED
+    instruction[36] = 0x2 : 0x2 : PASSED
+
+  Constants:
+    Constants[0] = 1.000000 : PASSED
+    Constants[1] = 2.000000 : PASSED
+    Constants[2] = 3.000000 : PASSED
+    Constants[3] = 4.000000 : PASSED
+
+finished testing: PS_1_1 Texture simple Compile: Check Pass 2
+
+
+*** TESTING: PS_1_2 CISC instructions Compile: Check Pass 1 and 2
+  source to compile:
+[
+ps.1.2
+def c0,1.0,2.0,3.0,4.0
+tex t0
+// test
+texreg2ar t1, t0
+]
+  Pass 1 Lines scaned: 0, Tokens produced: 17 out of 17: PASSED
+
+  Validating Pass 1:
+
+  Tokens:
+    Token[0] [ps.1.2] 2: [ps.1.2] 2: PASSED
+    Token[1] [def] 24: [def] 24: PASSED
+    Token[2] [c0] 4: [c0] 4: PASSED
+    Token[3] [,] 52: [,] 52: PASSED
+    Token[4] [Float Value] 53: [Float Value] 53: PASSED
+    Token[5] [,] 52: [,] 52: PASSED
+    Token[6] [Float Value] 53: [Float Value] 53: PASSED
+    Token[7] [,] 52: [,] 52: PASSED
+    Token[8] [Float Value] 53: [Float Value] 53: PASSED
+    Token[9] [,] 52: [,] 52: PASSED
+    Token[10] [Float Value] 53: [Float Value] 53: PASSED
+    Token[11] [tex] 84: [tex] 84: PASSED
+    Token[12] [t0] 80: [t0] 80: PASSED
+    Token[13] [texreg2ar] 92: [texreg2ar] 92: PASSED
+    Token[14] [t1] 81: [t1] 81: PASSED
+    Token[15] [,] 52: [,] 52: PASSED
+    Token[16] [t0] 80: [t0] 80: PASSED
+
+  Machine Instructions:
+  Pass 2 Machine Instructions generated: 27 out of 27: PASSED
+
+  Validating Pass 2:
+    instruction[0] = 0x6 : 0x6 : PASSED
+    instruction[1] = 0x8941 : 0x8941 : PASSED
+    instruction[2] = 0x0 : 0x0 : PASSED
+    instruction[3] = 0x8 : 0x8 : PASSED
+    instruction[4] = 0x8921 : 0x8921 : PASSED
+    instruction[5] = 0x84c0 : 0x84c0 : PASSED
+    instruction[6] = 0x8976 : 0x8976 : PASSED
+    instruction[7] = 0x0 : 0x0 : PASSED
+    instruction[8] = 0x8961 : 0x8961 : PASSED
+    instruction[9] = 0x8922 : 0x8922 : PASSED
+    instruction[10] = 0x1 : 0x1 : PASSED
+    instruction[11] = 0x0 : 0x0 : PASSED
+    instruction[12] = 0x8921 : 0x8921 : PASSED
+    instruction[13] = 0x1906 : 0x1906 : PASSED
+    instruction[14] = 0x0 : 0x0 : PASSED
+    instruction[15] = 0x0 : 0x0 : PASSED
+    instruction[16] = 0x8961 : 0x8961 : PASSED
+    instruction[17] = 0x8922 : 0x8922 : PASSED
+    instruction[18] = 0x2 : 0x2 : PASSED
+    instruction[19] = 0x0 : 0x0 : PASSED
+    instruction[20] = 0x8921 : 0x8921 : PASSED
+    instruction[21] = 0x1903 : 0x1903 : PASSED
+    instruction[22] = 0x0 : 0x0 : PASSED
+    instruction[23] = 0x8 : 0x8 : PASSED
+    instruction[24] = 0x8922 : 0x8922 : PASSED
+    instruction[25] = 0x8922 : 0x8922 : PASSED
+    instruction[26] = 0x8976 : 0x8976 : PASSED
+
+  Constants:
+    Constants[0] = 1.000000 : PASSED
+    Constants[1] = 2.000000 : PASSED
+    Constants[2] = 3.000000 : PASSED
+    Constants[3] = 4.000000 : PASSED
+
+finished testing: PS_1_2 CISC instructions Compile: Check Pass 2
+
+
+*** TESTING: PS_1_4 texture complex : Phase - instructions Compile: Check Pass 1 and 2
+  source to compile:
+[
+ps.1.4
+def c0,1.0,2.0,3.0,4.0
+texld r0, t0
+// test
+mul r0, r0, c0
+phase
+texld r1, r0
+mul r0,r0,r1
+
+]
+  Pass 1 Lines scaned: 8, Tokens produced: 32 out of 32: PASSED
+
+  Validating Pass 1:
+
+  Tokens:
+    Token[0] [ps.1.4] 0: [ps.1.4] 0: PASSED
+    Token[1] [def] 24: [def] 24: PASSED
+    Token[2] [c0] 4: [c0] 4: PASSED
+    Token[3] [,] 52: [,] 52: PASSED
+    Token[4] [Float Value] 53: [Float Value] 53: PASSED
+    Token[5] [,] 52: [,] 52: PASSED
+    Token[6] [Float Value] 53: [Float Value] 53: PASSED
+    Token[7] [,] 52: [,] 52: PASSED
+    Token[8] [Float Value] 53: [Float Value] 53: PASSED
+    Token[9] [,] 52: [,] 52: PASSED
+    Token[10] [Float Value] 53: [Float Value] 53: PASSED
+    Token[11] [texld] 71: [texld] 71: PASSED
+    Token[12] [r0] 54: [r0] 54: PASSED
+    Token[13] [,] 52: [,] 52: PASSED
+    Token[14] [t0] 60: [t0] 60: PASSED
+    Token[15] [mul] 16: [mul] 16: PASSED
+    Token[16] [r0] 54: [r0] 54: PASSED
+    Token[17] [,] 52: [,] 52: PASSED
+    Token[18] [r0] 54: [r0] 54: PASSED
+    Token[19] [,] 52: [,] 52: PASSED
+    Token[20] [c0] 4: [c0] 4: PASSED
+    Token[21] [phase] 77: [phase] 77: PASSED
+    Token[22] [texld] 71: [texld] 71: PASSED
+    Token[23] [r1] 55: [r1] 55: PASSED
+    Token[24] [,] 52: [,] 52: PASSED
+    Token[25] [r0] 54: [r0] 54: PASSED
+    Token[26] [mul] 16: [mul] 16: PASSED
+    Token[27] [r0] 54: [r0] 54: PASSED
+    Token[28] [,] 52: [,] 52: PASSED
+    Token[29] [r0] 54: [r0] 54: PASSED
+    Token[30] [,] 52: [,] 52: PASSED
+    Token[31] [r1] 55: [r1] 55: PASSED
+
+  Machine Instructions:
+  Pass 2 Machine Instructions generated: 57 out of 57: PASSED
+
+  Validating Pass 2:
+    instruction[0] = 0x6 : 0x6 : PASSED
+    instruction[1] = 0x8941 : 0x8941 : PASSED
+    instruction[2] = 0x0 : 0x0 : PASSED
+    instruction[3] = 0x8 : 0x8 : PASSED
+    instruction[4] = 0x8921 : 0x8921 : PASSED
+    instruction[5] = 0x84c0 : 0x84c0 : PASSED
+    instruction[6] = 0x8976 : 0x8976 : PASSED
+    instruction[7] = 0x1 : 0x1 : PASSED
+    instruction[8] = 0x8964 : 0x8964 : PASSED
+    instruction[9] = 0x8921 : 0x8921 : PASSED
+    instruction[10] = 0x7 : 0x7 : PASSED
+    instruction[11] = 0x0 : 0x0 : PASSED
+    instruction[12] = 0x8921 : 0x8921 : PASSED
+    instruction[13] = 0x0 : 0x0 : PASSED
+    instruction[14] = 0x0 : 0x0 : PASSED
+    instruction[15] = 0x8941 : 0x8941 : PASSED
+    instruction[16] = 0x0 : 0x0 : PASSED
+    instruction[17] = 0x0 : 0x0 : PASSED
+    instruction[18] = 0x4 : 0x4 : PASSED
+    instruction[19] = 0x8964 : 0x8964 : PASSED
+    instruction[20] = 0x8921 : 0x8921 : PASSED
+    instruction[21] = 0x0 : 0x0 : PASSED
+    instruction[22] = 0x8921 : 0x8921 : PASSED
+    instruction[23] = 0x0 : 0x0 : PASSED
+    instruction[24] = 0x0 : 0x0 : PASSED
+    instruction[25] = 0x8941 : 0x8941 : PASSED
+    instruction[26] = 0x0 : 0x0 : PASSED
+    instruction[27] = 0x0 : 0x0 : PASSED
+    instruction[28] = 0x8 : 0x8 : PASSED
+    instruction[29] = 0x8922 : 0x8922 : PASSED
+    instruction[30] = 0x8921 : 0x8921 : PASSED
+    instruction[31] = 0x8976 : 0x8976 : PASSED
+    instruction[32] = 0x7 : 0x7 : PASSED
+    instruction[33] = 0x8921 : 0x8921 : PASSED
+    instruction[34] = 0x8921 : 0x8921 : PASSED
+    instruction[35] = 0x8976 : 0x8976 : PASSED
+    instruction[36] = 0x1 : 0x1 : PASSED
+    instruction[37] = 0x8964 : 0x8964 : PASSED
+    instruction[38] = 0x8921 : 0x8921 : PASSED
+    instruction[39] = 0x7 : 0x7 : PASSED
+    instruction[40] = 0x0 : 0x0 : PASSED
+    instruction[41] = 0x8921 : 0x8921 : PASSED
+    instruction[42] = 0x0 : 0x0 : PASSED
+    instruction[43] = 0x0 : 0x0 : PASSED
+    instruction[44] = 0x8922 : 0x8922 : PASSED
+    instruction[45] = 0x0 : 0x0 : PASSED
+    instruction[46] = 0x0 : 0x0 : PASSED
+    instruction[47] = 0x4 : 0x4 : PASSED
+    instruction[48] = 0x8964 : 0x8964 : PASSED
+    instruction[49] = 0x8921 : 0x8921 : PASSED
+    instruction[50] = 0x0 : 0x0 : PASSED
+    instruction[51] = 0x8921 : 0x8921 : PASSED
+    instruction[52] = 0x0 : 0x0 : PASSED
+    instruction[53] = 0x0 : 0x0 : PASSED
+    instruction[54] = 0x8922 : 0x8922 : PASSED
+    instruction[55] = 0x0 : 0x0 : PASSED
+    instruction[56] = 0x0 : 0x0 : PASSED
+
+  Constants:
+    Constants[0] = 1.000000 : PASSED
+    Constants[1] = 2.000000 : PASSED
+    Constants[2] = 3.000000 : PASSED
+    Constants[3] = 4.000000 : PASSED
+
+finished testing: PS_1_4 texture complex : Phase - instructions Compile: Check Pass 2
+
