@@ -42,6 +42,8 @@ namespace GameElements
 		AiAgent * m_target;	
 
 	private:
+		Math::Vector2<Config::Real> getNextMove();
+		void attackInRange();
 		static DesignPattern::StaticMember<System::MessageEmitter<SelectedAiAgentMessage> > AiAgentEmitter ;
 		static DesignPattern::StaticMember<System::MessageEmitter<UnselectedAiAgentMessage> > AiAgentEmitterUnSelect ;
 	public:
@@ -53,14 +55,12 @@ namespace GameElements
 
 		bool setDestination(Math::Vector2<Config::Real> destination);
 		void computePath();
-		void getNextDestination();
 		void onSelect();
 		void onUnselect();
 		static System::MessageEmitter<SelectedAiAgentMessage> * getAIMessageEmitter();
 		static System::MessageEmitter<UnselectedAiAgentMessage> * getAIMessageEmitterUnSelect();
 		Team getTeam();
 		void drawCircle();
-		void attackInRange();
 		Ogre::ManualObject * getCircle();
 		void setTarget(AiAgent * target);
 	};
