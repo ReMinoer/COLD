@@ -12,6 +12,8 @@
 #include <OgreFramework/EntityAdapter.h>
 #include <GameElements/NullAgent.h>
 
+#include <GameElements/BuyMenu.h>
+
 namespace OgreFramework
 {
 	///////////////////////////////////////////////////////////////////////////////////
@@ -24,6 +26,9 @@ namespace OgreFramework
 	///////////////////////////////////////////////////////////////////////////////////
 	class MainApplication : public BaseApplication
 	{
+	private:
+		GameElements::BuyMenu m_buyMenu;
+
 	public:
 		MainApplication();
 		virtual ~MainApplication();
