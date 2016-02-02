@@ -14,20 +14,15 @@ RTSPicking::RTSPicking( Ogre::RenderWindow *renderWindow, Ogre::SceneManager * s
 	bool RTSPicking::getCoord(const OIS::MouseEvent &arg, Math::Vector3<Config::Real> * destination)
 	{
 		bool mMovableFound(false);
+		Ogre::Plane plan(Ogre::Vector3::UNIT_Z,0);
 		Ogre::Ray mouseRay = m_camera->getCameraToViewportRay(arg.state.X.abs / float(arg.state.width),arg.state.Y.abs / float(arg.state.height));
-		Ogre::RaySceneQuery* raySceneQuery = m_sceneManager->createRayQuery(mouseRay);
-		raySceneQuery->setSortByDistance(true);
-		Ogre::RaySceneQueryResult& result = raySceneQuery->execute();
-
-		for (Ogre::RaySceneQueryResult::iterator it = result.begin(); it != result.end(); it++)
+		std::pair<bool, Real> result = mouseRay.intersects(plan);
+		if(result.first) 
 		{
-			mMovableFound = it->movable && it->movable->getName() == "scene0Box001";
-			if (mMovableFound)
-			{
-				Ogre::Vector3 tmp = mouseRay.getPoint(it->distance);
-				*destination = Math::Vector3<Config::Real> (tmp.x, tmp.y, tmp.z);
-				return true;
-			}
+			Ogre::Vector3 tmp = mouseRay.getPoint(result.second);
+			*destination = Math::Vector3<Config::Real> (tmp.x, tmp.y, tmp.z);
+			std::cout << tmp << std::endl;
+			return true;
 		}
 		return false;
 	}

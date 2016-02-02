@@ -139,6 +139,7 @@ namespace OgreFramework
 		KeyboardState & m_keyboardState ;
 		///< The camera manager
 		RTSCameraManager * m_cameraManager ;
+		Ogre::AnimationState * mCamAnimState;
 
 		//Ogre::SceneNode * m_shipShape ;
 		//GameElements::NullAgent::Pointer m_entityAdapter ;

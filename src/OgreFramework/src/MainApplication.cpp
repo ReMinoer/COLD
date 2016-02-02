@@ -112,8 +112,23 @@ namespace OgreFramework
 
 		// Setups the camera control system
 		m_cameraManager = new RTSCameraManager(m_sceneManager, m_camera, &m_keyboardState) ;
-		m_camera->setPosition(0,0,60);
-	
+		
+		//camera animation
+		Ogre::Real time = 10;
+		Ogre::Animation * m_anim = m_sceneManager->createAnimation("animation",time);
+		m_anim->setInterpolationMode(Ogre::Animation::IM_SPLINE);
+		Ogre::NodeAnimationTrack * trak = m_anim->createNodeTrack(0,m_camera->getParentNode());
+		trak->createNodeKeyFrame(0)->setTranslate( Ogre::Vector3(0,0,70) );
+		trak->createNodeKeyFrame(time/5)->setTranslate( Ogre::Vector3(-10,-10,70) );
+		trak->createNodeKeyFrame(2*time/5)->setTranslate( Ogre::Vector3(10,-10,70) );
+		trak->createNodeKeyFrame(3*time/5)->setTranslate( Ogre::Vector3(10,10,70) );
+		trak->createNodeKeyFrame(4*time/5)->setTranslate( Ogre::Vector3(-10,10,70) );
+		trak->createNodeKeyFrame(time)->setTranslate( Ogre::Vector3(0,0,70) );
+		
+		mCamAnimState = m_sceneManager->createAnimationState("animation");
+		mCamAnimState ->setEnabled(true);
+		mCamAnimState ->setLoop(false);
+
 		// ----------------------------------------
 		// Creates two entities for testing purpose
 		// ----------------------------------------
@@ -212,6 +227,12 @@ namespace OgreFramework
 		//m_entityAdapter->setPosition(Math::Vector3<Config::Real>((int(absoluteTime*1000)%10000)/2000.0, (int(absoluteTime*1000)%10000)/2000.0, 0.0)) ;
 		//m_entityAdapter->setOrientation(0.0,0.0,absoluteTime) ;
 
+		mCamAnimState->addTime(dt);
+		if(mCamAnimState->hasEnded())
+		{
+			mCamAnimState->setEnabled(false);
+			m_camera->setPosition(0,0,70);
+		}
 		// Updates camera manager
 		m_cameraManager->update(dt) ;
 		// Updates (animation, behavoir & son on) are called here :)
@@ -273,6 +294,19 @@ namespace OgreFramework
 		m_keyboardState.notifyKeyPressed(arg.key) ;
 		// Sends notification to super class
 		BaseApplication::keyPressed(arg) ;
+		if (arg.key == OIS::KC_SPACE)   //lance animation
+		{
+			mCamAnimState->setEnabled(!mCamAnimState->getEnabled());
+			if(mCamAnimState->getEnabled())
+			{
+				m_camera->setPosition(Ogre::Vector3(0,0,0));
+				mCamAnimState->setTimePosition(0);
+			}
+			else
+			{
+				m_camera->setPosition(Ogre::Vector3(0,0,70));
+			}
+		}
 		return true ;
 	}
 

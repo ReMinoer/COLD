@@ -9,7 +9,7 @@ using namespace Config;
 namespace GameElements 
 {
 	GridPathfinder::GridPathfinder(Map* map, int gridStep)
-		: _map(map), _success(false), _isEnd(true), _timeout(10), _gridStep(gridStep)
+		: _map(map), _success(false), _isEnd(true), _timeout(5), _gridStep(gridStep)
 	{
 		_closedGrid = new bool*[height()];
 		for (int i = 0; i < height(); i++)

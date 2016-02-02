@@ -17,41 +17,41 @@ namespace GameElements
 	
 	void AiAgent::update(const Config::Real & dt)
 	{
-		attackInRange();
-
 		if (!_pathfinder.isEnd())
-		{
 			computePath();
-			return;
-		}
-
-		if (_currentPath.empty())
-			return;
-
-		Math::Vector2<Config::Real> diff = _nextDestination - getPosition().projectZ();
-		while (diff.norm() == 0)
-		{
-			getNextDestination();
-			//if (_currentPath.empty())
-				return;
-			//diff = _nextDestination - getPosition().projectZ();
-		}
-		
-		const Map::GroundCellDescription & currentCell = OgreFramework::GlobalConfiguration::getCurrentMap()->getCell(getPosition().projectZ());
-		_velocity = diff.normalized() * m_archetype->m_speed * (1.0 - currentCell.m_speedReduction);
-		
-		Math::Vector2<Config::Real> newPosition = getPosition().projectZ() + _velocity * dt;
-		Math::Vector2<Config::Real> newDiff = _nextDestination - newPosition;
-
-		if (newDiff * diff <= 0)
-		{
-			setPosition(_nextDestination.push(0.0));
-			getNextDestination();
-		}
 		else
-			setPosition(newPosition.push(0.0));
+		{
+			_velocity = Vector2<Config::Real>(0,0);
+			for (;;)
+			{
+				Math::Vector2<Config::Real> diff = getNextMove();
+				if (diff.norm() == 0)
+					break;
+
+				const Map::GroundCellDescription & currentCell = OgreFramework::GlobalConfiguration::getCurrentMap()->getCell(getPosition().projectZ());
+				float speed = m_archetype->m_speed * (1.0 - currentCell.m_speedReduction);
+				
+				Math::Vector2<Config::Real> move = diff.normalized() * (speed - _velocity.norm()) * dt;
+				Math::Vector2<Config::Real> newPosition = getPosition().projectZ() + move;
+				Math::Vector2<Config::Real> newDiff = _nextDestination - newPosition;
+
+				// If agent exceeding his current destination, move and continue
+				if (newDiff * diff <= 0)
+				{
+					_velocity += _nextDestination - getPosition().projectZ();
+					setPosition(_nextDestination.push(0.0));
+					continue;
+				}
+				
+				// Else, move and stop
+				_velocity += newPosition - getPosition().projectZ();
+				setPosition(newPosition.push(0.0));
+				break;
+			}
+		}
 
 		setOrientation(_velocity);
+		attackInRange();
 	}
 
 	void AiAgent::onCollision (const CollisionMessage & message)
@@ -81,15 +81,24 @@ namespace GameElements
 		_nextDestination = _currentPath.top();
 	}
 	
-	void AiAgent::getNextDestination()
+	Math::Vector2<Config::Real> AiAgent::getNextMove()
 	{
 		if (_currentPath.empty())
-			return;
+			return Vector2<Config::Real>();
 
-		_currentPath.pop();
+		Math::Vector2<Config::Real> diff = _nextDestination - getPosition().projectZ();
+		while (diff.norm() == 0)
+		{
+			_currentPath.pop();
 
-		if (!_currentPath.empty())
+			if (_currentPath.empty())
+				break;
+			
 			_nextDestination = _currentPath.top();
+			diff = _nextDestination - getPosition().projectZ();
+		}
+		
+		return diff;
 	}
 
 	System::MessageEmitter<AiAgent::SelectedAiAgentMessage> * AiAgent::getAIMessageEmitter()
@@ -121,6 +130,7 @@ namespace GameElements
 	{
 		return m_team;
 	}
+
 	void AiAgent::drawCircle()
 	{
 		std::string name = this->m_entity->getName();
