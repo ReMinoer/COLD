@@ -28,7 +28,6 @@ namespace OgreFramework
 	{
 	private:
 		GameElements::BuyMenu m_buyMenu;
-		bool m_hideBuyMenu;
 
 	public:
 		MainApplication();

@@ -25,7 +25,7 @@
 namespace OgreFramework
 {
 	MainApplication::MainApplication()
-		: m_keyboardState(*KeyboardState::getInstance()), m_hideBuyMenu(false)
+		: m_keyboardState(*KeyboardState::getInstance())
 	{
 		int moneyMax = 10000;
 		m_buyMenu = GameElements::BuyMenu(moneyMax);
@@ -238,10 +238,6 @@ namespace OgreFramework
 		// Updates (animation, behavoir & son on) are called here :)
 		GlobalConfiguration::getController()->update(dt) ;
 
-		if(m_hideBuyMenu)
-		{
-			m_trayManager->hideAll();
-		}
 		//static bool explosionFired = false ;
 		//if(absoluteTime>10.0 && !explosionFired)
 		//{
@@ -284,7 +280,8 @@ namespace OgreFramework
 		}
 		else 
 		{
-			m_hideBuyMenu = true;
+			m_trayManager->removeWidgetFromTray("menu_unity");
+			menu->hide();
 		}
 	}
 

@@ -28,12 +28,6 @@ namespace GameElements
 		OgreBites::SelectMenu * menu1 = a_trayManager->createThickSelectMenu(OgreBites::TL_CENTER, "menu_unity", piouuu + bla, 250, 15, tmp) ;
 	}
 
-	void BuyMenu::HideSelectionMenu(OgreBites::SdkTrayManager* a_trayManager, OgreBites::SelectMenu * menu)
-	{
-		//a_trayManager->removeWidgetFromTray(menu);
-		a_trayManager->hideAll();
-	}
-
 	void BuyMenu::BuyVehicle(const GameElements::UnitsArchetypes::Archetype * a_unit)
 	{
 		_moneyActual -= a_unit->m_cost;

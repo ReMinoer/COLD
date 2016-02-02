@@ -15,7 +15,6 @@ namespace GameElements
 	public:
 		BuyMenu(int a_moneyMax = 0);
 		void ShowSelectionMenu(OgreBites::SdkTrayManager* a_trayManager);
-		void HideSelectionMenu(OgreBites::SdkTrayManager* a_trayManager, OgreBites::SelectMenu * menu);
 		void BuyVehicle(const GameElements::UnitsArchetypes::Archetype * a_unit);
 	};
 }
