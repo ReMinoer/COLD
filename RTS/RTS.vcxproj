@@ -299,6 +299,7 @@ echo "Done"
     <ClInclude Include="..\src\GameElements\PlayParticleSystem.h" />
     <ClInclude Include="..\src\GameElements\RandomAgent.h" />
     <ClInclude Include="..\src\GameElements\RTSPicking.h" />
+    <ClInclude Include="..\src\GameElements\SelectionPanel.h" />
     <ClInclude Include="..\src\GameElements\StraightBullet.h" />
     <ClInclude Include="..\src\GameElements\UnitsArchetypes.h" />
     <ClInclude Include="..\src\GameElements\Weapon.h" />
@@ -378,6 +379,7 @@ echo "Done"
     <ClCompile Include="..\src\GameElements\src\PlayParticleSystem.cpp" />
     <ClCompile Include="..\src\GameElements\src\RandomAgent.cpp" />
     <ClCompile Include="..\src\GameElements\src\RTSPicking.cpp" />
+    <ClCompile Include="..\src\GameElements\src\SelectionPanel.cpp" />
     <ClCompile Include="..\src\GameElements\src\StraightBullet.cpp" />
     <ClCompile Include="..\src\GameElements\src\UnitsArchetypes.cpp" />
     <ClCompile Include="..\src\GameElements\src\Weapon.cpp" />

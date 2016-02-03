@@ -207,4 +207,9 @@ namespace GameElements
 	{
 		m_target = target;
 	}
+
+	Weapon AiAgent::getWeapon()
+	{
+		return m_weapon;
+	}
 }

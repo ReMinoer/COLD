@@ -4,8 +4,8 @@
 
 namespace GameElements
 {
-RTSPicking::RTSPicking( Ogre::RenderWindow *renderWindow, Ogre::SceneManager * sceneManager, Ogre::Camera * camera, OIS::MouseButtonID buttonId, OIS::MouseButtonID buttonIdright,System::MessageEmitter<AiAgent::SelectedAiAgentMessage> *emitter, System::MessageEmitter<AiAgent::UnselectedAiAgentMessage> * emitterUnSelect  ) 
-		: Picking(sceneManager, camera, buttonId), m_rightButton(buttonIdright), MessageListener<AiAgent::SelectedAiAgentMessage>(emitter), MessageListener<AiAgent::UnselectedAiAgentMessage>(emitterUnSelect)
+RTSPicking::RTSPicking( Ogre::RenderWindow *renderWindow, Ogre::SceneManager * sceneManager, Ogre::Camera * camera, OIS::MouseButtonID buttonId, OIS::MouseButtonID buttonIdright,System::MessageEmitter<AiAgent::SelectedAiAgentMessage> *emitter, System::MessageEmitter<AiAgent::UnselectedAiAgentMessage> * emitterUnSelect, SelectionPanel * menu) 
+		: Picking(sceneManager, camera, buttonId), m_rightButton(buttonIdright), MessageListener<AiAgent::SelectedAiAgentMessage>(emitter), MessageListener<AiAgent::UnselectedAiAgentMessage>(emitterUnSelect), m_menu(menu)
 	{
 		mSelectionBuffer = new Ogre::SelectionBuffer(sceneManager, camera, renderWindow);
 		agentSelected = NULL;
@@ -21,7 +21,6 @@ RTSPicking::RTSPicking( Ogre::RenderWindow *renderWindow, Ogre::SceneManager * s
 		{
 			Ogre::Vector3 tmp = mouseRay.getPoint(result.second);
 			*destination = Math::Vector3<Config::Real> (tmp.x, tmp.y, tmp.z);
-			std::cout << tmp << std::endl;
 			return true;
 		}
 		return false;
@@ -63,10 +62,7 @@ RTSPicking::RTSPicking( Ogre::RenderWindow *renderWindow, Ogre::SceneManager * s
 				{
 					
 				}
-			
-
 		}
-
 	}
 	
 	void RTSPicking::onMessage(AiAgent::SelectedAiAgentMessage const& msg)
@@ -75,17 +71,18 @@ RTSPicking::RTSPicking( Ogre::RenderWindow *renderWindow, Ogre::SceneManager * s
 		{
 			agentSelected = &msg.m_selected;
 			agentSelected->getCircle()->setVisible(true);
+			m_menu->selected(agentSelected);
 		}
 		else if (lastbutton == m_rightButton)
 		{
 			attackTarget(&msg.m_selected);
 		}
-	
 	}
 
 	void RTSPicking::onMessage(AiAgent::UnselectedAiAgentMessage const& msg)
 	{
 		agentSelected = NULL;
+		m_menu->unselected();
 	}
 
 	void RTSPicking::attackTarget(AiAgent * target)
