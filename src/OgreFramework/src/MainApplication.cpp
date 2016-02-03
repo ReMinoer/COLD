@@ -267,21 +267,24 @@ namespace OgreFramework
 	{
 		int SelectionIndex = menu->getSelectionIndex();
 
-		::std::vector<::std::string> types ;
-		types.push_back("MousticB") ;
-		types.push_back("CrocoB") ;
-		types.push_back("HippoB") ;
+		if (SelectionIndex < 3)
+		{
+			::std::vector<::std::string> types ;
+			types.push_back("MousticB") ;
+			types.push_back("CrocoB") ;
+			types.push_back("HippoB") ;
 
-		const GameElements::UnitsArchetypes::Archetype * unit = GlobalConfiguration::getConfigurationLoader()->getUnitsArchetypes().get(types[SelectionIndex]) ;
+			const GameElements::UnitsArchetypes::Archetype * unit = GlobalConfiguration::getConfigurationLoader()->getUnitsArchetypes().get(types[SelectionIndex]) ;
 		
-		::std::cout<<"Selection in menu "<<menu->getCaption()<<::std::endl ;
+			::std::cout<<"Selection in menu "<<menu->getCaption()<<::std::endl ;
 	
-		m_buyMenu.BuyVehicle(unit);
-		
-		/*{
-			m_buyMenu();
-			m_buyMenu.ShowSelectionMenu(m_trayManager);
-		}*/
+			m_buyMenu.BuyVehicle(unit);
+		}
+		else 
+		{
+			m_trayManager->removeWidgetFromTray("menu_unity");
+			menu->hide();
+		}
 	}
 
 	bool MainApplication::keyPressed( const OIS::KeyEvent &arg )
