@@ -11,10 +11,13 @@ namespace GameElements
 	private:
 		int _moneyMax;
 		int _moneyActual;
+		OgreBites::ParamsPanel* m_purchasePanel;
+		::std::vector<::std::string> m_nbVehicle ;
 
 	public:
 		BuyMenu(int a_moneyMax = 0);
 		void ShowSelectionMenu(OgreBites::SdkTrayManager* a_trayManager);
+		void HideSelectionMenu();
 		void BuyVehicle(const GameElements::UnitsArchetypes::Archetype * a_unit);
 	};
 }

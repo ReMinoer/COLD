@@ -105,6 +105,9 @@ namespace OgreFramework
 		{
 			m_buyMenu.ShowSelectionMenu(m_trayManager);
 		}
+
+		
+
 		// Setups the picking
 		//m_picking = new PickingBoundingBox(m_sceneManager, m_camera, OIS::MB_Left) ;
 		//m_picking = new PickingSelectionBuffer(m_window, m_sceneManager, m_camera, OIS::MB_Left) ;
@@ -265,14 +268,14 @@ namespace OgreFramework
 	{
 		int SelectionIndex = menu->getSelectionIndex();
 
-		if (SelectionIndex < 3)
+		if (SelectionIndex > 0)
 		{
 			::std::vector<::std::string> types ;
 			types.push_back("MousticB") ;
 			types.push_back("CrocoB") ;
 			types.push_back("HippoB") ;
 
-			const GameElements::UnitsArchetypes::Archetype * unit = GlobalConfiguration::getConfigurationLoader()->getUnitsArchetypes().get(types[SelectionIndex]) ;
+			const GameElements::UnitsArchetypes::Archetype * unit = GlobalConfiguration::getConfigurationLoader()->getUnitsArchetypes().get(types[SelectionIndex-1]) ;
 		
 			::std::cout<<"Selection in menu "<<menu->getCaption()<<::std::endl ;
 	
@@ -281,7 +284,9 @@ namespace OgreFramework
 		else 
 		{
 			m_trayManager->removeWidgetFromTray("menu_unity");
+			m_trayManager->removeWidgetFromTray("PurchasePanel");
 			menu->hide();
+			m_buyMenu.HideSelectionMenu();
 		}
 	}
 
