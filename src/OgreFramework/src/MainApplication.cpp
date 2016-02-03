@@ -21,7 +21,7 @@
 
 #include <GameElements/AiAgent.h>
 #include<GameElements\RTSPicking.h>
-
+#include <GameElements\SelectionPanel.h>
 namespace OgreFramework
 {
 	MainApplication::MainApplication()
@@ -105,10 +105,12 @@ namespace OgreFramework
 		{
 			m_buyMenu.ShowSelectionMenu(m_trayManager);
 		}
+		panel= new GameElements::SelectionPanel(m_trayManager);
+		
 		// Setups the picking
 		//m_picking = new PickingBoundingBox(m_sceneManager, m_camera, OIS::MB_Left) ;
 		//m_picking = new PickingSelectionBuffer(m_window, m_sceneManager, m_camera, OIS::MB_Left) ;
-		m_picking = new GameElements::RTSPicking(m_window, m_sceneManager, m_camera, OIS::MB_Left, OIS::MB_Right, GameElements::AiAgent::getAIMessageEmitter(), GameElements::AiAgent::getAIMessageEmitterUnSelect()) ;
+		m_picking = new GameElements::RTSPicking(m_window, m_sceneManager, m_camera, OIS::MB_Left, OIS::MB_Right, GameElements::AiAgent::getAIMessageEmitter(), GameElements::AiAgent::getAIMessageEmitterUnSelect(), panel) ;
 
 		// Setups the camera control system
 		m_cameraManager = new RTSCameraManager(m_sceneManager, m_camera, &m_keyboardState) ;
@@ -237,7 +239,7 @@ namespace OgreFramework
 		m_cameraManager->update(dt) ;
 		// Updates (animation, behavoir & son on) are called here :)
 		GlobalConfiguration::getController()->update(dt) ;
-
+		panel->update();
 		//static bool explosionFired = false ;
 		//if(absoluteTime>10.0 && !explosionFired)
 		//{

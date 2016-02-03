@@ -63,6 +63,7 @@ namespace GameElements
 		void drawCircle();
 		Ogre::ManualObject * getCircle();
 		void setTarget(AiAgent * target);
+		Weapon getWeapon();
 	};
 }
 

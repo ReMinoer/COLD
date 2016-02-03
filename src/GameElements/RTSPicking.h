@@ -9,6 +9,7 @@
 #include <GameElements\AiAgent.h>
 #include <OGRE\OgreSceneQuery.h>
 #include <System\MessageListener.h>
+#include <GameElements\SelectionPanel.h>
 
 namespace GameElements
 {
@@ -16,7 +17,7 @@ namespace GameElements
 	{
 	protected :
 		AiAgent * agentSelected;
-		
+		SelectionPanel * m_menu;
 		OIS::MouseButtonID m_rightButton;
 		Ogre::SelectionBuffer * mSelectionBuffer;
 		OIS::MouseButtonID lastbutton;
@@ -24,7 +25,7 @@ namespace GameElements
 		bool getCoord(const OIS::MouseEvent &arg, Math::Vector3<Config::Real> * destination);
 	public:
 
-		RTSPicking (Ogre::RenderWindow *renderWindow, Ogre::SceneManager * sceneManager, Ogre::Camera * camera, OIS::MouseButtonID buttonId, OIS::MouseButtonID buttonIdright, System::MessageEmitter<AiAgent::SelectedAiAgentMessage> * emitter, System::MessageEmitter<AiAgent::UnselectedAiAgentMessage> * emitterUnSelect );
+		RTSPicking (Ogre::RenderWindow *renderWindow, Ogre::SceneManager * sceneManager, Ogre::Camera * camera, OIS::MouseButtonID buttonId, OIS::MouseButtonID buttonIdright, System::MessageEmitter<AiAgent::SelectedAiAgentMessage> * emitter, System::MessageEmitter<AiAgent::UnselectedAiAgentMessage> * emitterUnSelect, SelectionPanel * menu );
 		void update(const OIS::MouseEvent &arg, OIS::MouseButtonID id);
 		void onMessage(AiAgent::SelectedAiAgentMessage const& msg);
 		void onMessage(AiAgent::UnselectedAiAgentMessage const& msg);
