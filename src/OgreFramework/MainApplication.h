@@ -13,7 +13,7 @@
 #include <GameElements/NullAgent.h>
 
 #include <GameElements/BuyMenu.h>
-
+#include <GameElements\SelectionPanel.h>
 namespace OgreFramework
 {
 	///////////////////////////////////////////////////////////////////////////////////
@@ -138,7 +138,8 @@ namespace OgreFramework
 		KeyboardState & m_keyboardState ;
 		///< The camera manager
 		RTSCameraManager * m_cameraManager ;
-
+		Ogre::AnimationState * mCamAnimState;
+		GameElements::SelectionPanel * panel;
 		//Ogre::SceneNode * m_shipShape ;
 		//GameElements::NullAgent::Pointer m_entityAdapter ;
 	};

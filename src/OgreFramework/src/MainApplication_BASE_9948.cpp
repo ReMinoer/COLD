@@ -21,7 +21,7 @@
 
 #include <GameElements/AiAgent.h>
 #include<GameElements\RTSPicking.h>
-#include <GameElements\SelectionPanel.h>
+
 namespace OgreFramework
 {
 	MainApplication::MainApplication()
@@ -105,12 +105,10 @@ namespace OgreFramework
 		{
 			m_buyMenu.ShowSelectionMenu(m_trayManager);
 		}
-		panel= new GameElements::SelectionPanel(m_trayManager);
-		
 		// Setups the picking
 		//m_picking = new PickingBoundingBox(m_sceneManager, m_camera, OIS::MB_Left) ;
 		//m_picking = new PickingSelectionBuffer(m_window, m_sceneManager, m_camera, OIS::MB_Left) ;
-		m_picking = new GameElements::RTSPicking(m_window, m_sceneManager, m_camera, OIS::MB_Left, OIS::MB_Right, GameElements::AiAgent::getAIMessageEmitter(), GameElements::AiAgent::getAIMessageEmitterUnSelect(), panel) ;
+		m_picking = new GameElements::RTSPicking(m_window, m_sceneManager, m_camera, OIS::MB_Left, OIS::MB_Right, GameElements::AiAgent::getAIMessageEmitter(), GameElements::AiAgent::getAIMessageEmitterUnSelect()) ;
 
 		// Setups the camera control system
 		m_cameraManager = new RTSCameraManager(m_sceneManager, m_camera, &m_keyboardState) ;
@@ -239,7 +237,7 @@ namespace OgreFramework
 		m_cameraManager->update(dt) ;
 		// Updates (animation, behavoir & son on) are called here :)
 		GlobalConfiguration::getController()->update(dt) ;
-		panel->update();
+
 		//static bool explosionFired = false ;
 		//if(absoluteTime>10.0 && !explosionFired)
 		//{
@@ -267,14 +265,14 @@ namespace OgreFramework
 	{
 		int SelectionIndex = menu->getSelectionIndex();
 
-		if (SelectionIndex > 0)
+		if (SelectionIndex < 3)
 		{
 			::std::vector<::std::string> types ;
 			types.push_back("MousticB") ;
 			types.push_back("CrocoB") ;
 			types.push_back("HippoB") ;
 
-			const GameElements::UnitsArchetypes::Archetype * unit = GlobalConfiguration::getConfigurationLoader()->getUnitsArchetypes().get(types[SelectionIndex-1]) ;
+			const GameElements::UnitsArchetypes::Archetype * unit = GlobalConfiguration::getConfigurationLoader()->getUnitsArchetypes().get(types[SelectionIndex]) ;
 		
 			::std::cout<<"Selection in menu "<<menu->getCaption()<<::std::endl ;
 	
@@ -283,9 +281,7 @@ namespace OgreFramework
 		else 
 		{
 			m_trayManager->removeWidgetFromTray("menu_unity");
-			m_trayManager->removeWidgetFromTray("PurchasePanel");
 			menu->hide();
-			m_buyMenu.HideSelectionMenu();
 		}
 	}
 

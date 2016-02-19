@@ -43,14 +43,20 @@ namespace GameElements
 
 	private:
 		Math::Vector2<Config::Real> getNextMove();
+
 		void attackInRange();
+
 		static DesignPattern::StaticMember<System::MessageEmitter<SelectedAiAgentMessage> > AiAgentEmitter ;
 		static DesignPattern::StaticMember<System::MessageEmitter<UnselectedAiAgentMessage> > AiAgentEmitterUnSelect ;
+	
 	public:
 		AiAgent(const UnitsArchetypes::Archetype * archetype, const WeaponsArchetypes::Archetype * weaponArchetype, Map* map, Ogre::SceneManager * sceneManager, Team team=none);
+		virtual ~AiAgent();
 
 		virtual void update(const Config::Real & dt);
+
 		virtual void onCollision (const CollisionMessage & message);
+
 		virtual Math::Vector2<Config::Real> getVelocity() const;
 
 		bool setDestination(Math::Vector2<Config::Real> destination);
@@ -59,10 +65,16 @@ namespace GameElements
 		void onUnselect();
 		static System::MessageEmitter<SelectedAiAgentMessage> * getAIMessageEmitter();
 		static System::MessageEmitter<UnselectedAiAgentMessage> * getAIMessageEmitterUnSelect();
+
 		Team getTeam();
+
 		void drawCircle();
 		Ogre::ManualObject * getCircle();
+
 		void setTarget(AiAgent * target);
+		AiAgent* getTarget();
+
+		Weapon getWeapon();
 	};
 }
 

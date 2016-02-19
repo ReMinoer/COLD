@@ -4,30 +4,25 @@
 
 namespace GameElements
 {
-RTSPicking::RTSPicking( Ogre::RenderWindow *renderWindow, Ogre::SceneManager * sceneManager, Ogre::Camera * camera, OIS::MouseButtonID buttonId, OIS::MouseButtonID buttonIdright,System::MessageEmitter<AiAgent::SelectedAiAgentMessage> *emitter, System::MessageEmitter<AiAgent::UnselectedAiAgentMessage> * emitterUnSelect  ) 
-		: Picking(sceneManager, camera, buttonId), m_rightButton(buttonIdright), MessageListener<AiAgent::SelectedAiAgentMessage>(emitter), MessageListener<AiAgent::UnselectedAiAgentMessage>(emitterUnSelect)
+RTSPicking::RTSPicking( Ogre::RenderWindow *renderWindow, Ogre::SceneManager * sceneManager, Ogre::Camera * camera, OIS::MouseButtonID buttonId, OIS::MouseButtonID buttonIdright,System::MessageEmitter<AiAgent::SelectedAiAgentMessage> *emitter, System::MessageEmitter<AiAgent::UnselectedAiAgentMessage> * emitterUnSelect, SelectionPanel * menu) 
+		: Picking(sceneManager, camera, buttonId), m_rightButton(buttonIdright), MessageListener<AiAgent::SelectedAiAgentMessage>(emitter), MessageListener<AiAgent::UnselectedAiAgentMessage>(emitterUnSelect), m_menu(menu)
 	{
 		mSelectionBuffer = new Ogre::SelectionBuffer(sceneManager, camera, renderWindow);
 		agentSelected = NULL;
+		controlledTeam = blue;
 	}
 
 	bool RTSPicking::getCoord(const OIS::MouseEvent &arg, Math::Vector3<Config::Real> * destination)
 	{
 		bool mMovableFound(false);
+		Ogre::Plane plan(Ogre::Vector3::UNIT_Z,0);
 		Ogre::Ray mouseRay = m_camera->getCameraToViewportRay(arg.state.X.abs / float(arg.state.width),arg.state.Y.abs / float(arg.state.height));
-		Ogre::RaySceneQuery* raySceneQuery = m_sceneManager->createRayQuery(mouseRay);
-		raySceneQuery->setSortByDistance(true);
-		Ogre::RaySceneQueryResult& result = raySceneQuery->execute();
-
-		for (Ogre::RaySceneQueryResult::iterator it = result.begin(); it != result.end(); it++)
+		std::pair<bool, Real> result = mouseRay.intersects(plan);
+		if(result.first) 
 		{
-			mMovableFound = it->movable && it->movable->getName() == "scene0Box001";
-			if (mMovableFound)
-			{
-				Ogre::Vector3 tmp = mouseRay.getPoint(it->distance);
-				*destination = Math::Vector3<Config::Real> (tmp.x, tmp.y, tmp.z);
-				return true;
-			}
+			Ogre::Vector3 tmp = mouseRay.getPoint(result.second);
+			*destination = Math::Vector3<Config::Real> (tmp.x, tmp.y, tmp.z);
+			return true;
 		}
 		return false;
 	}
@@ -54,9 +49,9 @@ RTSPicking::RTSPicking( Ogre::RenderWindow *renderWindow, Ogre::SceneManager * s
 		{
 				
 				notifySelected(selectedEntity) ;
-				if( agentSelected != NULL)
+				if( agentSelected != NULL && agentSelected->getTeam() == controlledTeam)
 				{	
-					//move
+					
 					Math::Vector3<Config::Real> destination;
 					if (getCoord(arg,&destination))
 					{	
@@ -68,10 +63,7 @@ RTSPicking::RTSPicking( Ogre::RenderWindow *renderWindow, Ogre::SceneManager * s
 				{
 					
 				}
-			
-
 		}
-
 	}
 	
 	void RTSPicking::onMessage(AiAgent::SelectedAiAgentMessage const& msg)
@@ -80,17 +72,18 @@ RTSPicking::RTSPicking( Ogre::RenderWindow *renderWindow, Ogre::SceneManager * s
 		{
 			agentSelected = &msg.m_selected;
 			agentSelected->getCircle()->setVisible(true);
+			m_menu->selected(agentSelected);
 		}
-		else if (lastbutton == m_rightButton)
+		else if (lastbutton == m_rightButton && agentSelected->getTeam() == controlledTeam)
 		{
 			attackTarget(&msg.m_selected);
 		}
-	
 	}
 
 	void RTSPicking::onMessage(AiAgent::UnselectedAiAgentMessage const& msg)
 	{
 		agentSelected = NULL;
+		m_menu->unselected();
 	}
 
 	void RTSPicking::attackTarget(AiAgent * target)

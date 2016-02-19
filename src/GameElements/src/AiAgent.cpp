@@ -14,6 +14,11 @@ namespace GameElements
 		m_target = NULL;
 		drawCircle();
 	}
+
+	AiAgent::~AiAgent()
+	{
+		System::ConstructionDestructionEmitter<AiAgent>::getDestructionEmitter()->send(System::DestructionMessage<AiAgent>(*this)) ;
+	}
 	
 	void AiAgent::update(const Config::Real & dt)
 	{
@@ -203,5 +208,15 @@ namespace GameElements
 	void AiAgent::setTarget(AiAgent * target)
 	{
 		m_target = target;
+	}
+
+	AiAgent* AiAgent::getTarget()
+	{
+		return m_target;
+	}
+
+	Weapon AiAgent::getWeapon()
+	{
+		return m_weapon;
 	}
 }
