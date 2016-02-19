@@ -9,7 +9,7 @@ using namespace Config;
 namespace GameElements 
 {
 	GridPathfinder::GridPathfinder(Map* map, int gridStep)
-		: _map(map), _success(false), _isEnd(true), _timeout(5), _gridStep(gridStep)
+		: _map(map), _succeed(false), _isEnd(true), _timeout(10)
 	{
 		_closedGrid = new bool*[height()];
 		for (int i = 0; i < height(); i++)
@@ -28,7 +28,7 @@ namespace GameElements
 		if(!isValid(start) || !isValid(finish) || getCell(start).m_speedReduction >= 1.0)
 			return false;
 		
-		_success = false;
+		_succeed = false;
 		_isEnd = false;
 	
 		_openlist.clear();
@@ -55,11 +55,12 @@ namespace GameElements
 				Vector2<float> remaining = _finish - _start;
 
 				PathfinderNode node;
+				node.point = point;
 				node.parent = Vector2<int>(-1, -1);
 				node.parentCost = move.norm();
 				node.personalCost = remaining.norm();
-
-				_openlist[point] = node;
+				
+				AddNodeToOpenList(node);
 			}
 
 		_timeoutElapsed = 0;
@@ -73,20 +74,20 @@ namespace GameElements
 		_timeoutElapsed = 0;
 		_processDuration = 0;
 
-		while (!_success && !_openlist.empty() && _timeoutElapsed < _timeout)
+		while (!_succeed && !_openlist.empty() && _timeoutElapsed < _timeout)
 		{
 			clock_t start = clock();
 
-			_current = BestNodeOpenlist();
+			PathfinderNode top = *_openlist.begin();
+			_openlist.erase(_openlist.begin());
 
-			_closedlist[_current] = _openlist[_current];
-			_closedGrid[_current[1]][_current[0]] = true;
-			_openlist.erase(_current);
-				
-			if (_current == _gridFinish)
-				_success = true;
+			_closedlist[top.point] = top;
+			_closedGrid[top.point[1]][top.point[0]] = true;
+			
+			if (top.point == _gridFinish)
+				_succeed = true;
 			else
-				ProcessSurroundingCases();
+				ProcessSurroundingCases(top);
 
 			clock_t end = clock();
 			double elapsed = (double) (end-start);
@@ -95,12 +96,12 @@ namespace GameElements
 			_processDuration += elapsed;
 		}
 
-		_isEnd = _success || _openlist.empty();
+		_isEnd = _succeed || _openlist.empty();
 
-		return _isEnd;
+		return _succeed;
 	}
 
-	void GridPathfinder::ProcessSurroundingCases()
+	void GridPathfinder::ProcessSurroundingCases(PathfinderNode top)
 	{
 		for (int i = -1; i <= 1; i++)
 			for (int j = -1; j <= 1; j++)
@@ -108,39 +109,43 @@ namespace GameElements
 				if (i == 0 && j == 0)
 					continue;
 
-				Vector2<int> diff(j, i);
+				Vector2<int> point = top.point + Vector2<int>(j, i);
 				
-				if (!isValid(_current + diff))
+				if (!isValid(point))
 					continue;
 
-				if (_closedGrid[_current[1] + i][_current[0] + j])
+				if (_closedGrid[point[1]][point[0]])
 					continue;
 
-				Vector2<int> point = _current + diff;
-				Vector2<float> worldPoint = toWorldCoordinates(point);
-
-				if (!isValid(point) && getCell(point).m_speedReduction >= 1.0)
+				if (getCell(point).m_speedReduction >= 1.0)
 					continue;
 		
-				Vector2<float> move = worldPoint - toWorldCoordinates(_current);
+				Vector2<float> worldPoint = toWorldCoordinates(point);
+				Vector2<float> move = worldPoint - toWorldCoordinates(top.point);
 				Vector2<float> remaining = _finish - worldPoint;
 
 				float actionCost = getCell(point).m_speedReduction * 100;
 
 				PathfinderNode node;
-				node.parent = _current;
-				node.parentCost = _closedlist[_current].parentCost + move.norm();
+				node.point = point;
+				node.parent = top.point;
+				node.parentCost = top.parentCost + move.norm();
 				node.personalCost = remaining.norm() + actionCost;
 				
-				map<Vector2<int>, PathfinderNode>::const_iterator existingNode = _openlist.find(point);
-				if (existingNode != _openlist.end())
-				{
-					if (node.getCost() < existingNode->second.getCost())
-						_openlist[point] = node;
-				}
-				else
-					_openlist[point] = node;
+				AddNodeToOpenList(node);
 			}
+	}
+
+	void GridPathfinder::AddNodeToOpenList(PathfinderNode node)
+	{
+		for (vector<PathfinderNode>::const_iterator it = _openlist.begin(); it != _openlist.end(); ++it)
+			if (node.getCost() < it->getCost())
+			{
+				_openlist.insert(it, node);
+				return;
+			}
+
+		_openlist.push_back(node);
 	}
 
 	stack<Vector2<Real>> GridPathfinder::GetPath()
@@ -150,56 +155,32 @@ namespace GameElements
 		if (_closedlist.empty())
 			return path;
 
-		Vector2<Real> current;
 		PathfinderNode node;
 
-		if (_success)
+		if (_succeed)
 		{
 			path.push(_finish);
-
-			current = _finish;
 			node = _closedlist[toGridCoordinates(_finish)];
 		}
 		else
 		{
-			Vector2<int> bestPoint = BestNodeClosedlist();
+			Vector2<int> bestPoint = BestPointClosedlist();
 			if (bestPoint == Vector2<Real>(-1, -1))
 				return path;
 
-			current = toWorldCoordinates(bestPoint);
 			node = _closedlist[bestPoint];
 		}
 
-		while (node.parent != Vector2<int>(-1, -1))
+		while (node.point != Vector2<int>(-1, -1))
 		{
-			current = toWorldCoordinates(node.parent);
+			path.push(toWorldCoordinates(node.point));
 			node = _closedlist[node.parent];
-
-			path.push(current);
 		}
 
 		return path;
 	}
 
-	Vector2<int> GridPathfinder::BestNodeOpenlist()
-	{
-		Vector2<int> pointMin = Vector2<int>(-1, -1);
-		float costMin = numeric_limits<float>::max();
-
-		for (map<Vector2<int>, PathfinderNode>::const_iterator it = _openlist.begin(); it != _openlist.end(); ++it)
-		{
-			float cost = it->second.getCost();
-			if (cost < costMin)
-			{
-				costMin = cost;
-				pointMin = it->first;
-			}
-		}
-
-		return pointMin;
-	}
-
-	Vector2<int> GridPathfinder::BestNodeClosedlist()
+	Vector2<int> GridPathfinder::BestPointClosedlist()
 	{
 		Vector2<int> pointMin = Vector2<int>(-1, -1);
 		float distanceMin = numeric_limits<float>::max();
@@ -225,27 +206,27 @@ namespace GameElements
 
 	int GridPathfinder::width() const
 	{
-		return _map->width() / _gridStep;
+		return _map->width();
 	}
 
 	int GridPathfinder::height() const
 	{
-		return _map->height() / _gridStep;
+		return _map->height();
 	}
 
 	Math::Vector2<Real> GridPathfinder::toWorldCoordinates(Math::Vector2<int> const & gridCoordinates) const
 	{
-		return _map->toWorldCoordinates(gridCoordinates * _gridStep);
+		return _map->toWorldCoordinates(gridCoordinates);
 	}
 
 	Math::Vector2<int> GridPathfinder::toGridCoordinates(Math::Vector2<Real> const & worldCoordinates) const
 	{
-		return _map->toGridCoordinates(worldCoordinates) / _gridStep;
+		return _map->toGridCoordinates(worldCoordinates);
 	}
 
 	const Map::GroundCellDescription & GridPathfinder::getCell(Math::Vector2<int> const & gridCoordinates) const
 	{
-		return _map->getCell(gridCoordinates * _gridStep);
+		return _map->getCell(gridCoordinates);
 	}
 
 	const Map::GroundCellDescription & GridPathfinder::getCell(Math::Vector2<Config::Real> const & worldCoordinates) const
@@ -255,7 +236,7 @@ namespace GameElements
 
 	bool GridPathfinder::isValid(Math::Vector2<int> const & gridCoordinates) const
 	{
-		return _map->isValid(gridCoordinates * _gridStep);
+		return _map->isValid(gridCoordinates);
 	}
 
 	bool GridPathfinder::isValid(Math::Vector2<Config::Real> const & worldCoordinates) const

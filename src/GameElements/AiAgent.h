@@ -54,7 +54,7 @@ namespace GameElements
 		virtual Math::Vector2<Config::Real> getVelocity() const;
 
 		bool setDestination(Math::Vector2<Config::Real> destination);
-		void computePath();
+		bool computePath();
 		void onSelect();
 		void onUnselect();
 		static System::MessageEmitter<SelectedAiAgentMessage> * getAIMessageEmitter();
