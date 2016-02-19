@@ -9,6 +9,7 @@ RTSPicking::RTSPicking( Ogre::RenderWindow *renderWindow, Ogre::SceneManager * s
 	{
 		mSelectionBuffer = new Ogre::SelectionBuffer(sceneManager, camera, renderWindow);
 		agentSelected = NULL;
+		controlledTeam = blue;
 	}
 
 	bool RTSPicking::getCoord(const OIS::MouseEvent &arg, Math::Vector3<Config::Real> * destination)
@@ -48,9 +49,9 @@ RTSPicking::RTSPicking( Ogre::RenderWindow *renderWindow, Ogre::SceneManager * s
 		{
 				
 				notifySelected(selectedEntity) ;
-				if( agentSelected != NULL)
+				if( agentSelected != NULL && agentSelected->getTeam() == controlledTeam)
 				{	
-					//move
+					
 					Math::Vector3<Config::Real> destination;
 					if (getCoord(arg,&destination))
 					{	
@@ -73,7 +74,7 @@ RTSPicking::RTSPicking( Ogre::RenderWindow *renderWindow, Ogre::SceneManager * s
 			agentSelected->getCircle()->setVisible(true);
 			m_menu->selected(agentSelected);
 		}
-		else if (lastbutton == m_rightButton)
+		else if (lastbutton == m_rightButton && agentSelected->getTeam() == controlledTeam)
 		{
 			attackTarget(&msg.m_selected);
 		}
