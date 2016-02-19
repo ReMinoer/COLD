@@ -289,11 +289,13 @@ echo "Done"
     <ClInclude Include="..\src\Ext\TinyXML\Helpers.h" />
     <ClInclude Include="..\src\GameElements\AiAgent.h" />
     <ClInclude Include="..\src\GameElements\AIManager.h" />
+    <ClInclude Include="..\src\GameElements\AnnilhationVictory.h" />
     <ClInclude Include="..\src\GameElements\BallisticBullet.h" />
     <ClInclude Include="..\src\GameElements\BulletBase.h" />
     <ClInclude Include="..\src\GameElements\BuyMenu.h" />
     <ClInclude Include="..\src\GameElements\ConfigurationLoader.h" />
     <ClInclude Include="..\src\GameElements\GridPathfinder.h" />
+    <ClInclude Include="..\src\GameElements\IVictoryConditions.h" />
     <ClInclude Include="..\src\GameElements\Map.h" />
     <ClInclude Include="..\src\GameElements\NullAgent.h" />
     <ClInclude Include="..\src\GameElements\Perception.h" />
@@ -370,6 +372,7 @@ echo "Done"
     <ClCompile Include="..\src\Ext\std\src\string_utils.cpp" />
     <ClCompile Include="..\src\GameElements\src\AiAgent.cpp" />
     <ClCompile Include="..\src\GameElements\src\AIManager.cpp" />
+    <ClCompile Include="..\src\GameElements\src\AnnilhationVictory.cpp" />
     <ClCompile Include="..\src\GameElements\src\BallisticBullet.cpp" />
     <ClCompile Include="..\src\GameElements\src\BulletBase.cpp" />
     <ClCompile Include="..\src\GameElements\src\BuyMenu.cpp" />
