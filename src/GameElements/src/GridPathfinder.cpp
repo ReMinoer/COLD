@@ -31,7 +31,7 @@ namespace GameElements
 		_succeed = false;
 		_isEnd = false;
 	
-		_openlist.clear();
+		_openlist = Openlist();
 		_closedlist.clear();
 		
 		for (int i = 0; i < height(); i++)
@@ -60,7 +60,7 @@ namespace GameElements
 				node.parentCost = move.norm();
 				node.personalCost = remaining.norm();
 				
-				AddNodeToOpenList(node);
+				_openlist.push(node);
 			}
 
 		_timeoutElapsed = 0;
@@ -78,8 +78,13 @@ namespace GameElements
 		{
 			clock_t start = clock();
 
-			PathfinderNode top = *_openlist.begin();
-			_openlist.erase(_openlist.begin());
+			PathfinderNode top;
+			do
+			{
+				top = _openlist.top();
+				_openlist.pop();
+			}
+			while (_closedGrid[top.point[1]][top.point[0]]);
 
 			_closedlist[top.point] = top;
 			_closedGrid[top.point[1]][top.point[0]] = true;
@@ -124,28 +129,14 @@ namespace GameElements
 				Vector2<float> move = worldPoint - toWorldCoordinates(top.point);
 				Vector2<float> remaining = _finish - worldPoint;
 
-				float actionCost = getCell(point).m_speedReduction * 100;
-
 				PathfinderNode node;
 				node.point = point;
 				node.parent = top.point;
-				node.parentCost = top.parentCost + move.norm();
-				node.personalCost = remaining.norm() + actionCost;
+				node.parentCost = top.parentCost + move.norm() * (1.0 / (1.0 - getCell(point).m_speedReduction));
+				node.personalCost = remaining.norm();
 				
-				AddNodeToOpenList(node);
+				_openlist.push(node);
 			}
-	}
-
-	void GridPathfinder::AddNodeToOpenList(PathfinderNode node)
-	{
-		for (vector<PathfinderNode>::const_iterator it = _openlist.begin(); it != _openlist.end(); ++it)
-			if (node.getCost() < it->getCost())
-			{
-				_openlist.insert(it, node);
-				return;
-			}
-
-		_openlist.push_back(node);
 	}
 
 	stack<Vector2<Real>> GridPathfinder::GetPath()
@@ -171,11 +162,13 @@ namespace GameElements
 			node = _closedlist[bestPoint];
 		}
 
-		while (node.point != Vector2<int>(-1, -1))
+		while (node.parent != Vector2<int>(-1, -1))
 		{
 			path.push(toWorldCoordinates(node.point));
 			node = _closedlist[node.parent];
 		}
+		
+		path.push(toWorldCoordinates(node.point));
 
 		return path;
 	}

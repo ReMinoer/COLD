@@ -12,7 +12,6 @@ using namespace Config;
 
 namespace GameElements 
 {
-	// BUG : Grid step != 1 don't work !
 	class GridPathfinder
 	{
 	public:
@@ -30,21 +29,20 @@ namespace GameElements
 			}
 		};
 
-		typedef ::boost::intrusive_ptr<GridPathfinder> Pointer;
-
 		class ByCost
 		{
 			public:
 				bool operator()(PathfinderNode a, PathfinderNode b)
 				{
-					return a.personalCost < b.personalCost;
+					return a.getCost() > b.getCost();
 				}
 		};
+
+		typedef ::boost::intrusive_ptr<GridPathfinder> Pointer;
 		
 	private:
 
-		//typedef priority_queue<PathfinderNode, vector<PathfinderNode>, ByCost> Openlist;
-		typedef vector<PathfinderNode> Openlist;
+		typedef priority_queue<PathfinderNode, vector<PathfinderNode>, ByCost> Openlist;
 		typedef map<Vector2<int>, PathfinderNode> Closedlist;
 
 		Map* _map;
@@ -68,7 +66,6 @@ namespace GameElements
 		stack<Vector2<Config::Real>> GetPath();
 	private:
 		void ProcessSurroundingCases(PathfinderNode top);
-		void AddNodeToOpenList(PathfinderNode node);
 		Vector2<int> BestPointClosedlist();
 		int width() const;
 		int height() const;
