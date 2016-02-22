@@ -83,29 +83,13 @@ namespace OgreFramework
 		Ogre::SceneNode * rootSceneNode = getRootSceneNode() ;
 		
 		// --------------------------------------
-		// Setups the GUI (it's a test / example)
+		// Setups the GUI 
 		// --------------------------------------
-		
-		
 
-		/*{
-			Ogre::StringVector tmp ;
-			tmp.push_back("item 1") ;
-			tmp.push_back("item 2") ;
-			tmp.push_back("item 3") ;
-			OgreBites::SelectMenu * menu1 = m_trayManager->createThickSelectMenu(OgreBites::TL_TOPLEFT, "Menu 1", "Foo", 200, 10, tmp) ;
-		}
 		{
-			Ogre::StringVector tmp ;
-			tmp.push_back("item 1") ;
-			tmp.push_back("item 2") ;
-			tmp.push_back("item 3") ;
-			OgreBites::SelectMenu * menu1 = m_trayManager->createThickSelectMenu(OgreBites::TL_TOPLEFT, "Menu 2", "Foo 2", 200, 10, tmp) ;
-		}*/
-		{
-			m_buyMenu.ShowSelectionMenu(m_trayManager);
+			m_buyMenu.ShowSelectionMenu(m_trayManager) ;
 		}
-		panel= new GameElements::SelectionPanel(m_trayManager);
+		panel = new GameElements::SelectionPanel(m_trayManager) ;
 		
 		// Setups the picking
 		//m_picking = new PickingBoundingBox(m_sceneManager, m_camera, OIS::MB_Left) ;
@@ -287,6 +271,10 @@ namespace OgreFramework
 		{
 			const GameElements::UnitsArchetypes::Archetype * unit = GlobalConfiguration::getConfigurationLoader()->getUnitsArchetypes().get(types[SelectionIndex - 1]) ;
 			m_buyMenu.BuyVehicle(unit) ;
+		}
+		else
+		{
+			m_buyMenu.HideSelectionMenu(m_trayManager);
 		}
 	}
 

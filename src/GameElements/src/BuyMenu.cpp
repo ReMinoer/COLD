@@ -15,22 +15,35 @@ namespace GameElements
 	void BuyMenu::ShowSelectionMenu(OgreBites::SdkTrayManager* a_trayManager) 
 	{
 		// create a params panel for displaying purchase details
-		Ogre::StringVector purchases;
-		purchases.push_back("Money");
-		purchases.push_back("Moustics");
-		purchases.push_back("Crocos");
-		purchases.push_back("Hippos");
-		m_purchasePanel = a_trayManager->createParamsPanel(OgreBites::TL_CENTER, "PurchasePanel", 200, purchases);
-		m_purchasePanel->setParamValue(0, Ogre::StringConverter::toString(_moneyActual));
 		
-		m_addMousticButton = a_trayManager->createButton(OgreBites::TL_CENTER, "MousticButton", "Add Moustic");
-		m_addCrocoButton = a_trayManager->createButton(OgreBites::TL_CENTER, "CrocoButton", "Add Croco");
-		m_addMousticButton = a_trayManager->createButton(OgreBites::TL_CENTER, "HippoButton", "Add Hippo");
+		m_closeMenuButton = a_trayManager->createButton(OgreBites::TL_CENTER, "CloseMenuButton", "Close Menu") ;
+
+		Ogre::StringVector purchases ;
+		purchases.push_back("Money") ;
+		purchases.push_back("Moustics") ;
+		purchases.push_back("Crocos") ;
+		purchases.push_back("Hippos") ;
+		m_purchasePanel = a_trayManager->createParamsPanel(OgreBites::TL_CENTER, "PurchasePanel", 200, purchases) ;
+		m_purchasePanel->setParamValue(0, Ogre::StringConverter::toString(_moneyActual)) ;
+		
+		m_addMousticButton = a_trayManager->createButton(OgreBites::TL_CENTER, "MousticButton", "Add Moustic") ;
+		m_addCrocoButton = a_trayManager->createButton(OgreBites::TL_CENTER, "CrocoButton", "Add Croco") ;
+		m_addHippoButton = a_trayManager->createButton(OgreBites::TL_CENTER, "HippoButton", "Add Hippo") ;
 	}
 
-	void BuyMenu::HideSelectionMenu()
+	void BuyMenu::HideSelectionMenu(OgreBites::SdkTrayManager* a_trayManager)
 	{
+		m_closeMenuButton->hide() ;
 		m_purchasePanel->hide() ;
+		m_addMousticButton->hide() ;
+		m_addCrocoButton->hide() ;
+		m_addHippoButton->hide() ;
+		
+		a_trayManager->removeWidgetFromTray("CloseMenuButton") ;
+		a_trayManager->removeWidgetFromTray("PurchasePanel") ;
+		a_trayManager->removeWidgetFromTray("MousticButton") ;
+		a_trayManager->removeWidgetFromTray("CrocoButton") ;
+		a_trayManager->removeWidgetFromTray("HippoButton") ;
 	}
 
 	void BuyMenu::BuyVehicle(const GameElements::UnitsArchetypes::Archetype * a_unit)
