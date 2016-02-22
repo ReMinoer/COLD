@@ -12,6 +12,9 @@ namespace GameElements
 		int _moneyMax;
 		int _moneyActual;
 		OgreBites::ParamsPanel* m_purchasePanel;
+		OgreBites::Button* m_addMousticButton;
+		OgreBites::Button* m_addCrocoButton;
+		OgreBites::Button* m_addHippoButton;
 		::std::vector<::std::string> m_nbVehicle ;
 
 	public:

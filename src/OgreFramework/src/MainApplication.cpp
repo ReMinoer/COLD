@@ -27,7 +27,7 @@ namespace OgreFramework
 	MainApplication::MainApplication()
 		: m_keyboardState(*KeyboardState::getInstance())
 	{
-		int moneyMax = 10000;
+		int moneyMax = 2000;
 		m_buyMenu = GameElements::BuyMenu(moneyMax);
 	}
 
@@ -263,9 +263,9 @@ namespace OgreFramework
 		return result ;
 	}
 
-	void MainApplication::itemSelected( OgreBites::SelectMenu* menu )
+	void MainApplication::itemSelected(OgreBites::SelectMenu* menu)
 	{
-		int SelectionIndex = menu->getSelectionIndex();
+		/*int SelectionIndex = menu->getSelectionIndex();
 
 		if (SelectionIndex > 0)
 		{
@@ -286,6 +286,38 @@ namespace OgreFramework
 			m_trayManager->removeWidgetFromTray("PurchasePanel");
 			menu->hide();
 			m_buyMenu.HideSelectionMenu();
+		}*/
+	}
+
+	void MainApplication::buttonHit(OgreBites::Button* button)
+	{
+		int SelectionIndex = 0;
+
+		::std::vector<::std::string> types ;
+		types.push_back("MousticB") ;
+		types.push_back("CrocoB") ;
+		types.push_back("HippoB") ;
+
+		if (button->getName() == "MousticButton")
+		{
+			::std::cout<<"Moustic !"<<::std::endl ;
+			SelectionIndex = 1 ;
+		}
+		else if (button->getName() == "CrocoButton" )
+		{
+			::std::cout<<"Croco !"<<::std::endl ;
+			SelectionIndex = 2 ;
+		}
+	    else if (button->getName() == "HippoButton" )
+		{
+			::std::cout<<"Hippo !"<<::std::endl ;
+			SelectionIndex = 3 ;
+		}
+
+		if (SelectionIndex > 0)
+		{
+			const GameElements::UnitsArchetypes::Archetype * unit = GlobalConfiguration::getConfigurationLoader()->getUnitsArchetypes().get(types[SelectionIndex - 1]) ;
+			m_buyMenu.BuyVehicle(unit) ;
 		}
 	}
 

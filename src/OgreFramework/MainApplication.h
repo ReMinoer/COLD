@@ -101,7 +101,9 @@ namespace OgreFramework
 		///
 		/// \param menu	The menu in which the selection happened.
 		////////////////////////////////////////////////////////////////////////////////////////////////////
-		void itemSelected(OgreBites::SelectMenu* menu);
+		void itemSelected( OgreBites::SelectMenu* menu);
+
+		void buttonHit(OgreBites::Button* button);
 
 		////////////////////////////////////////////////////////////////////////////////////////////////////
 		/// \fn	virtual bool MainApplication::keyPressed( const OIS::KeyEvent &arg );

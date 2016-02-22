@@ -22,46 +22,49 @@ namespace GameElements
 		purchases.push_back("Hippos");
 		m_purchasePanel = a_trayManager->createParamsPanel(OgreBites::TL_CENTER, "PurchasePanel", 200, purchases);
 		m_purchasePanel->setParamValue(0, Ogre::StringConverter::toString(_moneyActual));
-
-		// create a select menu for purchase vehicle
-		Ogre::StringVector tmp ;
-		Ogre::DisplayString title = "Choose your unity ";
-		tmp.push_back("Stop choice and start Game") ;
-		tmp.push_back("Moustic -- 250") ;
-		tmp.push_back("Croco -- 500") ;
-		tmp.push_back("Hippo -- 1000") ;
-		OgreBites::SelectMenu * menu1 = a_trayManager->createThickSelectMenu(OgreBites::TL_CENTER, "menu_unity", title, 250, 15, tmp) ;
+		
+		m_addMousticButton = a_trayManager->createButton(OgreBites::TL_CENTER, "MousticButton", "Add Moustic");
+		m_addCrocoButton = a_trayManager->createButton(OgreBites::TL_CENTER, "CrocoButton", "Add Croco");
+		m_addMousticButton = a_trayManager->createButton(OgreBites::TL_CENTER, "HippoButton", "Add Hippo");
 	}
 
 	void BuyMenu::HideSelectionMenu()
 	{
-		m_purchasePanel->hide();
+		m_purchasePanel->hide() ;
 	}
 
 	void BuyMenu::BuyVehicle(const GameElements::UnitsArchetypes::Archetype * a_unit)
 	{
-		_moneyActual -= a_unit->m_cost;
-
-		int nbMoustic = 0;
-		int nbCroco = 0;
-		int nbHippo = 0;
-
-		::std::cout<< "Cost: " <<a_unit->m_cost<<", name: "<< a_unit->m_name<<::std::endl ;
-		m_nbVehicle.push_back(a_unit->m_name);
-		for(int i = 0; i < m_nbVehicle.size(); i++)
-		{
-			::std::cout<<"Name: "<< m_nbVehicle[i]<<::std::endl ;
-			if(m_nbVehicle[i] == "MousticB")
-				nbMoustic++;
-			if(m_nbVehicle[i] == "CrocoB")
-				nbCroco++;
-			if(m_nbVehicle[i] == "HippoB")
-				nbHippo++;
-		}
+		int nbMoustic = 0 ;
+		int nbCroco = 0 ;
+		int nbHippo = 0 ;
 		
-		m_purchasePanel->setParamValue(0, Ogre::StringConverter::toString(_moneyActual));
-		m_purchasePanel->setParamValue(1, Ogre::StringConverter::toString(nbMoustic));
-		m_purchasePanel->setParamValue(2, Ogre::StringConverter::toString(nbCroco));
-		m_purchasePanel->setParamValue(3, Ogre::StringConverter::toString(nbHippo));
+		::std::cout<< "Cost: " <<a_unit->m_cost<<", name: "<< a_unit->m_name<<::std::endl ;
+		::std::cout<< "Actual Money: " <<_moneyActual<<::std::endl ;
+		if (_moneyActual >= a_unit->m_cost)
+		{
+			_moneyActual -= a_unit->m_cost ;
+
+			m_nbVehicle.push_back(a_unit->m_name);
+			for(int i = 0; i < m_nbVehicle.size(); i++)
+			{
+				::std::cout<<"Name: "<< m_nbVehicle[i]<<::std::endl ;
+				if(m_nbVehicle[i] == "MousticB")
+					nbMoustic++;
+				if(m_nbVehicle[i] == "CrocoB")
+					nbCroco++;
+				if(m_nbVehicle[i] == "HippoB")
+					nbHippo++;
+			}
+		
+			m_purchasePanel->setParamValue(0, Ogre::StringConverter::toString(_moneyActual));
+			m_purchasePanel->setParamValue(1, Ogre::StringConverter::toString(nbMoustic));
+			m_purchasePanel->setParamValue(2, Ogre::StringConverter::toString(nbCroco));
+			m_purchasePanel->setParamValue(3, Ogre::StringConverter::toString(nbHippo));
+		}
+		else 
+		{
+			::std::cout<<"Not enough money"<<::std::endl ;
+		}
 	}
 }
