@@ -307,6 +307,15 @@
     <ClInclude Include="..\src\GameElements\SelectionPanel.h">
       <Filter>GameElements</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\GameElements\AIManager.h">
+      <Filter>GameElements</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameElements\AnnilhationVictory.h">
+      <Filter>GameElements</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameElements\IVictoryConditions.h">
+      <Filter>GameElements</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\System\src\ActiveObject.cpp">
@@ -460,6 +469,12 @@
       <Filter>GameElements\src</Filter>
     </ClCompile>
     <ClCompile Include="..\src\GameElements\src\SelectionPanel.cpp">
+      <Filter>GameElements\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameElements\src\AIManager.cpp">
+      <Filter>GameElements\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameElements\src\AnnilhationVictory.cpp">
       <Filter>GameElements\src</Filter>
     </ClCompile>
   </ItemGroup>

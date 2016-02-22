@@ -22,6 +22,8 @@ namespace GameElements
 		Ogre::SelectionBuffer * mSelectionBuffer;
 		OIS::MouseButtonID lastbutton;
 		
+		Team controlledTeam;
+
 		bool getCoord(const OIS::MouseEvent &arg, Math::Vector3<Config::Real> * destination);
 	public:
 

@@ -12,13 +12,13 @@ using namespace Config;
 
 namespace GameElements 
 {
-	// BUG : Grid step != 1 don't work !
 	class GridPathfinder
 	{
 	public:
 
 		struct PathfinderNode
 		{
+			Vector2<int> point;
 			Vector2<int> parent;
 			float personalCost;
 			float parentCost;
@@ -29,19 +29,31 @@ namespace GameElements
 			}
 		};
 
+		class ByCost
+		{
+			public:
+				bool operator()(PathfinderNode a, PathfinderNode b)
+				{
+					return a.getCost() > b.getCost();
+				}
+		};
+
 		typedef ::boost::intrusive_ptr<GridPathfinder> Pointer;
+		
 	private:
+
+		typedef priority_queue<PathfinderNode, vector<PathfinderNode>, ByCost> Openlist;
+		typedef map<Vector2<int>, PathfinderNode> Closedlist;
+
 		Map* _map;
-		map<Vector2<int>, PathfinderNode> _openlist;
+		Openlist _openlist;
 		bool** _closedGrid;
-		map<Vector2<int>, PathfinderNode> _closedlist;
-		bool _success;
+		Closedlist _closedlist;
+		bool _succeed;
 		bool _isEnd;
 		Vector2<Real> _start;
 		Vector2<Real> _finish;
 		Vector2<int> _gridFinish;
-		Vector2<int> _current;
-		int _gridStep;
 		double _timeout;
 		double _timeoutElapsed;
 		double _processDuration;
@@ -53,9 +65,8 @@ namespace GameElements
 		bool isEnd();
 		stack<Vector2<Config::Real>> GetPath();
 	private:
-		void ProcessSurroundingCases();
-		Vector2<int> BestNodeOpenlist();
-		Vector2<int> BestNodeClosedlist();
+		void ProcessSurroundingCases(PathfinderNode top);
+		Vector2<int> BestPointClosedlist();
 		int width() const;
 		int height() const;
 		Math::Vector2<int> toGridCoordinates(Math::Vector2<Real> const & worldCoordinates) const;

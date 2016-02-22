@@ -14,15 +14,18 @@ namespace GameElements
 		m_target = NULL;
 		drawCircle();
 	}
+
+	AiAgent::~AiAgent()
+	{
+		System::ConstructionDestructionEmitter<AiAgent>::getDestructionEmitter()->send(System::DestructionMessage<AiAgent>(*this)) ;
+	}
 	
 	void AiAgent::update(const Config::Real & dt)
 	{
-		if (!_pathfinder.isEnd())
-			computePath();
-		else
+		if (_pathfinder.isEnd() || computePath())
 		{
 			_velocity = Vector2<Config::Real>(0,0);
-			for (;;)
+			while (true)
 			{
 				Math::Vector2<Config::Real> diff = getNextMove();
 				if (diff.norm() == 0)
@@ -48,9 +51,10 @@ namespace GameElements
 				setPosition(newPosition.push(0.0));
 				break;
 			}
+
+			setOrientation(_velocity);
 		}
 
-		setOrientation(_velocity);
 		attackInRange();
 	}
 
@@ -66,19 +70,17 @@ namespace GameElements
 
 	bool AiAgent::setDestination(Math::Vector2<Config::Real> destination)
 	{
-		if (!_pathfinder.Initialize(getPosition().projectZ(), destination))
-			return false;
-
-		computePath();
-
-		return true;
+		return _pathfinder.Initialize(getPosition().projectZ(), destination);
 	}
 
-	void AiAgent::computePath()
+	bool AiAgent::computePath()
 	{
-		_pathfinder.ComputePath();
+		if (!_pathfinder.ComputePath())
+			return false;
+		
 		_currentPath = _pathfinder.GetPath();
 		_nextDestination = _currentPath.top();
+		return true;
 	}
 	
 	Math::Vector2<Config::Real> AiAgent::getNextMove()
@@ -206,6 +208,11 @@ namespace GameElements
 	void AiAgent::setTarget(AiAgent * target)
 	{
 		m_target = target;
+	}
+
+	AiAgent* AiAgent::getTarget()
+	{
+		return m_target;
 	}
 
 	Weapon AiAgent::getWeapon()
