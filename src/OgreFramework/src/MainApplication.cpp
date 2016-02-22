@@ -265,28 +265,6 @@ namespace OgreFramework
 
 	void MainApplication::itemSelected(OgreBites::SelectMenu* menu)
 	{
-		/*int SelectionIndex = menu->getSelectionIndex();
-
-		if (SelectionIndex > 0)
-		{
-			::std::vector<::std::string> types ;
-			types.push_back("MousticB") ;
-			types.push_back("CrocoB") ;
-			types.push_back("HippoB") ;
-
-			const GameElements::UnitsArchetypes::Archetype * unit = GlobalConfiguration::getConfigurationLoader()->getUnitsArchetypes().get(types[SelectionIndex-1]) ;
-		
-			::std::cout<<"Selection in menu "<<menu->getCaption()<<::std::endl ;
-	
-			m_buyMenu.BuyVehicle(unit);
-		}
-		else 
-		{
-			m_trayManager->removeWidgetFromTray("menu_unity");
-			m_trayManager->removeWidgetFromTray("PurchasePanel");
-			menu->hide();
-			m_buyMenu.HideSelectionMenu();
-		}*/
 	}
 
 	void MainApplication::buttonHit(OgreBites::Button* button)
@@ -299,20 +277,11 @@ namespace OgreFramework
 		types.push_back("HippoB") ;
 
 		if (button->getName() == "MousticButton")
-		{
-			::std::cout<<"Moustic !"<<::std::endl ;
 			SelectionIndex = 1 ;
-		}
 		else if (button->getName() == "CrocoButton" )
-		{
-			::std::cout<<"Croco !"<<::std::endl ;
 			SelectionIndex = 2 ;
-		}
 	    else if (button->getName() == "HippoButton" )
-		{
-			::std::cout<<"Hippo !"<<::std::endl ;
 			SelectionIndex = 3 ;
-		}
 
 		if (SelectionIndex > 0)
 		{
