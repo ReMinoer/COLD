@@ -26,9 +26,11 @@ namespace OgreFramework
 {
 	MainApplication::MainApplication()
 		: m_keyboardState(*KeyboardState::getInstance())
+		, m_moneyMax(2000)
+		, m_enemyMoney(2000)
 	{
-		int moneyMax = 2000;
-		m_buyMenu = GameElements::BuyMenu(moneyMax);
+		m_buyMenu = GameElements::BuyMenu(m_moneyMax);
+		srand(time(NULL));
 	}
 
 	MainApplication::~MainApplication()
@@ -118,7 +120,6 @@ namespace OgreFramework
 		// ----------------------------------------
 		// Creates two entities for testing purpose
 		// ----------------------------------------
-		//vehicleGeneration();
 
 		/*
 		for(int cpt=0 ; cpt<50 ; ++cpt)
@@ -248,7 +249,8 @@ namespace OgreFramework
 		else // If press button is "Close Menu"
 		{
 			m_buyMenu.HideSelectionMenu(m_trayManager);
-			vehicleGeneration(m_buyMenu.GetVehicleList());
+			m_ourVehicleList = m_buyMenu.GetVehicleList();
+			vehicleGeneration(m_ourVehicleList);
 		}
 	}
 
@@ -285,11 +287,24 @@ namespace OgreFramework
 
 	void MainApplication::vehicleGeneration(::std::vector<::std::string> a_vehicleList)
 	{
-		/*::std::vector<::std::string> types ;
-		types.push_back("CrocoR") ;
+		// Selection enemy's vehicles
+		::std::vector<::std::string> types ;
 		types.push_back("HippoR") ;
-		types.push_back("MousticR") ;*/
+		types.push_back("CrocoR") ;
+		types.push_back("MousticR") ;
+		
+		while ( m_enemyMoney > 0 )
+		{
+			int vehicleType = (int)std::floorf(rand()%3);
+			const GameElements::UnitsArchetypes::Archetype * unit = GlobalConfiguration::getConfigurationLoader()->getUnitsArchetypes().get(types[vehicleType]) ;
+			if ( unit->m_cost <= m_enemyMoney )
+			{
+				m_enemyMoney -= unit->m_cost;
+				m_enemyVehicleList.push_back(unit->m_name);
+			}
+		}
 
+		// Generation our vehicles
 		for(int i = 0; i < a_vehicleList.size(); i++)
 		{
 			const GameElements::UnitsArchetypes::Archetype * unit = GlobalConfiguration::getConfigurationLoader()->getUnitsArchetypes().get(a_vehicleList[i]) ;
@@ -298,28 +313,16 @@ namespace OgreFramework
 			GameElements::AiAgent::Pointer m_entityAdapter = new GameElements::AiAgent(unit, weapon, GlobalConfiguration::getCurrentMap(),m_sceneManager, GameElements::Team::blue) ;
 			m_entityAdapter->setPosition(GlobalConfiguration::getCurrentMap()->toWorldCoordinates(GlobalConfiguration::getCurrentMap()->findFreeLocation()).push(0.0)) ;
 		}
-		
-		/*for(int typeunit=0 ; typeunit<3; ++typeunit)
+
+		// Generation enemy's vehicles
+		for(int i = 0; i < m_enemyVehicleList.size() ; i++)
 		{
-			//blue team
-			for (int nbunit = 0; nbunit<1; nbunit++)
-			{
-			const GameElements::UnitsArchetypes::Archetype * unit = GlobalConfiguration::getConfigurationLoader()->getUnitsArchetypes().get(types[typeunit]) ;
+			const GameElements::UnitsArchetypes::Archetype * unit = GlobalConfiguration::getConfigurationLoader()->getUnitsArchetypes().get(m_enemyVehicleList[i]) ;
 			const GameElements::WeaponsArchetypes::Archetype * weapon = GlobalConfiguration::getConfigurationLoader()->getWeaponsArchetypes().get(unit->m_weapon) ;
-			if(weapon==NULL) { ::std::cout<<"HippoB: bad weapon!" ; char c ; ::std::cin>>c ; }
+			if(weapon==NULL) { ::std::cout<< m_enemyVehicleList[i] <<" : bad weapon!" ; char c ; ::std::cin>>c ; }
 			GameElements::AiAgent::Pointer m_entityAdapter = new GameElements::AiAgent(unit, weapon, GlobalConfiguration::getCurrentMap(),m_sceneManager, GameElements::Team::blue) ;
 			m_entityAdapter->setPosition(GlobalConfiguration::getCurrentMap()->toWorldCoordinates(GlobalConfiguration::getCurrentMap()->findFreeLocation()).push(0.0)) ;
-			}
-			//red team
-			for (int nbunit = 0; nbunit<1; nbunit++)
-			{
-			const GameElements::UnitsArchetypes::Archetype * unit = GlobalConfiguration::getConfigurationLoader()->getUnitsArchetypes().get(types[typeunit+3]) ;
-			const GameElements::WeaponsArchetypes::Archetype * weapon = GlobalConfiguration::getConfigurationLoader()->getWeaponsArchetypes().get(unit->m_weapon) ;
-			if(weapon==NULL) { ::std::cout<<"HippoB: bad weapon!" ; char c ; ::std::cin>>c ; }
-			GameElements::AiAgent::Pointer m_entityAdapter = new GameElements::AiAgent(unit, weapon, GlobalConfiguration::getCurrentMap(), m_sceneManager, GameElements::Team::red) ;
-			m_entityAdapter->setPosition(GlobalConfiguration::getCurrentMap()->toWorldCoordinates(GlobalConfiguration::getCurrentMap()->findFreeLocation()).push(0.0)) ;
-			}
-		}*/
+		}
 	}
 }
 

@@ -94,7 +94,7 @@
 		<unit 	name="CrocoR" 
 				mesh="CrocoRouge01.scene" 
 				scale="0.01"
-				cost="5000" 
+				cost="500" 
 				perceptionRange="15" 
 				speed="4"
 				life="800"

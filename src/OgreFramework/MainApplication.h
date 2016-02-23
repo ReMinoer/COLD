@@ -28,6 +28,10 @@ namespace OgreFramework
 	{
 	private:
 		GameElements::BuyMenu m_buyMenu;
+		int m_moneyMax;
+		int m_enemyMoney;
+		std::vector<::std::string> m_ourVehicleList;
+		std::vector<::std::string> m_enemyVehicleList;
 
 	public:
 		MainApplication();
