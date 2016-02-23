@@ -118,35 +118,8 @@ namespace OgreFramework
 		// ----------------------------------------
 		// Creates two entities for testing purpose
 		// ----------------------------------------
-		::std::vector<::std::string> types ;
-		types.push_back("CrocoB") ;
-		types.push_back("HippoB") ;
-		types.push_back("MousticB") ;
-		types.push_back("CrocoR") ;
-		types.push_back("HippoR") ;
-		types.push_back("MousticR") ;
-		
-		for(int typeunit=0 ; typeunit<3; ++typeunit)
-		{
-			//blue team
-			for (int nbunit = 0; nbunit<1; nbunit++)
-			{
-			const GameElements::UnitsArchetypes::Archetype * unit = GlobalConfiguration::getConfigurationLoader()->getUnitsArchetypes().get(types[typeunit]) ;
-			const GameElements::WeaponsArchetypes::Archetype * weapon = GlobalConfiguration::getConfigurationLoader()->getWeaponsArchetypes().get(unit->m_weapon) ;
-			if(weapon==NULL) { ::std::cout<<"HippoB: bad weapon!" ; char c ; ::std::cin>>c ; }
-			GameElements::AiAgent::Pointer m_entityAdapter = new GameElements::AiAgent(unit, weapon, GlobalConfiguration::getCurrentMap(),m_sceneManager, GameElements::Team::blue) ;
-			m_entityAdapter->setPosition(GlobalConfiguration::getCurrentMap()->toWorldCoordinates(GlobalConfiguration::getCurrentMap()->findFreeLocation()).push(0.0)) ;
-			}
-			//red team
-			for (int nbunit = 0; nbunit<1; nbunit++)
-			{
-			const GameElements::UnitsArchetypes::Archetype * unit = GlobalConfiguration::getConfigurationLoader()->getUnitsArchetypes().get(types[typeunit+3]) ;
-			const GameElements::WeaponsArchetypes::Archetype * weapon = GlobalConfiguration::getConfigurationLoader()->getWeaponsArchetypes().get(unit->m_weapon) ;
-			if(weapon==NULL) { ::std::cout<<"HippoB: bad weapon!" ; char c ; ::std::cin>>c ; }
-			GameElements::AiAgent::Pointer m_entityAdapter = new GameElements::AiAgent(unit, weapon, GlobalConfiguration::getCurrentMap(), m_sceneManager, GameElements::Team::red) ;
-			m_entityAdapter->setPosition(GlobalConfiguration::getCurrentMap()->toWorldCoordinates(GlobalConfiguration::getCurrentMap()->findFreeLocation()).push(0.0)) ;
-			}
-		}
+		//vehicleGeneration();
+
 		/*
 		for(int cpt=0 ; cpt<50 ; ++cpt)
 		{
@@ -272,9 +245,10 @@ namespace OgreFramework
 			const GameElements::UnitsArchetypes::Archetype * unit = GlobalConfiguration::getConfigurationLoader()->getUnitsArchetypes().get(types[SelectionIndex - 1]) ;
 			m_buyMenu.BuyVehicle(unit) ;
 		}
-		else
+		else // If press button is "Close Menu"
 		{
 			m_buyMenu.HideSelectionMenu(m_trayManager);
+			vehicleGeneration(m_buyMenu.GetVehicleList());
 		}
 	}
 
@@ -307,6 +281,45 @@ namespace OgreFramework
 		// Sends notification to super class
 		BaseApplication::keyReleased(arg) ;
 		return true ;
+	}
+
+	void MainApplication::vehicleGeneration(::std::vector<::std::string> a_vehicleList)
+	{
+		/*::std::vector<::std::string> types ;
+		types.push_back("CrocoR") ;
+		types.push_back("HippoR") ;
+		types.push_back("MousticR") ;*/
+
+		for(int i = 0; i < a_vehicleList.size(); i++)
+		{
+			const GameElements::UnitsArchetypes::Archetype * unit = GlobalConfiguration::getConfigurationLoader()->getUnitsArchetypes().get(a_vehicleList[i]) ;
+			const GameElements::WeaponsArchetypes::Archetype * weapon = GlobalConfiguration::getConfigurationLoader()->getWeaponsArchetypes().get(unit->m_weapon) ;
+			if(weapon==NULL) { ::std::cout<< a_vehicleList[i] <<" : bad weapon!" ; char c ; ::std::cin>>c ; }
+			GameElements::AiAgent::Pointer m_entityAdapter = new GameElements::AiAgent(unit, weapon, GlobalConfiguration::getCurrentMap(),m_sceneManager, GameElements::Team::blue) ;
+			m_entityAdapter->setPosition(GlobalConfiguration::getCurrentMap()->toWorldCoordinates(GlobalConfiguration::getCurrentMap()->findFreeLocation()).push(0.0)) ;
+		}
+		
+		/*for(int typeunit=0 ; typeunit<3; ++typeunit)
+		{
+			//blue team
+			for (int nbunit = 0; nbunit<1; nbunit++)
+			{
+			const GameElements::UnitsArchetypes::Archetype * unit = GlobalConfiguration::getConfigurationLoader()->getUnitsArchetypes().get(types[typeunit]) ;
+			const GameElements::WeaponsArchetypes::Archetype * weapon = GlobalConfiguration::getConfigurationLoader()->getWeaponsArchetypes().get(unit->m_weapon) ;
+			if(weapon==NULL) { ::std::cout<<"HippoB: bad weapon!" ; char c ; ::std::cin>>c ; }
+			GameElements::AiAgent::Pointer m_entityAdapter = new GameElements::AiAgent(unit, weapon, GlobalConfiguration::getCurrentMap(),m_sceneManager, GameElements::Team::blue) ;
+			m_entityAdapter->setPosition(GlobalConfiguration::getCurrentMap()->toWorldCoordinates(GlobalConfiguration::getCurrentMap()->findFreeLocation()).push(0.0)) ;
+			}
+			//red team
+			for (int nbunit = 0; nbunit<1; nbunit++)
+			{
+			const GameElements::UnitsArchetypes::Archetype * unit = GlobalConfiguration::getConfigurationLoader()->getUnitsArchetypes().get(types[typeunit+3]) ;
+			const GameElements::WeaponsArchetypes::Archetype * weapon = GlobalConfiguration::getConfigurationLoader()->getWeaponsArchetypes().get(unit->m_weapon) ;
+			if(weapon==NULL) { ::std::cout<<"HippoB: bad weapon!" ; char c ; ::std::cin>>c ; }
+			GameElements::AiAgent::Pointer m_entityAdapter = new GameElements::AiAgent(unit, weapon, GlobalConfiguration::getCurrentMap(), m_sceneManager, GameElements::Team::red) ;
+			m_entityAdapter->setPosition(GlobalConfiguration::getCurrentMap()->toWorldCoordinates(GlobalConfiguration::getCurrentMap()->findFreeLocation()).push(0.0)) ;
+			}
+		}*/
 	}
 }
 

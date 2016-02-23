@@ -23,6 +23,7 @@ namespace GameElements
 		void ShowSelectionMenu(OgreBites::SdkTrayManager* a_trayManager);
 		void HideSelectionMenu(OgreBites::SdkTrayManager* a_trayManager);
 		void BuyVehicle(const GameElements::UnitsArchetypes::Archetype * a_unit);
+		::std::vector<::std::string> GetVehicleList() { return m_nbVehicle; }
 	};
 }
 

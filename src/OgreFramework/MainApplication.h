@@ -133,7 +133,9 @@ namespace OgreFramework
 		////////////////////////////////////////////////////////////////////////////////////////////////////
 		virtual bool keyReleased(const OIS::KeyEvent &arg );
 
-		
+		void vehicleGeneration(::std::vector<::std::string> a_vehicleList);
+
+
 		///< The picking controller
 		OgreFramework::Picking * m_picking ;
 		///< State of the keyboard
