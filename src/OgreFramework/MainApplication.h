@@ -14,6 +14,9 @@
 
 #include <GameElements/BuyMenu.h>
 #include <GameElements\SelectionPanel.h>
+#include <GameElements\AIManager.h>
+#include <GameElements\AnnilhationVictory.h>
+
 namespace OgreFramework
 {
 	///////////////////////////////////////////////////////////////////////////////////
@@ -139,7 +142,6 @@ namespace OgreFramework
 
 		void vehicleGeneration(::std::vector<::std::string> a_vehicleList);
 
-
 		///< The picking controller
 		OgreFramework::Picking * m_picking ;
 		///< State of the keyboard
@@ -150,6 +152,9 @@ namespace OgreFramework
 		GameElements::SelectionPanel * panel;
 		//Ogre::SceneNode * m_shipShape ;
 		//GameElements::NullAgent::Pointer m_entityAdapter ;
+
+		GameElements::AIManager * aiManager;
+		GameElements::AnnilhationVictory * victoryConditions;
 	};
 }
 

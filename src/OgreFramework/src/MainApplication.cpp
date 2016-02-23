@@ -292,7 +292,8 @@ namespace OgreFramework
 		types.push_back("HippoR") ;
 		types.push_back("CrocoR") ;
 		types.push_back("MousticR") ;
-		
+
+		int ennemyUnits =0;
 		while ( m_enemyMoney > 0 )
 		{
 			int vehicleType = (int)std::floorf(rand()%3);
@@ -301,6 +302,7 @@ namespace OgreFramework
 			{
 				m_enemyMoney -= unit->m_cost;
 				m_enemyVehicleList.push_back(unit->m_name);
+				ennemyUnits++;
 			}
 		}
 
@@ -315,6 +317,7 @@ namespace OgreFramework
 		}
 
 		// Generation enemy's vehicles
+
 		for(int i = 0; i < m_enemyVehicleList.size() ; i++)
 		{
 			const GameElements::UnitsArchetypes::Archetype * unit = GlobalConfiguration::getConfigurationLoader()->getUnitsArchetypes().get(m_enemyVehicleList[i]) ;
@@ -323,7 +326,12 @@ namespace OgreFramework
 			GameElements::AiAgent::Pointer m_entityAdapter = new GameElements::AiAgent(unit, weapon, GlobalConfiguration::getCurrentMap(),m_sceneManager, GameElements::Team::blue) ;
 			m_entityAdapter->setPosition(GlobalConfiguration::getCurrentMap()->toWorldCoordinates(GlobalConfiguration::getCurrentMap()->findFreeLocation()).push(0.0)) ;
 		}
+
+		//Instantiate IA
+
+		//aiManager = new AIManager(
 	}
+	
 }
 
 
