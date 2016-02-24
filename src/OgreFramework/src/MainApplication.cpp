@@ -305,31 +305,32 @@ namespace OgreFramework
 				ennemyUnits++;
 			}
 		}
-
+		aiManager = new GameElements::AIManager();
 		// Generation our vehicles
 		for(int i = 0; i < a_vehicleList.size(); i++)
 		{
 			const GameElements::UnitsArchetypes::Archetype * unit = GlobalConfiguration::getConfigurationLoader()->getUnitsArchetypes().get(a_vehicleList[i]) ;
 			const GameElements::WeaponsArchetypes::Archetype * weapon = GlobalConfiguration::getConfigurationLoader()->getWeaponsArchetypes().get(unit->m_weapon) ;
 			if(weapon==NULL) { ::std::cout<< a_vehicleList[i] <<" : bad weapon!" ; char c ; ::std::cin>>c ; }
-			GameElements::AiAgent::Pointer m_entityAdapter = new GameElements::AiAgent(unit, weapon, GlobalConfiguration::getCurrentMap(),m_sceneManager, GameElements::Team::blue) ;
+			GameElements::AiAgent* m_entityAdapter = new GameElements::AiAgent(unit, weapon, GlobalConfiguration::getCurrentMap(),m_sceneManager, GameElements::Team::blue) ;
+			aiManager->addUnitToOpponentUnits(m_entityAdapter);
 			m_entityAdapter->setPosition(GlobalConfiguration::getCurrentMap()->toWorldCoordinates(GlobalConfiguration::getCurrentMap()->findFreeLocation()).push(0.0)) ;
 		}
 
 		// Generation enemy's vehicles
-
 		for(int i = 0; i < m_enemyVehicleList.size() ; i++)
 		{
 			const GameElements::UnitsArchetypes::Archetype * unit = GlobalConfiguration::getConfigurationLoader()->getUnitsArchetypes().get(m_enemyVehicleList[i]) ;
 			const GameElements::WeaponsArchetypes::Archetype * weapon = GlobalConfiguration::getConfigurationLoader()->getWeaponsArchetypes().get(unit->m_weapon) ;
 			if(weapon==NULL) { ::std::cout<< m_enemyVehicleList[i] <<" : bad weapon!" ; char c ; ::std::cin>>c ; }
-			GameElements::AiAgent::Pointer m_entityAdapter = new GameElements::AiAgent(unit, weapon, GlobalConfiguration::getCurrentMap(),m_sceneManager, GameElements::Team::blue) ;
+			GameElements::AiAgent* m_entityAdapter = new GameElements::AiAgent(unit, weapon, GlobalConfiguration::getCurrentMap(),m_sceneManager, GameElements::Team::red) ;
+			aiManager->addUnitToControlledUnits(m_entityAdapter);
 			m_entityAdapter->setPosition(GlobalConfiguration::getCurrentMap()->toWorldCoordinates(GlobalConfiguration::getCurrentMap()->findFreeLocation()).push(0.0)) ;
 		}
 
-		//Instantiate IA
+		aiManager->assignAllUnitsTarget();
 
-		//aiManager = new AIManager(
+
 	}
 	
 }

@@ -59,10 +59,6 @@ RTSPicking::RTSPicking( Ogre::RenderWindow *renderWindow, Ogre::SceneManager * s
 						agentSelected->setTarget(NULL);
 					}
 				}
-				else
-				{
-					
-				}
 		}
 	}
 	

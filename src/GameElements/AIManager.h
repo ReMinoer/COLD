@@ -14,9 +14,12 @@ namespace GameElements
 		vector<AiAgent*> controlledUnits;
 
 	public:
-		AIManager (vector<AiAgent*> opponents, vector<AiAgent*> controlled);
+		AIManager ();
 		void onMessage(System::DestructionMessage<AiAgent> const& msg);
 		void assignAllUnitsTarget();
+
+		void addUnitToControlledUnits(AiAgent* unit);
+		void addUnitToOpponentUnits(AiAgent* unit);
 
 	private:
 		void assignUnitTarget(AiAgent* agent);

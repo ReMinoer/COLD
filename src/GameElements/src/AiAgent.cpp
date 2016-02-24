@@ -17,6 +17,7 @@ namespace GameElements
 
 	AiAgent::~AiAgent()
 	{
+		std::cout <<"MessageSent" << std::endl;
 		System::ConstructionDestructionEmitter<AiAgent>::getDestructionEmitter()->send(System::DestructionMessage<AiAgent>(*this)) ;
 	}
 	
@@ -193,6 +194,7 @@ namespace GameElements
 				if(distanceToTarget <= m_weapon.getArchetype()->m_range)
 				{
 					fire(otherPosition+otherVelocity*timeToTarget) ;
+					//setDestination(this->getPosition().projectZ());
 					//fire(ptr->getPosition().projectZ()) ;
 				}
 			}

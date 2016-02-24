@@ -7,7 +7,7 @@
 	<!-- weapons description -->
 	<weapons>
 		<weapon name="MousticWeapon"						
-				strength="2"
+				strength="5"
 				armorDamage="0"
 				frequency="15"
 				extent="0"
@@ -19,7 +19,7 @@
 		/>
 		
 		<weapon name="CrocoWeapon"						
-				strength="5"
+				strength="10"
 				armorDamage="0"
 				frequency="7"
 				extent="0"
@@ -31,7 +31,7 @@
 		/>		
 		
 		<weapon name="HippoWeapon"						
-				strength="20"
+				strength="50"
 				armorDamage="0"
 				frequency="1"
 				extent="2"
