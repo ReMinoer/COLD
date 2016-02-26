@@ -4,6 +4,7 @@
 namespace GameElements
 {
 	AIManager::AIManager ()
+		:  MessageListener< System::DestructionMessage<AiAgent> >(System::ConstructionDestructionEmitter<AiAgent>::getDestructionEmitter())
 	{
 		std::cout << "Constructeur: Manager" <<std::endl;
 	}
@@ -11,23 +12,27 @@ namespace GameElements
 	void AIManager::onMessage(System::DestructionMessage<AiAgent> const& msg)
 	{
 		std::cout << "onMessage" <<std::endl;
-		for(int i=0;i<controlledUnits.size();i++)
+		for (int i = 0; i < controlledUnits.size(); i++)
 		{
-			if(&msg.m_object == controlledUnits[i])
+			if (&msg.m_object == controlledUnits[i])
 			{
 				controlledUnits.erase(controlledUnits.begin()+i);
+				std::cout << "Remove controlled" <<std::endl;
 				return;
 			}
-			if(&msg.m_object == controlledUnits[i]->getTarget())
-			{
-				assignUnitTarget(controlledUnits[i]);
-			}
 		}
-		for(int i=0;i<opponentUnits.size();i++)
+
+		for (int i = 0; i < opponentUnits.size(); i++)
 		{
-			if(&msg.m_object == opponentUnits[i])
+			if (&msg.m_object == opponentUnits[i])
 			{
 				opponentUnits.erase(opponentUnits.begin()+i);
+
+				for (int j=0; j < controlledUnits.size(); j++)
+					if (&msg.m_object == controlledUnits[j]->getTarget())
+						assignUnitTarget(controlledUnits[j]);
+
+				std::cout << "Remove opponent" <<std::endl;
 				return;
 			}
 		}
@@ -45,24 +50,23 @@ namespace GameElements
 	void AIManager::assignUnitTarget(AiAgent* agent)
 	{
 		std::cout << "AssignTarget" <<std::endl;
-		Math::Vector3<Config::Real> minDistance = realMaxValue;
+		Config::Real minDistance = Config::realMaxValue;
 		Math::Vector3<Config::Real> shipPosition = agent->getPosition();
-		Math::Vector3<Config::Real> destination;
 		AiAgent* newTarget = NULL;
 
 		for(int i=0; i<opponentUnits.size();i++)
 		{
-			
-			Math::Vector3<Config::Real> distance = opponentUnits[i]->getPosition() - shipPosition; 
-			if( distance < minDistance)
+			Config::Real distance = (opponentUnits[i]->getPosition() - shipPosition).norm(); 
+			if(distance < minDistance)
 			{
 				minDistance = distance;
 				newTarget = opponentUnits[i];
-				destination = opponentUnits[i]->getPosition();
 			}
 		}
-		agent->setDestination(destination.projectZ());
+		
 		agent->setTarget(newTarget);
+		if (newTarget == NULL)
+			agent->setDestination(agent->getPosition().projectZ());
 	}
 
 	void AIManager::addUnitToControlledUnits(AiAgent* unit)

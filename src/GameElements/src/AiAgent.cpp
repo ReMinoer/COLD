@@ -9,7 +9,7 @@ namespace GameElements
 	DesignPattern::StaticMember<System::MessageEmitter<AiAgent::UnselectedAiAgentMessage> > AiAgent::AiAgentEmitterUnSelect ;
 
 	AiAgent::AiAgent( const UnitsArchetypes::Archetype * archetype, const WeaponsArchetypes::Archetype * weaponArchetype, Map* map, Ogre::SceneManager * sceneManager, Team team)
-		: Agent(archetype, weaponArchetype), m_team(team), _pathfinder(GridPathfinder(map)), m_sceneManager(sceneManager)
+		: Agent(archetype, weaponArchetype), m_team(team), _pathfinder(GridPathfinder(map)), m_sceneManager(sceneManager), stopRushDistance(10), startRushDistance(15)
 	{
 		m_target = NULL;
 		drawCircle();
@@ -17,13 +17,24 @@ namespace GameElements
 
 	AiAgent::~AiAgent()
 	{
-		std::cout <<"MessageSent" << std::endl;
-		System::ConstructionDestructionEmitter<AiAgent>::getDestructionEmitter()->send(System::DestructionMessage<AiAgent>(*this)) ;
+		//std::cout << "Destruction" << std::endl;
 	}
 	
 	void AiAgent::update(const Config::Real & dt)
 	{
-		if (_pathfinder.isEnd() || computePath())
+		if (m_target != NULL)
+		{
+			float distance = (m_target->getPosition() - getPosition()).norm();
+			if (!tooCloseFromTarget && distance <= stopRushDistance)
+				tooCloseFromTarget = true;
+			else if (tooCloseFromTarget && distance >= startRushDistance)
+			{
+				tooCloseFromTarget = false;
+				setDestination(m_target->getPosition().projectZ());
+			}
+		}
+
+		if (!tooCloseFromTarget && (_pathfinder.isEnd() || computePath()))
 		{
 			_velocity = Vector2<Config::Real>(0,0);
 			while (true)
@@ -210,6 +221,16 @@ namespace GameElements
 	void AiAgent::setTarget(AiAgent * target)
 	{
 		m_target = target;
+
+		if (m_target != NULL)
+		{
+			float distance = (m_target->getPosition() - getPosition()).norm();
+			tooCloseFromTarget = distance <= stopRushDistance;
+
+			setDestination(m_target->getPosition().projectZ());
+		}
+		else
+			tooCloseFromTarget = false;
 	}
 
 	AiAgent* AiAgent::getTarget()
@@ -220,5 +241,13 @@ namespace GameElements
 	Weapon AiAgent::getWeapon()
 	{
 		return m_weapon;
+	}
+
+	void AiAgent::destroy()
+	{
+		std::cout <<"MessageSent" << std::endl;
+		System::ConstructionDestructionEmitter<AiAgent>::getDestructionEmitter()->send(System::DestructionMessage<AiAgent>(*this)) ;
+		Agent::destroy() ;
+		
 	}
 }

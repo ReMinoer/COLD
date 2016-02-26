@@ -36,6 +36,9 @@ namespace GameElements
 		stack<Math::Vector2<Config::Real>> _currentPath;
 		Math::Vector2<Config::Real> _velocity;
 		Math::Vector2<Config::Real> _nextDestination;
+		float stopRushDistance;
+		float startRushDistance;
+		bool tooCloseFromTarget;
 		Team m_team;
 		Ogre::SceneManager * m_sceneManager ;
 		Ogre::ManualObject * m_circle;
@@ -75,6 +78,7 @@ namespace GameElements
 		AiAgent* getTarget();
 
 		Weapon getWeapon();
+		virtual void destroy();
 	};
 }
 

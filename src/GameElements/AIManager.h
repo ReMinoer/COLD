@@ -3,11 +3,12 @@
 
 #include <GameElements/AiAgent.h>
 #include <System\MessageEmitter.h>
+#include <System\MessageListener.h>
 #include <vector>
 
 namespace GameElements 
 {
-	class AIManager
+	class AIManager : public System::MessageListener<System::DestructionMessage<AiAgent>>
 	{
 	private:
 		vector<AiAgent*> opponentUnits;
@@ -23,6 +24,7 @@ namespace GameElements
 
 	private:
 		void assignUnitTarget(AiAgent* agent);
+
 	};
 }
 
