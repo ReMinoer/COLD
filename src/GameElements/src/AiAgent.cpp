@@ -187,7 +187,6 @@ namespace GameElements
 				{
 					int index = rand()%objects.size() ;
 					ptr = boost::dynamic_pointer_cast<AiAgent>(objects[index]) ;
-					m_perception->reset() ;
 					
 				}
 			}
@@ -210,7 +209,7 @@ namespace GameElements
 				}
 			}
 		}
-		
+		m_perception->reset() ;
 	}
 
 	Ogre::ManualObject * AiAgent::getCircle()
