@@ -20,14 +20,19 @@
 #include <GameElements/RandomAgent.h>
 
 #include <GameElements/AiAgent.h>
-#include<GameElements\RTSPicking.h>
-#include <GameElements\SelectionPanel.h>
+#include <GameElements/RTSPicking.h>
+#include <GameElements/SelectionPanel.h>
+#include <GameElements/AnnilhationVictory.h>
+
 namespace OgreFramework
 {
 	MainApplication::MainApplication()
 		: m_keyboardState(*KeyboardState::getInstance())
 		, m_moneyMax(2000)
 		, m_enemyMoney(2000)
+		, victoryCondition(NULL)
+		, winnerPanel(NULL)
+		, _isEnd(false)
 	{
 		m_buyMenu = GameElements::BuyMenu(m_moneyMax);
 		srand(time(NULL));
@@ -198,6 +203,23 @@ namespace OgreFramework
 		// Updates (animation, behavoir & son on) are called here :)
 		GlobalConfiguration::getController()->update(dt) ;
 		panel->update();
+
+		if (!_isEnd && victoryCondition != NULL)
+		{
+			victoryCondition->update();
+
+			GameElements::Team winner = victoryCondition->isEnd();
+			if (winner != GameElements::Team::none)
+			{
+				cout << "Winner !" << endl;
+
+				Ogre::DisplayString winnerString = winner == GameElements::Team::blue ? "Blue win !" : "Red win !";
+				winnerPanel = m_trayManager->createLabel(OgreBites::TL_CENTER, "EndPanel", winnerString);
+
+				_isEnd = true;
+			}
+		}
+
 		//static bool explosionFired = false ;
 		//if(absoluteTime>10.0 && !explosionFired)
 		//{
@@ -305,7 +327,10 @@ namespace OgreFramework
 				ennemyUnits++;
 			}
 		}
+
 		aiManager = new GameElements::AIManager();
+		map<GameElements::Team,int> unitsCount;
+
 		// Generation our vehicles
 		for(int i = 0; i < a_vehicleList.size(); i++)
 		{
@@ -313,7 +338,10 @@ namespace OgreFramework
 			const GameElements::WeaponsArchetypes::Archetype * weapon = GlobalConfiguration::getConfigurationLoader()->getWeaponsArchetypes().get(unit->m_weapon) ;
 			if(weapon==NULL) { ::std::cout<< a_vehicleList[i] <<" : bad weapon!" ; char c ; ::std::cin>>c ; }
 			GameElements::AiAgent* m_entityAdapter = new GameElements::AiAgent(unit, weapon, GlobalConfiguration::getCurrentMap(),m_sceneManager, GameElements::Team::blue) ;
+			
 			aiManager->addUnitToOpponentUnits(m_entityAdapter);
+			unitsCount[GameElements::Team::blue]++;
+
 			m_entityAdapter->setPosition(GlobalConfiguration::getCurrentMap()->toWorldCoordinates(GlobalConfiguration::getCurrentMap()->findFreeLocation()).push(0.0)) ;
 		}
 
@@ -324,13 +352,16 @@ namespace OgreFramework
 			const GameElements::WeaponsArchetypes::Archetype * weapon = GlobalConfiguration::getConfigurationLoader()->getWeaponsArchetypes().get(unit->m_weapon) ;
 			if(weapon==NULL) { ::std::cout<< m_enemyVehicleList[i] <<" : bad weapon!" ; char c ; ::std::cin>>c ; }
 			GameElements::AiAgent* m_entityAdapter = new GameElements::AiAgent(unit, weapon, GlobalConfiguration::getCurrentMap(),m_sceneManager, GameElements::Team::red) ;
+			
 			aiManager->addUnitToControlledUnits(m_entityAdapter);
+			unitsCount[GameElements::Team::red]++;
+
 			m_entityAdapter->setPosition(GlobalConfiguration::getCurrentMap()->toWorldCoordinates(GlobalConfiguration::getCurrentMap()->findFreeLocation()).push(0.0)) ;
 		}
 
 		aiManager->assignAllUnitsTarget();
-
-
+		
+		victoryCondition = new GameElements::AnnilhationVictory(unitsCount);
 	}
 	
 }

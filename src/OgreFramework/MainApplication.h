@@ -154,7 +154,9 @@ namespace OgreFramework
 		//GameElements::NullAgent::Pointer m_entityAdapter ;
 
 		GameElements::AIManager * aiManager;
-		GameElements::AnnilhationVictory * victoryConditions;
+		GameElements::AnnilhationVictory * victoryCondition;
+		OgreBites::Label * winnerPanel;
+		bool _isEnd;
 	};
 }
 

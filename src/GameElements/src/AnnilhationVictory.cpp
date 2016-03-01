@@ -3,7 +3,8 @@
 
 namespace GameElements
 {
-	AnnilhationVictory::AnnilhationVictory (map<Team,int> units) 
+	AnnilhationVictory::AnnilhationVictory (map<Team,int> units)
+		:  MessageListener<System::DestructionMessage<AiAgent>>(System::ConstructionDestructionEmitter<AiAgent>::getDestructionEmitter())
 	{
 		remainingUnits = units;
 	}
@@ -13,7 +14,7 @@ namespace GameElements
 		Team winner = Team::none;
 		for(map<Team,int>::iterator it=remainingUnits.begin() ; it!=remainingUnits.end() ; ++it)
 		{
-			if(it->second != 0)
+			if(it->second > 0)
 			{
 				if(winner == Team::none)
 				{
@@ -39,7 +40,7 @@ namespace GameElements
 		{
 			if(msg.m_object.getTeam() == it->first)
 			{
-				it->second = it->second -1;
+				it->second--;
 			}
 		}
 	}

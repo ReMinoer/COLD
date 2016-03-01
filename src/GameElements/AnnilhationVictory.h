@@ -3,11 +3,12 @@
 
 #include <GameElements\AiAgent.h>
 #include <GameElements\IVictoryConditions.h>
+#include <System\MessageListener.h>
 #include <map>
 
 namespace GameElements 
 {
-	class AnnilhationVictory : public IVictoryConditions
+	class AnnilhationVictory : public IVictoryConditions, public System::MessageListener<System::DestructionMessage<AiAgent>>
 	{
 	private:
 		map<Team,int> remainingUnits;
